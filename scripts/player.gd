@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+@onready var explosion = preload("res://prefabs/explosion.tscn")
 const SPEED = 300.0
 
 
