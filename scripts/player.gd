@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
 @onready var explosion = preload("res://prefabs/explosion.tscn")
+@onready var camera = $player_camera
 const SPEED = 300.0
 
 
 func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed("smack"):
+		smack()
 	var direction_horizontal := Input.get_axis("left", "right")
 	if direction_horizontal:
 		velocity.x = direction_horizontal * SPEED
@@ -18,3 +21,12 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func smack():
+	print("hello")
+	camera.shake(20.0,1.0)
+	var spawned_explosion = explosion.instantiate()
+	spawned_explosion.position = self.position
+	spawned_explosion.emitting = true
+	get_parent().add_child(spawned_explosion)
+	

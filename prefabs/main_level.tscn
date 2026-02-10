@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4ji52sphyeik" path="res://scripts/player.gd" id="1_fypyd"]
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_ofjge"]
+[ext_resource type="Script" uid="uid://bcax5sywvc6ye" path="res://scripts/player_camera.gd" id="3_ofjge"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fypyd"]
 texture = ExtResource("2_ofjge")
@@ -63,7 +64,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAA
 tile_set = SubResource("TileSet_ofjge")
 
 [node name="player" type="CharacterBody2D" parent="." unique_id=2037562812]
-position = Vector2(1544, 769)
+position = Vector2(763, 413)
 script = ExtResource("1_fypyd")
 metadata/_edit_group_ = true
 
@@ -80,3 +81,4 @@ limit_left = 0
 limit_top = 0
 limit_right = 10000043
 limit_bottom = 10000033
+script = ExtResource("3_ofjge")
