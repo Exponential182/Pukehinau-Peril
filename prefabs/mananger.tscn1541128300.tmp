@@ -7,3 +7,7 @@
 script = ExtResource("1_bqup5")
 
 [node name="Menu" parent="." unique_id=796594367 instance=ExtResource("1_wg5ge")]
+
+[connection signal="pressed" from="Menu/Local" to="." method="_on_local_pressed"]
+
+[editable path="Menu"]

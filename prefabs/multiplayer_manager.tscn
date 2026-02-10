@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cbjgrg0f6oj2h"]
+
+[ext_resource type="Script" uid="uid://bg44kfkk61bsm" path="res://scripts/multiplayer_manager.gd" id="1_0ns71"]
+[ext_resource type="PackedScene" uid="uid://c3rx334bi11gh" path="res://prefabs/menu.tscn" id="2_hkob2"]
+
+[node name="manager" type="Node" unique_id=979954136]
+script = ExtResource("1_0ns71")
+
+[node name="menu" parent="." unique_id=796594367 instance=ExtResource("2_hkob2")]
+
+[node name="port" type="Label" parent="." unique_id=1419839091]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Port: {port}"
+
+[connection signal="server_request" from="menu" to="." method="_on_menu_server_request"]

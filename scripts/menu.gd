@@ -1,11 +1,11 @@
-extends Node
+extends Control
+signal server_request(server_type: String)
 
+func _on_singleplayer_pressed():
+	server_request.emit("none")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _on_local_pressed():
+	server_request.emit("LAN")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_node_tunnel_pressed():
+	server_request.emit("node_tunnel")
