@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cwdsorfptkw5f"]
+
+[ext_resource type="Script" uid="uid://cq6xuflvp35jd" path="res://server/server.gd" id="1_pcfvm"]
+[ext_resource type="PackedScene" uid="uid://ctpgtligwpro0" path="res://prefabs/main_level.tscn" id="2_0wvpq"]
+
+[node name="server" type="Node" unique_id=1187720221]
+script = ExtResource("1_pcfvm")
+
+[node name="world" parent="." unique_id=1141564264 instance=ExtResource("2_0wvpq")]
+visible = false
+
+[node name="Node" type="Node" parent="." unique_id=1487399992]
+
+[node name="port" type="Label" parent="." unique_id=615860773]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1398068063]
