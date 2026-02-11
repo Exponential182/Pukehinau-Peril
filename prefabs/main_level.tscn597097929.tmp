@@ -30,9 +30,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_fypyd")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fypyd"]
-properties/0/path = NodePath(".:test_colour")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [node name="main_level" type="Node2D" unique_id=1141564264]
 script = ExtResource("1_fypyd")
