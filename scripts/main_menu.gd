@@ -1,10 +1,10 @@
 extends Control
 
+signal create_server
+signal create_client(port)
 
 func _on_host_button_pressed():
-	get_tree().change_scene_to_file("res://server/server.tscn")
-
+	create_server.emit()
 
 func _on_join_button_pressed():
-	Globals.port = int($port_input.text)
-	get_tree().change_scene_to_file("res://prefabs/client.tscn")
+	create_client.emit(int($port_input.text))
