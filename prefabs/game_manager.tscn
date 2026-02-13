@@ -58,11 +58,13 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "Port Number"
 
 [node name="error_message" type="Label" parent="main_menu" unique_id=593628555]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="port" type="Label" parent="." unique_id=1244525931]
+z_index = 50
 offset_right = 40.0
 offset_bottom = 23.0
 
