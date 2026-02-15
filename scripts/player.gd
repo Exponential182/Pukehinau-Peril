@@ -22,6 +22,11 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("smack"):
 		smack()
+
+const SPEED = 300.0
+
+
+func _physics_process(_delta: float) -> void:
 	var direction_horizontal := Input.get_axis("left", "right")
 	if direction_horizontal:
 		velocity.x = direction_horizontal * SPEED
