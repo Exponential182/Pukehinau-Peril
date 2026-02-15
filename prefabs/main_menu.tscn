@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c3rx334bi11gh"]
+
+[ext_resource type="Script" uid="uid://binwuw1hwpi77" path="res://scripts/main_menu_relay.gd" id="1_1n3ne"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1n3ne"]
+font_size = 50
+
+[node name="main_menu" type="Control" unique_id=1679809929]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1n3ne")
+
+[node name="background" type="ColorRect" parent="." unique_id=1568700531]
+z_index = -100
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.38039216, 0.84313726, 1, 0.8039216)
+
+[node name="title" type="Label" parent="." unique_id=714351596]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 112.0
+offset_right = 1210.0
+offset_bottom = 262.0
+text = "Pukehinau Peril"
+label_settings = SubResource("LabelSettings_1n3ne")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="host_button" type="Button" parent="." unique_id=1787614412]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 416.0
+offset_right = 742.0
+offset_bottom = 479.0
+theme_override_font_sizes/font_size = 40
+text = "Create Server"
+
+[node name="join_button" type="Button" parent="." unique_id=1934133329]
+layout_mode = 0
+offset_left = 1120.0
+offset_top = 436.0
+offset_right = 1271.0
+offset_bottom = 493.0
+theme_override_font_sizes/font_size = 35
+text = "Join LAN"
+
+[node name="port_input" type="TextEdit" parent="." unique_id=69191176]
+layout_mode = 0
+offset_left = 1103.0
+offset_top = 514.0
+offset_right = 1305.0
+offset_bottom = 571.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Port Number"
+
+[node name="error_message" type="Label" parent="." unique_id=970404880]
+visible = false
+layout_mode = 0
+offset_left = 988.0
+offset_top = 581.0
+offset_right = 1390.0
+offset_bottom = 604.0
+text = "Invalid Port (Try a number between 49152 an 65535)"
+
+[connection signal="pressed" from="host_button" to="." method="_create_server_relay"]
+[connection signal="pressed" from="join_button" to="." method="_create_client_relay"]
