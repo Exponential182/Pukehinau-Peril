@@ -11,26 +11,27 @@ func create_LAN_server():
 		port += 1
 		status = enet_peer.create_server(port, 2)
 	multiplayer.multiplayer_peer = enet_peer
-	$port.text = "port: " + str(port)
 	multiplayer.peer_connected.connect(spawn_player)
-	$main_menu.queue_free()
 	spawn_player(multiplayer.get_unique_id())
+	$port.text = "port: " + str(port)
+	$main_menu.queue_free()
 	add_child(preload("res://prefabs/main_level.tscn").instantiate())
 
-func create_client():
-	if $main_menu/port_input.text.is_valid_int():
-		var port = int($main_menu/port_input.text)
+func create_client(port_unverified):
+	if port_unverified.is_valid_int():
+		var port = int(port_unverified)
 		enet_peer.create_client("localhost", port)
 		multiplayer.multiplayer_peer = enet_peer
 		$main_menu.queue_free()
 		add_child(preload("res://prefabs/main_level.tscn").instantiate())
 	else:
 		$main_menu/error_message.hide()
-		await get_tree().create_timer(1).timeout
-	
-	
+		await get_tree().create_timer(0.1).timeout
+		$main_menu/error_message.show()
+
 func spawn_player(peer_id):
+	if !multiplayer.is_server(): return
+	print("Player Spawned: " + str(peer_id))
 	var player = preload("res://prefabs/player.tscn").instantiate()
-	player.position = Vector2(350, 200)
 	player.name = str(peer_id)
 	$players.add_child(player)
