@@ -18,4 +18,4 @@ func _process(delta):
 			randf_range(-1, 1)
 		) * shake_strength * (shake_timer / shake_duration)
 	else:
-		offset = original_offset
+		offset = Vector2.ZERO
