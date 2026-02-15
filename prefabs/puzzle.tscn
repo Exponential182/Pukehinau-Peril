@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c21glppvsl2il" path="res://scripts/vertical_puzzle.gd" id="1_m0lco"]
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_8c0lc"]
+[ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="3_8c0lc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vetud"]
 size = Vector2(118, 169)
@@ -37,7 +38,6 @@ texture = ExtResource("2_8c0lc")
 
 [node name="bar" type="Node2D" parent="." unique_id=1410193935]
 position = Vector2(1465, 533)
-metadata/_edit_group_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="bar" unique_id=449647512]
 anchors_preset = 8
@@ -51,9 +51,49 @@ offset_right = 64.5
 offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
-value = 40.0
 fill_mode = 3
 show_percentage = false
 
+[node name="combo_counter" type="Node2D" parent="." unique_id=589618018]
+position = Vector2(1184, 599)
+metadata/_edit_group_ = true
+
+[node name="combo_count" type="Label" parent="combo_counter" unique_id=875638287]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/line_spacing = -60
+theme_override_fonts/font = ExtResource("3_8c0lc")
+theme_override_font_sizes/font_size = 128
+text = "COMBO
+X0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="combo_timer" type="Timer" parent="." unique_id=1685809194]
+wait_time = 0.5
+
+[node name="speed_timer" type="Timer" parent="." unique_id=1032653830]
+
+[node name="win" type="Node2D" parent="." unique_id=2081957352]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="win" unique_id=422032304]
+position = Vector2(849.5, 144.5)
+scale = Vector2(14.2734375, 3.2578125)
+texture = ExtResource("2_8c0lc")
+
+[node name="Label" type="Label" parent="win" unique_id=583179869]
+offset_right = 1392.0
+offset_bottom = 443.0
+scale = Vector2(34.695, 34.695)
+text = "Good"
+
 [connection signal="area_entered" from="main_area" to="." method="_on_main_area_area_entered"]
 [connection signal="area_exited" from="main_area" to="." method="_on_main_area_area_exited"]
+[connection signal="timeout" from="combo_timer" to="." method="_on_combo_timer_timeout"]
+[connection signal="timeout" from="speed_timer" to="." method="_on_speed_timer_timeout"]
