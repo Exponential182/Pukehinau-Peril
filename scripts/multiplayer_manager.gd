@@ -23,6 +23,7 @@ func create_client():
 		enet_peer.create_client("localhost", port)
 		multiplayer.multiplayer_peer = enet_peer
 		$main_menu.queue_free()
+		add_child(preload("res://prefabs/main_level.tscn").instantiate())
 	else:
 		$main_menu/error_message.hide()
 		await get_tree().create_timer(1).timeout
@@ -31,6 +32,5 @@ func create_client():
 func spawn_player(peer_id):
 	var player = preload("res://prefabs/player.tscn").instantiate()
 	player.position = Vector2(350, 200)
-	player.set_multiplayer_authority(peer_id)
 	player.name = str(peer_id)
 	$players.add_child(player)

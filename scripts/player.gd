@@ -4,8 +4,17 @@ extends CharacterBody2D
 @onready var camera = $player_camera
 const SPEED = 300.0
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
+func _ready():
+	if not is_multiplayer_authority(): return
+	
+	$player_camera.enabled = true
 
 func _physics_process(_delta: float) -> void:
+	if not is_multiplayer_authority(): return
+	
 	if Input.is_action_just_pressed("smack"):
 		smack()
 	var direction_horizontal := Input.get_axis("left", "right")
