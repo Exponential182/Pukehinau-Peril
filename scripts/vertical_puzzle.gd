@@ -6,8 +6,10 @@ extends Node2D
 @onready var combo_counter = $combo_counter
 @onready var combo_text = $combo_counter/combo_count
 @onready var combo_timer = $combo_timer
+@onready var speed_timer = $speed_timer
+@onready var win = $win
 var in_range = false
-var speed = 10
+var speed = 15
 var direction = 1
 var min_height = 0
 var max_height = 1080
@@ -34,9 +36,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if shake_timer > 0:
 		shake_timer -= delta
-		$bar.scale =  Vector2(1,1) + Vector2(rand_scale,rand_scale
-		) * shake_strength/35 * (shake_timer / shake_duration)
-		$bar.rotation_degrees = 0 + randf_range(-1, 1) * 0.5 * shake_strength * (shake_timer / shake_duration)
+		bar.scale =  Vector2(1,1) + Vector2(rand_scale,rand_scale
+		) * combo_multiplier * 0.6 *(shake_timer / shake_duration)
+		bar.rotation_degrees = 0 + randf_range(-1, 1) * (1.0/combo_multiplier) * shake_strength * (shake_timer / shake_duration)
 	else:
 		offset = Vector2.ZERO
 	win_area.position.y += speed * direction
@@ -55,26 +57,26 @@ func _physics_process(delta: float) -> void:
 		if in_range:
 			combo += 1
 			var progress_adition = combo_multiplier * (0.1 * progress_bar.value + 1) + 4
-			print(progress_adition)
 			progress_bar.value += progress_adition
-			shake(0.5 * progress_bar.value * combo_multiplier, 1.0)
+			shake(progress_bar.value * combo_multiplier, 1.0)
 			if progress_bar.value >= 100:
-				$win.show()
+				win.show()
 				await get_tree().create_timer(5).timeout
 				get_tree().reload_current_scene()
 		else:
 			progress_bar.value *= 0.9
 			combo = 0
+			combo_multiplier = 1
 		combo_text.text = "COMBO
 		X" + str(combo)
-		$speed_timer.start(0.5)
+		speed_timer.start(0.5)
 
 
 		
 	
 func shake(strength: float, duration: float):
 	if combo > 2:
-		rand_scale = (0.01*(progress_bar.value-50))
+		rand_scale = (0.01*(progress_bar.value))
 		shake_strength = strength
 		shake_duration = duration
 		shake_timer = duration
@@ -86,4 +88,4 @@ func _on_combo_timer_timeout() -> void:
 
 
 func _on_speed_timer_timeout() -> void:
-	speed = base_speed * combo_multiplier * 3
+	speed = base_speed * combo_multiplier * ( 1 + progress_bar.value/100)
