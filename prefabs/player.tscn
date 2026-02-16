@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://uf8ol5pwve7"]
+
+[ext_resource type="Script" uid="uid://b4ji52sphyeik" path="res://scripts/player.gd" id="1_r66lb"]
+[ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_1txc5"]
+[ext_resource type="Script" uid="uid://bcax5sywvc6ye" path="res://scripts/player_camera.gd" id="3_ht1c8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
+size = Vector2(120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nja2s"]
+atlas = ExtResource("2_1txc5")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jynbf"]
+atlas = ExtResource("2_1txc5")
+region = Rect2(0, 18, 128, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jxr24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nja2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jynbf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r66lb"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("player_sprite:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="player" type="CharacterBody2D" unique_id=484850195]
+collision_layer = 2
+script = ExtResource("1_r66lb")
+
+[node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1464497376]
+shape = SubResource("RectangleShape2D_su5do")
+
+[node name="player_sprite" type="AnimatedSprite2D" parent="." unique_id=1178543682]
+sprite_frames = SubResource("SpriteFrames_jxr24")
+animation = &"walk"
+frame_progress = 0.035142448
+
+[node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
+enabled = false
+limit_left = 0
+limit_top = 0
+script = ExtResource("3_ht1c8")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1588803920]
+replication_config = SubResource("SceneReplicationConfig_r66lb")

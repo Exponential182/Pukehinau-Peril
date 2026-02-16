@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ch4mrbwc48o6n"]
+
+[ext_resource type="Script" uid="uid://bg44kfkk61bsm" path="res://scripts/multiplayer_manager.gd" id="1_oht7d"]
+[ext_resource type="PackedScene" uid="uid://c3rx334bi11gh" path="res://prefabs/main_menu.tscn" id="2_oht7d"]
+
+[node name="game_manager" type="Node" unique_id=325509681]
+script = ExtResource("1_oht7d")
+
+[node name="main_menu" parent="." unique_id=1679809929 instance=ExtResource("2_oht7d")]
+
+[node name="port" type="Label" parent="." unique_id=1244525931]
+z_index = 50
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="players" type="Node" parent="." unique_id=970913669]
+
+[node name="player_spawner" type="MultiplayerSpawner" parent="players" unique_id=109945623]
+_spawnable_scenes = PackedStringArray("uid://uf8ol5pwve7")
+spawn_path = NodePath("..")
+
+[node name="world_spawner" type="MultiplayerSpawner" parent="." unique_id=911791005]
+_spawnable_scenes = PackedStringArray("uid://ctpgtligwpro0")
+spawn_path = NodePath("..")
+
+[connection signal="create_client" from="main_menu" to="." method="create_client"]
+[connection signal="create_server" from="main_menu" to="." method="create_LAN_server"]
