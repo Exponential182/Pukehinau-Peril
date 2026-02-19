@@ -1,13 +1,13 @@
 extends Node2D
-@onready var win_area = $win_area
-@onready var progress_bar = $bar/ProgressBar
-@onready var bar = $bar
-@onready var offset = $bar/ProgressBar.position
-@onready var combo_counter = $combo_counter
-@onready var combo_text = $combo_counter/combo_count
-@onready var combo_timer = $combo_timer
-@onready var speed_timer = $speed_timer
-@onready var win = $win
+@onready var win_area = $canvas_layer/win_area
+@onready var progress_bar = $canvas_layer/bar/ProgressBar
+@onready var bar = $canvas_layer/bar
+@onready var offset = $canvas_layer/bar/ProgressBar.position
+@onready var combo_counter = $canvas_layer/combo_counter
+@onready var combo_text = $canvas_layer/combo_counter/combo_count
+@onready var combo_timer = $canvas_layer/combo_timer
+@onready var speed_timer = $canvas_layer/speed_timer
+@onready var win = $canvas_layer/win
 var in_range = false
 var speed = 15
 var direction = 1
@@ -26,11 +26,10 @@ var can_combo = true
 var combo_multiplier = 1
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-	# speed = spee
 
+signal puzzle_completed
+func _ready() -> void:
+	puzzle_completed.connect(get_node("/root/game_manager/main_level/world").vertical_puzzle_completed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -60,9 +59,8 @@ func _physics_process(delta: float) -> void:
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier, 1.0)
 			if progress_bar.value >= 100:
-				win.show()
-				await get_tree().create_timer(5).timeout
-				get_tree().reload_current_scene()
+				emit_signal("puzzle_completed")
+				queue_free()
 		else:
 			progress_bar.value *= 0.9
 			combo = 0

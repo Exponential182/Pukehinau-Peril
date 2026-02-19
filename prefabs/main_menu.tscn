@@ -53,6 +53,7 @@ offset_top = 514.0
 offset_right = 1305.0
 offset_bottom = 571.0
 theme_override_font_sizes/font_size = 30
+text = "49153"
 placeholder_text = "Port Number"
 
 [node name="error_message" type="Label" parent="." unique_id=970404880]

@@ -1,7 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-*.gd text eol=crlf
-*.tscn text eol=crlf
-*.tres text eol=crlf
-*.cfg text eol=crlf
-*.import text eol=crlf
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.cfg text eol=lf
+*.import text eol=lf
