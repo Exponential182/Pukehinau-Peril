@@ -59,6 +59,7 @@ offset_right = 64.5
 offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
+value = 25.0
 fill_mode = 3
 show_percentage = false
 metadata/_edit_use_anchors_ = true
