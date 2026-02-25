@@ -35,6 +35,9 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_fypyd")
 pattern_0 = SubResource("TileMapPattern_ofjge")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
+size = Vector2(335, 168)
+
 [node name="main_level" type="Node2D" unique_id=1141564264]
 
 [node name="world" type="Node2D" parent="." unique_id=663481402]
@@ -54,7 +57,8 @@ script = ExtResource("2_fypyd")
 metadata/_edit_group_ = true
 
 [node name="area" type="CollisionShape2D" parent="puzzle_areas/vertical_puzzle" unique_id=1288288947]
-shape = SubResource("RectangleShape2D_ofjge")
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_su5do")
 
 [node name="sprite_2d" type="Sprite2D" parent="puzzle_areas/vertical_puzzle" unique_id=1318231526]
 position = Vector2(-0.99998474, 2.9999933)
