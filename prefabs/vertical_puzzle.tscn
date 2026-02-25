@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bbnt6fg25w0fw"]
 
-[ext_resource type="Script" uid="uid://c21glppvsl2il" path="res://scripts/vertical_puzzle.gd" id="1_m0lco"]
-[ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_8c0lc"]
-[ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="3_8c0lc"]
+[ext_resource type="Script" uid="uid://c21glppvsl2il" path="res://scripts/vertical_puzzle.gd" id="1_n2pnt"]
+[ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_tghds"]
+[ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="3_28ko8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vetud"]
 size = Vector2(118, 169)
@@ -10,14 +10,14 @@ size = Vector2(118, 169)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvhsu"]
 size = Vector2(246, 1.76)
 
-[node name="puzzle" type="Node2D" unique_id=1792755049]
-script = ExtResource("1_m0lco")
+[node name="vertical_puzzle" type="Node2D" unique_id=1792755049]
+script = ExtResource("1_n2pnt")
 
 [node name="icon" type="Sprite2D" parent="." unique_id=742348805]
 texture_filter = 1
 position = Vector2(4705, 2666.0002)
 scale = Vector2(83.734375, 47.48438)
-texture = ExtResource("2_8c0lc")
+texture = ExtResource("2_tghds")
 
 [node name="canvas_layer" type="CanvasLayer" parent="." unique_id=184093748]
 
@@ -31,7 +31,7 @@ shape = SubResource("RectangleShape2D_vetud")
 [node name="Sprite2D" type="Sprite2D" parent="canvas_layer" unique_id=1829736672]
 position = Vector2(15, 538)
 scale = Vector2(1, 1.375)
-texture = ExtResource("2_8c0lc")
+texture = ExtResource("2_tghds")
 
 [node name="win_area" type="Area2D" parent="canvas_layer" unique_id=242481353]
 position = Vector2(184, 452)
@@ -42,7 +42,7 @@ shape = SubResource("RectangleShape2D_uvhsu")
 
 [node name="Sprite2D" type="Sprite2D" parent="canvas_layer/win_area" unique_id=1997258581]
 scale = Vector2(1, 0.140625)
-texture = ExtResource("2_8c0lc")
+texture = ExtResource("2_tghds")
 
 [node name="bar" type="Node2D" parent="canvas_layer" unique_id=1410193935]
 position = Vector2(1465, 533)
@@ -59,6 +59,7 @@ offset_right = 64.5
 offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
+step = 0.0
 value = 25.0
 fill_mode = 3
 show_percentage = false
@@ -77,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_constants/line_spacing = -60
-theme_override_fonts/font = ExtResource("3_8c0lc")
+theme_override_fonts/font = ExtResource("3_28ko8")
 theme_override_font_sizes/font_size = 128
 text = "COMBO
 X0"
@@ -96,7 +97,7 @@ visible = false
 [node name="Sprite2D" type="Sprite2D" parent="canvas_layer/win" unique_id=422032304]
 position = Vector2(849.5, 144.5)
 scale = Vector2(14.2734375, 3.2578125)
-texture = ExtResource("2_8c0lc")
+texture = ExtResource("2_tghds")
 
 [node name="Label" type="Label" parent="canvas_layer/win" unique_id=583179869]
 offset_right = 1392.0

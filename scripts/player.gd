@@ -2,30 +2,24 @@ extends CharacterBody2D
 
 @onready var explosion = preload("res://prefabs/explosion.tscn")
 @onready var camera = $player_camera
+@onready var puzzles = get_node("/root/main_level/puzzles")
 const SPEED = 300.0
 @export var spawn_position := Vector2(350, 200)
 var can_start_puzzle = false
 var is_puzzling = false
+var current_puzzle = null
 
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-	position = spawn_position
-
+signal summon_puzzle
 func _ready():
-	if not is_multiplayer_authority(): return
-	$player_camera.enabled = true
+	pass
 
 func _physics_process(_delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	if Input.is_action_just_pressed("interact") and not is_puzzling:
+		if can_start_puzzle and current_puzzle != null:
+			can_start_puzzle = false
+			is_puzzling = true
+			summon_puzzle.emit(str(current_puzzle))
 
-	if Input.is_action_just_pressed("interact"):
-		if can_start_puzzle:
-			var my_id := get_multiplayer_authority()
-			var puzzle_manager = get_node("/root/game_manager/main_level/puzzlemanager")
-			if multiplayer.is_server():
-				puzzle_manager.request_puzzle_start(my_id)
-			else:
-				puzzle_manager.request_puzzle_start.rpc_id(1, my_id)
 	if not is_puzzling:
 		if Input.is_action_just_pressed("smack"):
 			smack()
@@ -35,6 +29,9 @@ func _physics_process(_delta: float) -> void:
 
 		var direction_vertical := Input.get_axis("up", "down")
 		velocity.y = direction_vertical * SPEED if direction_vertical else move_toward(velocity.y, 0, SPEED)
+	else:
+		self.velocity.y = move_toward(velocity.y, 0, SPEED)
+		self.velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 
