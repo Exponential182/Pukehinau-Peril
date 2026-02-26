@@ -1,42 +1,67 @@
 extends Node2D
 
-@onready var layer_1_key_map = $grid_handler/stage_1/base_layer
-@onready var layer_1_grid_map = $grid_handler/stage_1/grid_layer
-@onready var layer_1_correct_key_cells = $grid_handler/stage_1/comparison_layer.get_used_cells()
-@onready var layer_2_key_map = $grid_handler/stage_2/base_layer
-@onready var layer_2_grid_map = $grid_handler/stage_2/grid_layer
-@onready var layer_2_correct_key_cells = $grid_handler/stage_2/comparison_layer.get_used_cells()
-@onready var layer_2_bounds = Vector2i.ZERO
-var laser_on = false
-var grid_state = []
-var grid_states = {}
-
+var start_grid_states = {}
+var live_grid_states = {}
+var target_cells = null
+var key_map = null
+var grid_map = null
+var bounds = null
+var current_stage = null
 
 func _ready():
-	for cell in layer_2_key_map.get_used_cells():
-		layer_2_bounds.x = max(layer_2_bounds.x, cell.x)
-		layer_2_bounds.y = max(layer_2_bounds.y, cell.y)
-	var layer_2_width = layer_2_bounds.x
-	var layer_2_height = layer_2_bounds.y
-	var phase_2_grid = []
-	print($grid_handler/stage_2/base_layer.get_used_cells())
-	for i in range(layer_2_height+1):
-		phase_2_grid.append(array_ones(layer_2_width+1))
-	for pos in layer_2_key_map.get_used_cells():
-		phase_2_grid[pos.y][pos.x] = 1
-	for pos in layer_2_correct_key_cells:
-		phase_2_grid[pos.y][pos.x] = 2
-	grid_states[1] = phase_2_grid
+	var stage_1_grid = []
+	var stage_2_grid = []
+	
+	# Compose Grid for Stage 1
+	stage_select(1)
+	for i in range(bounds.y + 1):
+		stage_1_grid.append(array_zeros(bounds.x+1))
+	for pos in key_map.get_used_cells():
+		stage_1_grid[pos.y][pos.x] = 1
+	for pos in target_cells:
+		stage_1_grid[pos.y][pos.x] = 2
+	start_grid_states[1] = stage_1_grid
+	live_grid_states[1] = stage_1_grid
+	
+	stage_select(2)
+	for i in range(bounds.y + 1):
+		stage_2_grid.append(array_zeros(bounds.x+1))
+	for pos in key_map.get_used_cells():
+		stage_2_grid[pos.y][pos.x] = 1
+	for pos in target_cells:
+		stage_2_grid[pos.y][pos.x] = 2
+	start_grid_states[2] = stage_2_grid
+	live_grid_states[2] = stage_2_grid
+	
+	stage_select(1)
 
 
-func array_ones(length):
+func stage_select(stage):
+	if stage == 1:
+		target_cells = $grid_handler/stage_1/comparison_layer.get_used_cells()
+		grid_map = $grid_handler/stage_1/grid_layer
+		key_map = $grid_handler/stage_1/base_layer
+		bounds = Vector2i(35,21)
+		current_stage = 1
+	
+	if stage == 2:
+		target_cells = $grid_handler/stage_2/comparison_layer.get_used_cells()
+		grid_map = $grid_handler/stage_2/grid_layer
+		key_map = $grid_handler/stage_2/base_layer
+		bounds = Vector2i(24,14)
+		current_stage = 2
+	
+	target_cells.sort()
+
+
+func array_zeros(length):
 	var array_to_fill = []
 	for i in range(length):
 		array_to_fill.append(0)
 	return array_to_fill
 
 
-func dfs_tile_removal(grid, bounds) -> Array:
+func dfs_tile_removal(grid) -> Array:
 	var coords_visited = {}
 	var changes = []
 	for row_index in range(len(grid)):
@@ -71,36 +96,54 @@ func dfs_tile_removal(grid, bounds) -> Array:
 
 func _process(_delta):
 	if Input.is_action_just_pressed("left_click"):
-		laser_on = true
-	if Input.is_action_just_released("left_click"):
-		laser_on = false
-		var changes = dfs_tile_removal(grid_states[1], Vector2i(len(grid_states[1][0])-1, len(grid_states[1])-1))
-		grid_states[1] = changes[0]
-		print(changes[1])
-		for coordinate in changes[1]:
-			layer_2_key_map.set_cell(coordinate, -1)
-			layer_2_grid_map.set_cell(coordinate, -1)
-		print(grid_states[1])
-	
-	if laser_on:
 		var absolute_input_pos = get_viewport().get_mouse_position()
-		var base_layer_tile_pos = layer_2_key_map.local_to_map(layer_2_key_map.to_local(absolute_input_pos))
-		var grid_layer_tile_pos = layer_2_grid_map.local_to_map(layer_2_grid_map.to_local(absolute_input_pos))
-		if 0 <= base_layer_tile_pos.x and base_layer_tile_pos.x <= layer_2_bounds.x and 0 <= base_layer_tile_pos.y and base_layer_tile_pos.y <= layer_2_bounds.y:
-			layer_2_key_map.set_cell(base_layer_tile_pos, -1)
-			layer_2_grid_map.set_cell(grid_layer_tile_pos, -1)
-			print(base_layer_tile_pos)
-			grid_states[1][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
+		var base_layer_tile_pos = key_map.local_to_map(key_map.to_local(absolute_input_pos))
+		var grid_layer_tile_pos = grid_map.local_to_map(grid_map.to_local(absolute_input_pos))
+		if 0 <= base_layer_tile_pos.x and base_layer_tile_pos.x <= bounds.x and 0 <= base_layer_tile_pos.y and base_layer_tile_pos.y <= bounds.y:
+			key_map.set_cell(base_layer_tile_pos, -1)
+			grid_map.set_cell(grid_layer_tile_pos, -1)
+			live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
 		
+		var changes = dfs_tile_removal(live_grid_states[current_stage])
+		live_grid_states[1] = changes[0]
+		for coordinate in changes[1]:
+			key_map.set_cell(coordinate, -1)
+			grid_map.set_cell(coordinate, -1)
+		
+		var sorted_key_map = key_map.get_used_cells()
+		sorted_key_map.sort()
+		if sorted_key_map == target_cells:
+			if current_stage == 1:
+				stage_select(2)
+				$checkpoint_button.show()
+				$checkpoint_button.disabled = false
+				$grid_handler/stage_1.hide()
+				$grid_handler/stage_2.show()
+			elif current_stage == 2:
+				$win_indicator.show()
 
 
 func _on_reset_button_pressed():
 	$grid_handler.free()
-	var key_grid = preload("res://prefabs/forge_key_grid.tscn").instantiate()
-	key_grid.position = Vector2(200, 75)
-	self.add_child(key_grid)
-	layer_2_key_map = $grid_handler/stage_2/base_layer
-	layer_2_grid_map = $grid_handler/stage_2/grid_layer
-	
+	var keys = preload("res://prefabs/forge_key_grid.tscn").instantiate()
+	self.add_child(keys)
+	stage_select(1)
+	$checkpoint_button.hide()
+	$checkpoint_button.disabled = true
+	live_grid_states[1] = start_grid_states[1]
+	live_grid_states[2] = start_grid_states[2]
+
+
+func _on_checkpoint_button_pressed() -> void:
+	$grid_handler.free()
+	var keys = preload("res://prefabs/forge_key_grid.tscn").instantiate()
+	self.add_child(keys)
+	stage_select(2)
+	$grid_handler/stage_1.hide()
+	$grid_handler/stage_2.show()
+	$checkpoint_button.show()
+	$checkpoint_button.disabled = false
+	live_grid_states[1] = start_grid_states[1]
+	live_grid_states[2] = start_grid_states[2]
 	
 	
