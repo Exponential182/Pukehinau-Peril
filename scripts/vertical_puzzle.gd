@@ -26,6 +26,10 @@ var can_combo = true
 var combo_multiplier = 1
 var wait = 0
 var last_synced_value := 0.0
+func _ready() -> void:
+	var score_scale = progress_bar.value/100
+	$score/score.text = str(round(progress_bar.value*10)/10)
+	$score.scale = Vector2(score_scale, score_scale)
 
 func _physics_process(delta: float) -> void:
 	if progress_bar.value > 0:
@@ -62,10 +66,9 @@ func _physics_process(delta: float) -> void:
 			combo_multiplier = 1
 		combo_text.text = "COMBO\nX" + str(combo)
 		speed_timer.start(0.5)
-	# Only sync when value changes
-	var rounded = round(progress_bar.value * 10) / 10
-	if rounded != last_synced_value:
-		last_synced_value = rounded
+	var score_scale = progress_bar.value/100
+	$score/score.text = str(round(progress_bar.value*10)/10)
+	$score.scale = Vector2(score_scale, score_scale)
 func shake(strength: float, duration: float):
 	if combo > 2:
 		rand_scale = (0.005*(progress_bar.value))
