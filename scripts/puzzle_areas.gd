@@ -6,4 +6,4 @@ func _on_body_entered(body):
 	body.current_puzzle = self.name
 
 func _on_body_exited(body):
-	body.can_start_puzzle = true
+	body.can_start_puzzle = false

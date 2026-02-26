@@ -48,6 +48,30 @@ tile_set = SubResource("TileSet_ofjge")
 
 [node name="puzzle_areas" type="Node2D" parent="." unique_id=1004798896]
 
+[node name="forge_puzzle" type="Area2D" parent="puzzle_areas" unique_id=539822609]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(437, 824)
+collision_mask = 3
+priority = 1
+script = ExtResource("2_fypyd")
+
+[node name="area" type="CollisionShape2D" parent="puzzle_areas/forge_puzzle" unique_id=1621766289]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_su5do")
+
+[node name="sprite_2d" type="Sprite2D" parent="puzzle_areas/forge_puzzle" unique_id=1011985555]
+position = Vector2(-0.99998474, 2.9999933)
+scale = Vector2(2.6093752, 1.3124999)
+texture = ExtResource("2_ofjge")
+
+[node name="label" type="Label" parent="puzzle_areas/forge_puzzle" unique_id=1197544472]
+offset_left = -99.0
+offset_top = -180.0
+offset_right = 51.0
+offset_bottom = -103.0
+theme_override_font_sizes/font_size = 50
+text = "Forge Puzzle"
+
 [node name="vertical_puzzle" type="Area2D" parent="puzzle_areas" unique_id=2119357602]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(1697, 140)
@@ -73,6 +97,19 @@ script = ExtResource("3_nja2s")
 z_index = 20
 position = Vector2(268, 217)
 
+[node name="help_text" type="Label" parent="." unique_id=1469192801]
+offset_left = 399.0
+offset_top = 109.0
+offset_right = 789.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 30
+text = "Use WASD to move
+E to interact with puzzle areas
+Space in right puzzle
+Left click in forge puzzle"
+
+[connection signal="body_entered" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_entered"]
+[connection signal="body_exited" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_exited"]
 [connection signal="body_entered" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_exited"]
 [connection signal="summon_puzzle" from="player" to="puzzles" method="_on_player_summon_puzzle"]
