@@ -21,7 +21,7 @@ func _ready():
 	for pos in target_cells:
 		stage_1_grid[pos.y][pos.x] = 2
 	start_grid_states[1] = stage_1_grid
-	live_grid_states[1] = stage_1_grid
+	live_grid_states[1] = Global.matrix_copy_2d(stage_1_grid)
 	
 	stage_select(2)
 	for i in range(bounds.y + 1):
@@ -31,7 +31,7 @@ func _ready():
 	for pos in target_cells:
 		stage_2_grid[pos.y][pos.x] = 2
 	start_grid_states[2] = stage_2_grid
-	live_grid_states[2] = stage_2_grid
+	live_grid_states[2] = Global.matrix_copy_2d(stage_2_grid)
 	
 	stage_select(1)
 
@@ -130,8 +130,8 @@ func _on_reset_button_pressed():
 	stage_select(1)
 	$checkpoint_button.hide()
 	$checkpoint_button.disabled = true
-	live_grid_states[1] = start_grid_states[1]
-	live_grid_states[2] = start_grid_states[2]
+	live_grid_states[1] = Global.matrix_copy_2d(start_grid_states[1])
+	live_grid_states[2] = Global.matrix_copy_2d(start_grid_states[2])
 
 
 func _on_checkpoint_button_pressed() -> void:
@@ -143,7 +143,7 @@ func _on_checkpoint_button_pressed() -> void:
 	$grid_handler/stage_2.show()
 	$checkpoint_button.show()
 	$checkpoint_button.disabled = false
-	live_grid_states[1] = start_grid_states[1]
-	live_grid_states[2] = start_grid_states[2]
+	live_grid_states[1] = Global.matrix_copy_2d(start_grid_states[1])
+	live_grid_states[2] = Global.matrix_copy_2d(start_grid_states[2])
 	
 	
