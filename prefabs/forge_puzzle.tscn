@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://du370rxia1q02"]
+
+[ext_resource type="Script" uid="uid://bem8ps3mjx3dq" path="res://scripts/forge_puzzle.gd" id="1_y8w8l"]
+[ext_resource type="PackedScene" uid="uid://dn3o3iwc116lo" path="res://prefabs/forge_key_grid.tscn" id="3_6rt1s"]
+[ext_resource type="Texture2D" uid="uid://wa6okxa0m5tx" path="res://assets/blue_background.svg" id="4_6rt1s"]
+
+[node name="forge_puzzle" type="Node2D" unique_id=2044794346]
+script = ExtResource("1_y8w8l")
+
+[node name="grid_handler" parent="." unique_id=397140835 instance=ExtResource("3_6rt1s")]
+
+[node name="background" type="Sprite2D" parent="." unique_id=13490364]
+z_index = -100
+scale = Vector2(12, 6.786)
+texture = ExtResource("4_6rt1s")
+centered = false
+
+[node name="reset_button" type="Button" parent="." unique_id=512851482]
+z_index = 5
+offset_left = 1700.0
+offset_top = 666.0
+offset_right = 1888.0
+offset_bottom = 754.0
+theme_override_font_sizes/font_size = 30
+text = "Reset Puzzle"
+
+[node name="checkpoint_button" type="Button" parent="." unique_id=1690203314]
+visible = false
+z_index = 5
+offset_left = 1691.0
+offset_top = 786.0
+offset_right = 1894.0
+offset_bottom = 903.0
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "Return to 
+Checkpoint"
+
+[node name="win_indicator" type="Label" parent="." unique_id=384919517]
+visible = false
+z_index = 10
+offset_left = 770.0
+offset_top = 69.0
+offset_right = 1239.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN!"
+
+[connection signal="pressed" from="reset_button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="checkpoint_button" to="." method="_on_checkpoint_button_pressed"]
