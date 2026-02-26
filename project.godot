@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pukehinau Peril"
-run/main_scene="uid://ch4mrbwc48o6n"
+run/main_scene="uid://c3rx334bi11gh"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -23,7 +23,6 @@ Global="*uid://08117la6i18b"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [editor]

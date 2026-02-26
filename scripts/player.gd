@@ -2,43 +2,42 @@ extends CharacterBody2D
 
 @onready var explosion = preload("res://prefabs/explosion.tscn")
 @onready var camera = $player_camera
+@onready var puzzles = get_node("/root/main_level/puzzles")
 const SPEED = 300.0
-
 @export var spawn_position := Vector2(350, 200)
+var can_start_puzzle = false
+var is_puzzling = false
+var current_puzzle = null
 
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-	
-	position = spawn_position
-
+signal summon_puzzle
 func _ready():
-	if not is_multiplayer_authority(): return
-	
-	$player_camera.enabled = true
+	pass
 
 func _physics_process(_delta: float) -> void:
-	if not is_multiplayer_authority(): return
-	
-	if Input.is_action_just_pressed("smack"):
-		smack()
+	if Input.is_action_just_pressed("interact") and not is_puzzling:
+		if can_start_puzzle and current_puzzle != null:
+			can_start_puzzle = false
+			is_puzzling = true
+			summon_puzzle.emit(str(current_puzzle))
 
-	var direction_horizontal := Input.get_axis("left", "right")
-	if direction_horizontal:
-		velocity.x = direction_horizontal * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if not is_puzzling:
+		if Input.is_action_just_pressed("smack"):
+			smack()
 
-	var direction_vertical := Input.get_axis("up", "down")
-	if direction_vertical:
-		velocity.y = direction_vertical * SPEED
+		var direction_horizontal := Input.get_axis("left", "right")
+		velocity.x = direction_horizontal * SPEED if direction_horizontal else move_toward(velocity.x, 0, SPEED)
+
+		var direction_vertical := Input.get_axis("up", "down")
+		velocity.y = direction_vertical * SPEED if direction_vertical else move_toward(velocity.y, 0, SPEED)
 	else:
-		velocity.y = move_toward(velocity.x, 0, SPEED)
+		self.velocity.y = move_toward(velocity.y, 0, SPEED)
+		self.velocity.x = move_toward(velocity.x, 0, SPEED)
+
 	move_and_slide()
 
 func smack():
-	camera.shake(20.0,1.0)
+	camera.shake(20.0, 1.0)
 	var spawned_explosion = explosion.instantiate()
 	spawned_explosion.position = self.position
 	spawned_explosion.emitting = true
 	get_parent().add_child(spawned_explosion)
-	
