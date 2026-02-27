@@ -2,8 +2,10 @@ extends Area2D
 
 
 func _on_body_entered(body):
-	body.can_start_puzzle = true
-	body.current_puzzle = self.name
+	if body.name == "player":
+		body.can_start_puzzle = true
+		body.current_puzzle = self.name
 
 func _on_body_exited(body):
-	body.can_start_puzzle = true
+	if body.name == "player":
+		body.can_start_puzzle = true

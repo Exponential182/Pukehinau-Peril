@@ -32,6 +32,7 @@ animations = [{
 [node name="player" type="CharacterBody2D" unique_id=484850195]
 collision_layer = 2
 script = ExtResource("1_r66lb")
+metadata/_edit_group_ = true
 
 [node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1464497376]
 shape = SubResource("RectangleShape2D_su5do")
@@ -42,7 +43,6 @@ animation = &"walk"
 frame_progress = 0.035142448
 
 [node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
-enabled = false
 limit_left = 0
 limit_top = 0
 limit_right = 10000
