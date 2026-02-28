@@ -1,5 +1,7 @@
 extends Node2D
 
+signal puzzle_completed
+
 var start_grid_states = {}
 var live_grid_states = {}
 var target_cells = null
@@ -11,6 +13,9 @@ var current_stage = null
 func _ready():
 	var stage_1_grid = []
 	var stage_2_grid = []
+	
+	puzzle_completed.connect(get_parent().forge_puzzle_completed)
+	
 	
 	# Compose Grid for Stage 1
 	stage_select(1)
@@ -121,7 +126,9 @@ func _process(_delta):
 				$grid_handler/stage_2.show()
 			elif current_stage == 2:
 				$win_indicator.show()
-
+				puzzle_completed.emit()
+				await get_tree().create_timer(2).timeout
+				self.queue_free()
 
 func _on_reset_button_pressed():
 	$grid_handler.free()
