@@ -28,6 +28,7 @@ var wait = 0
 var last_synced_value := 0.0
 
 signal vertical_puzzle_completed
+
 func _ready() -> void:
 	var score_scale = progress_bar.value/100
 	$score/score.text = str(round(progress_bar.value*10)/10)
@@ -40,6 +41,7 @@ func _physics_process(delta: float) -> void:
 		self.queue_free()
 	elif progress_bar.value > 0.1:
 		progress_bar.value -= 0.03 * (1+0.1*wait*wait)
+		pass
 	else:
 		self.queue_free()
 	if shake_timer > 0:
@@ -65,7 +67,7 @@ func _physics_process(delta: float) -> void:
 			in_range = true
 		if in_range:
 			combo += 1
-			var progress_adition = combo_multiplier * 2 + 8
+			var progress_adition = combo_multiplier * 5 + 5
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
 		else:

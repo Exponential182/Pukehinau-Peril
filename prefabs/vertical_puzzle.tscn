@@ -46,6 +46,7 @@ width = 1080
 height = 120
 
 [node name="vertical_puzzle" type="Node2D" unique_id=1792755049]
+light_mask = 2
 script = ExtResource("1_n2pnt")
 
 [node name="background" type="Sprite2D" parent="." unique_id=1906833742]
@@ -155,13 +156,13 @@ vertical_alignment = 1
 
 [node name="Tutorial" type="Label" parent="." unique_id=1443259148]
 z_index = 120
-offset_left = 980.0
+offset_left = 877.0
 offset_top = 11.0
 offset_right = 1907.0
 offset_bottom = 300.0
 theme_override_fonts/font = ExtResource("3_28ko8")
 theme_override_font_sizes/font_size = 64
-text = "Press space when the icons are aligned. Gain bonus score for high combos, but the longer you wait per press, the faster your score depletes."
+text = "Press space when the moving object is in the green area/godot icon. Gain bonus score for high combos, but the longer you wait per press, the faster your score depletes."
 horizontal_alignment = 2
 autowrap_mode = 2
 
