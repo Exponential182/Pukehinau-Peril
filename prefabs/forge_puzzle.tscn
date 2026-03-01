@@ -9,7 +9,6 @@ z_index = 100
 script = ExtResource("1_y8w8l")
 
 [node name="grid_handler" parent="." unique_id=397140835 instance=ExtResource("3_6rt1s")]
-z_index = 100
 
 [node name="background" type="Sprite2D" parent="." unique_id=13490364]
 z_index = 99

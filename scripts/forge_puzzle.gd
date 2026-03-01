@@ -100,35 +100,38 @@ func dfs_tile_removal(grid) -> Array:
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_pressed("left_click"):
 		var absolute_input_pos = get_viewport().get_mouse_position()
 		var base_layer_tile_pos = key_map.local_to_map(key_map.to_local(absolute_input_pos))
 		var grid_layer_tile_pos = grid_map.local_to_map(grid_map.to_local(absolute_input_pos))
+		var original_grid_value = null
 		if 0 <= base_layer_tile_pos.x and base_layer_tile_pos.x <= bounds.x and 0 <= base_layer_tile_pos.y and base_layer_tile_pos.y <= bounds.y:
+			original_grid_value = live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]
 			key_map.set_cell(base_layer_tile_pos, -1)
 			grid_map.set_cell(grid_layer_tile_pos, -1)
 			live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
 		
-		var changes = dfs_tile_removal(live_grid_states[current_stage])
-		live_grid_states[1] = changes[0]
-		for coordinate in changes[1]:
-			key_map.set_cell(coordinate, -1)
-			grid_map.set_cell(coordinate, -1)
-		
-		var sorted_key_map = key_map.get_used_cells()
-		sorted_key_map.sort()
-		if sorted_key_map == target_cells:
-			if current_stage == 1:
-				stage_select(2)
-				$checkpoint_button.show()
-				$checkpoint_button.disabled = false
-				$grid_handler/stage_1.hide()
-				$grid_handler/stage_2.show()
-			elif current_stage == 2:
-				$win_indicator.show()
-				puzzle_completed.emit()
-				await get_tree().create_timer(2).timeout
-				self.queue_free()
+			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
+				var changes = dfs_tile_removal(live_grid_states[current_stage])
+				live_grid_states[current_stage] = changes[0]
+				for coordinate in changes[1]:
+					key_map.set_cell(coordinate, -1)
+					grid_map.set_cell(coordinate, -1)
+				
+				var sorted_key_map = key_map.get_used_cells()
+				sorted_key_map.sort()
+				if sorted_key_map == target_cells:
+					if current_stage == 1:
+						stage_select(2)
+						$checkpoint_button.show()
+						$checkpoint_button.disabled = false
+						$grid_handler/stage_1.hide()
+						$grid_handler/stage_2.show()
+					elif current_stage == 2:
+						$win_indicator.show()
+						puzzle_completed.emit()
+						await get_tree().create_timer(2).timeout
+						self.queue_free()
 
 func _on_reset_button_pressed():
 	$grid_handler.free()
