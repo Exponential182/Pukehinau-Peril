@@ -26,14 +26,22 @@ var can_combo = true
 var combo_multiplier = 1
 var wait = 0
 var last_synced_value := 0.0
+
+signal vertical_puzzle_completed
 func _ready() -> void:
 	var score_scale = progress_bar.value/100
 	$score/score.text = str(round(progress_bar.value*10)/10)
 	$score.scale = Vector2(score_scale, score_scale)
+	vertical_puzzle_completed.connect(get_parent().vertical_puzzle_completed)
 
 func _physics_process(delta: float) -> void:
-	if progress_bar.value > 0:
+	if progress_bar.value >=99.9:
+		vertical_puzzle_completed.emit()
+		self.queue_free()
+	elif progress_bar.value > 0.1:
 		progress_bar.value -= 0.03 * (1+0.1*wait*wait)
+	else:
+		self.queue_free()
 	if shake_timer > 0:
 		shake_timer -= delta
 		bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
@@ -57,11 +65,11 @@ func _physics_process(delta: float) -> void:
 			in_range = true
 		if in_range:
 			combo += 1
-			var progress_adition = combo_multiplier * 1 + 10
+			var progress_adition = combo_multiplier * 2 + 8
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
 		else:
-			progress_bar.value *= 0.9
+			progress_bar.value -= 10
 			combo = 0
 			combo_multiplier = 1
 		combo_text.text = "COMBO\nX" + str(combo)

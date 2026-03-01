@@ -189,16 +189,18 @@ texture = ExtResource("2_ofjge")
 z_index = 25
 script = ExtResource("3_nja2s")
 
+[node name="puzzle_camera" type="Camera2D" parent="puzzles" unique_id=1484445758]
+
 [node name="player" parent="." unique_id=484850195 instance=ExtResource("6_jynbf")]
 z_index = 20
-position = Vector2(544, 682)
+position = Vector2(1531, 828)
 
 [node name="light_occluder_2d" type="LightOccluder2D" parent="player" unique_id=687638729]
 position = Vector2(-1635, -1043)
 occluder = SubResource("OccluderPolygon2D_jynbf")
 
 [node name="point_light_2d" type="PointLight2D" parent="." unique_id=1518796078]
-position = Vector2(1675, -276.99994)
+position = Vector2(1862, -249.99994)
 scale = Vector2(65.37, 65.37)
 energy = 0.3
 texture = ExtResource("7_jxr24")

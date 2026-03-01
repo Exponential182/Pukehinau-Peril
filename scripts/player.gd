@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var explosion = preload("res://prefabs/explosion.tscn")
 @onready var camera = $player_camera
+@onready var puzzle_camera = $"../puzzles/puzzle_camera"
 @onready var puzzles = get_node("/root/main_level/puzzles")
 const SPEED = 300.0
 @export var spawn_position := Vector2(350, 200)
@@ -11,13 +12,16 @@ var current_puzzle = null
 
 signal summon_puzzle
 func _ready():
-	pass
+	puzzle_camera.enabled = false
+	camera.enabled = true
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if can_start_puzzle and current_puzzle != null:
 			can_start_puzzle = false
 			is_puzzling = true
+			puzzle_camera.enabled = true
+			camera.enabled = false
 			summon_puzzle.emit(str(current_puzzle))
 
 	if not is_puzzling:
