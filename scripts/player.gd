@@ -3,17 +3,20 @@ extends CharacterBody2D
 @onready var explosion = preload("res://prefabs/explosion.tscn")
 @onready var camera = $player_camera
 @onready var puzzle_camera = $"../puzzles/puzzle_camera"
+@onready var animation = $player_sprite
 @onready var puzzles = get_node("/root/main_level/puzzles")
 const SPEED = 300.0
 @export var spawn_position := Vector2(350, 200)
 var can_start_puzzle = false
 var is_puzzling = false
 var current_puzzle = null
+var state = "brain"
 
 signal summon_puzzle
 func _ready():
 	puzzle_camera.enabled = false
 	camera.enabled = true
+	animation.play("brain")
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
@@ -26,6 +29,12 @@ func _physics_process(_delta: float) -> void:
 
 	if not is_puzzling:
 		if Input.is_action_just_pressed("smack"):
+			if state == "brain":
+				state = "brawn"
+				animation.play("brawn")
+			elif state == "brawn":
+				state = "brain"
+				animation.play("brain")
 			smack()
 
 		var direction_horizontal := Input.get_axis("left", "right")

@@ -173,7 +173,33 @@ position = Vector2(60, 540)
 rotation = 1.5707964
 texture = SubResource("GradientTexture2D_d1beo")
 
+[node name="fail" type="Node2D" parent="." unique_id=1918243977]
+visible = false
+
+[node name="Tutorial" type="Label" parent="fail" unique_id=2059556525]
+z_index = 120
+offset_left = 518.0
+offset_top = 436.0
+offset_right = 1548.0
+offset_bottom = 725.0
+theme_override_fonts/font = ExtResource("3_28ko8")
+theme_override_font_sizes/font_size = 64
+text = "You failed :("
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="button" type="Button" parent="fail" unique_id=364393041]
+z_index = 186
+offset_left = 599.0
+offset_top = 519.0
+offset_right = 1413.0
+offset_bottom = 794.0
+theme_override_fonts/font = ExtResource("3_28ko8")
+theme_override_font_sizes/font_size = 128
+text = "Retry"
+
 [connection signal="area_entered" from="canvas_layer/main_area" to="." method="_on_main_area_area_entered"]
 [connection signal="area_exited" from="canvas_layer/main_area" to="." method="_on_main_area_area_exited"]
 [connection signal="timeout" from="canvas_layer/combo_timer" to="." method="_on_combo_timer_timeout"]
 [connection signal="timeout" from="canvas_layer/speed_timer" to="." method="_on_speed_timer_timeout"]
+[connection signal="pressed" from="fail/button" to="." method="_on_button_pressed"]

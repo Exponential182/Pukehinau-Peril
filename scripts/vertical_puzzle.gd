@@ -43,7 +43,8 @@ func _physics_process(delta: float) -> void:
 		progress_bar.value -= 0.03 * (1+0.1*wait*wait)
 		pass
 	else:
-		self.queue_free()
+		$fail.show()
+		can_combo = false
 	if shake_timer > 0:
 		shake_timer -= delta
 		bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
@@ -92,3 +93,12 @@ func _on_combo_timer_timeout() -> void:
 
 func _on_speed_timer_timeout() -> void:
 	speed = base_speed * combo_multiplier
+
+
+func _on_button_pressed() -> void:
+	$fail.hide()
+	progress_bar.value = 20
+	wait = 0
+	combo = 0
+	can_combo = true
+	
