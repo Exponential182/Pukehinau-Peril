@@ -2,8 +2,8 @@ extends Node2D
 @onready var lights = $"../world/lights"
 @onready var player = $"../player"
 @onready var puzzles = {
-	"vertical_puzzle" : [preload("res://prefabs/vertical_puzzle.tscn"), false],
-	"forge_puzzle" : [preload("res://prefabs/forge_puzzle.tscn"),false]
+	"vertical_puzzle" : [preload("res://prefabs/vertical_puzzle.tscn"), false, "brain"],
+	"forge_puzzle" : [preload("res://prefabs/forge_puzzle.tscn"), false, "brawn"],
 }
 
 func _on_player_summon_puzzle(puzzle_name) -> void:
