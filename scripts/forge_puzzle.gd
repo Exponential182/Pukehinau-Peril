@@ -9,6 +9,7 @@ var key_map = null
 var grid_map = null
 var bounds = null
 var current_stage = null
+@onready var particle = preload("res://prefabs/forge_tile_fade.tscn")
 
 func _ready():
 	var stage_1_grid = []
@@ -66,6 +67,13 @@ func array_zeros(length):
 	return array_to_fill
 
 
+func spawn_fadeout_particle(pos: Vector2):
+	var spawned_particle = particle.instantiate()
+	spawned_particle.position = pos
+	spawned_particle.emitting = true
+	self.add_child(spawned_particle)
+
+
 func dfs_tile_removal(grid) -> Array:
 	var coords_visited = {}
 	var changes = []
@@ -115,7 +123,8 @@ func _process(_delta):
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]
 				for coordinate in changes[1]:
-					key_map.set_cell(coordinate, -1)
+					spawn_fadeout_particle(key_map.map_to_local(coordinate)*3)
+					key_map.set_cell(coordinate, -1)	
 					grid_map.set_cell(coordinate, -1)
 				
 				var sorted_key_map = key_map.get_used_cells()
