@@ -6,14 +6,14 @@ extends Node2D
 	"forge_puzzle" : [preload("res://prefabs/forge_puzzle.tscn"), false, "brawn"],
 }
 
-func _on_player_summon_puzzle(puzzle_name) -> void:
-	print(puzzle_name)
-	if not puzzles[puzzle_name][1]:
+func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
+	if not puzzles[puzzle_name][1] and player_state == puzzles[puzzle_name][2]:
 		var spawned_puzzle = puzzles[puzzle_name][0].instantiate()
 		self.add_child(spawned_puzzle)
 		spawned_puzzle.position = Vector2.ZERO
 		lights.hide()
 	else:
+		print("hello")
 		fix_player()
 
 

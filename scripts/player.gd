@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 			is_puzzling = true
 			puzzle_camera.enabled = true
 			camera.enabled = false
-			summon_puzzle.emit(str(current_puzzle))
+			summon_puzzle.emit(str(current_puzzle), str(state))
 
 	if not is_puzzling:
 		if Input.is_action_just_pressed("smack") and can_swap:
@@ -35,11 +35,11 @@ func _physics_process(_delta: float) -> void:
 			if state == "brain":
 				state = "brawn"
 				speed = 500.0
-				animation.play("brawn")
+				animation.play("brawn_idle")
 				animation.flip_v = false
 			elif state == "brawn":
 				state = "brain"
-				animation.play("brain")
+				animation.play("brain_idle")
 				speed = 300.0
 				animation.flip_v = true
 			smack()
