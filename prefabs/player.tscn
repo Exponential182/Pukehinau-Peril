@@ -102,6 +102,58 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_ht1c8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u51tk"]
+resource_name = "camera_unzoom"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(6, 6), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g2jcq"]
+resource_name = "camera_zoom"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(4, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u51tk"]
+_data = {
+&"RESET": SubResource("Animation_ht1c8"),
+&"camera_unzoom": SubResource("Animation_u51tk"),
+&"camera_zoom": SubResource("Animation_g2jcq")
+}
+
 [node name="player" type="CharacterBody2D" unique_id=484850195]
 collision_layer = 2
 script = ExtResource("1_r66lb")
@@ -125,5 +177,8 @@ limit_bottom = 1150
 script = ExtResource("3_ht1c8")
 
 [node name="swap_timer" type="Timer" parent="." unique_id=996996033]
+
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=991069522]
+libraries/ = SubResource("AnimationLibrary_u51tk")
 
 [connection signal="timeout" from="swap_timer" to="." method="_on_swap_timer_timeout"]

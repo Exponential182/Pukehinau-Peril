@@ -16,7 +16,6 @@ angle_min = -720.0
 angle_max = 191.00002
 radial_velocity_min = 61.219975
 radial_velocity_max = 999.99994
-gravity = Vector3(0, 0, 0)
 linear_accel_min = -25.7
 linear_accel_max = 22.449997
 scale_min = 0.25
@@ -25,7 +24,7 @@ color_ramp = SubResource("GradientTexture1D_ah2ku")
 
 [node name="explosion_particles" type="GPUParticles2D" unique_id=406331604]
 emitting = false
-amount = 16
+amount = 32
 texture = ExtResource("1_psxt3")
 one_shot = true
 explosiveness = 1.0

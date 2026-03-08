@@ -12,6 +12,7 @@ var is_puzzling = false
 var current_puzzle = null
 var can_swap = true
 var state = "brain"
+var zoomed = false
 
 signal summon_puzzle
 func _ready():
@@ -20,6 +21,13 @@ func _ready():
 	animation.play("brain")
 
 func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ZOOM"):
+		if not zoomed:
+			$animation_player.play("camera_zoom")
+			zoomed = true
+		else:
+			$animation_player.play("camera_unzoom")
+			zoomed = false
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if can_start_puzzle and current_puzzle != null:
 			can_start_puzzle = false
