@@ -9,7 +9,8 @@ var key_map = null
 var grid_map = null
 var bounds = null
 var current_stage = null
-@onready var particle = preload("res://prefabs/forge_tile_fade.tscn")
+@onready var fadeout_particle = preload("res://prefabs/forge_tile_fade.tscn")
+@onready var pop_particle = preload("res://prefabs/forge_tile_pop.tscn")
 
 func _ready():
 	var stage_1_grid = []
@@ -68,7 +69,13 @@ func array_zeros(length):
 
 
 func spawn_fadeout_particle(pos: Vector2):
-	var spawned_particle = particle.instantiate()
+	var spawned_particle = fadeout_particle.instantiate()
+	spawned_particle.position = pos
+	spawned_particle.emitting = true
+	self.add_child(spawned_particle)
+
+func spawn_pop_particle(pos: Vector2):
+	var spawned_particle = pop_particle.instantiate()
 	spawned_particle.position = pos
 	spawned_particle.emitting = true
 	self.add_child(spawned_particle)
@@ -120,6 +127,7 @@ func _process(_delta):
 			live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
 		
 			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
+				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*3)
 				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*3)
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]

@@ -4,23 +4,15 @@
 [ext_resource type="Script" uid="uid://deqjuvmobyxar" path="res://scripts/particle_clear.gd" id="2_1f33y"]
 
 [sub_resource type="Curve" id="Curve_1f33y"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_wwgiw"]
 curve = SubResource("Curve_1f33y")
 
-[sub_resource type="Curve" id="Curve_wwgiw"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_kxjqa"]
-curve = SubResource("Curve_wwgiw")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kxjqa"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_kxjqa")
 alpha_curve = SubResource("CurveTexture_wwgiw")
 
 [node name="forge_tile_fade" type="GPUParticles2D" unique_id=1829862622]
@@ -29,7 +21,6 @@ scale = Vector2(3, 3)
 emitting = false
 amount = 1
 texture = ExtResource("1_lr2d3")
-lifetime = 2.0
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_kxjqa")
 script = ExtResource("2_1f33y")
