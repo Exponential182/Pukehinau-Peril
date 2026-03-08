@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dndpx1jwwsrt2"]
 
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="1_psxt3"]
+[ext_resource type="Script" uid="uid://bs8f7igsabebu" path="res://scripts/explosion.gd" id="2_ah2ku"]
 
 [sub_resource type="Gradient" id="Gradient_psxt3"]
 offsets = PackedFloat32Array(0, 0.4021739, 0.5543478, 1)
@@ -15,7 +16,6 @@ angle_min = -720.0
 angle_max = 191.00002
 radial_velocity_min = 61.219975
 radial_velocity_max = 999.99994
-gravity = Vector3(0, 0, 0)
 linear_accel_min = -25.7
 linear_accel_max = 22.449997
 scale_min = 0.25
@@ -24,8 +24,12 @@ color_ramp = SubResource("GradientTexture1D_ah2ku")
 
 [node name="explosion_particles" type="GPUParticles2D" unique_id=406331604]
 emitting = false
+amount = 32
 texture = ExtResource("1_psxt3")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ah2ku")
+script = ExtResource("2_ah2ku")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
