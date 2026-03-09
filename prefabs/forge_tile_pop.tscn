@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://br3iji2pmohh2"]
+
+[ext_resource type="Texture2D" uid="uid://cs5cc4ra13od2" path="res://assets/hot_metal.svg" id="1_0uhc5"]
+[ext_resource type="Script" uid="uid://deqjuvmobyxar" path="res://scripts/particle_clear.gd" id="2_0uhc5"]
+
+[sub_resource type="Curve" id="Curve_ychd5"]
+_data = [Vector2(0.50769234, 0.48314613), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_ayi8j"]
+curve = SubResource("Curve_ychd5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ah2ku"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 191.00002
+radial_velocity_min = 99.99998
+radial_velocity_max = 399.99997
+gravity = Vector3(0, 800, 0)
+linear_accel_min = -25.7
+linear_accel_max = 22.449997
+scale_min = 0.25
+scale_max = 0.79999995
+emission_curve = SubResource("CurveTexture_ayi8j")
+
+[node name="forge_tile_pop" type="GPUParticles2D" unique_id=406331604]
+z_index = 150
+emitting = false
+texture = ExtResource("1_0uhc5")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ah2ku")
+script = ExtResource("2_0uhc5")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

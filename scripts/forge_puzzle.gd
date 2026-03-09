@@ -9,6 +9,8 @@ var key_map = null
 var grid_map = null
 var bounds = null
 var current_stage = null
+@onready var fadeout_particle = preload("res://prefabs/forge_tile_fade.tscn")
+@onready var pop_particle = preload("res://prefabs/forge_tile_pop.tscn")
 
 func _ready():
 	var stage_1_grid = []
@@ -66,6 +68,19 @@ func array_zeros(length):
 	return array_to_fill
 
 
+func spawn_fadeout_particle(pos: Vector2):
+	var spawned_particle = fadeout_particle.instantiate()
+	spawned_particle.position = pos
+	spawned_particle.emitting = true
+	self.add_child(spawned_particle)
+
+func spawn_pop_particle(pos: Vector2):
+	var spawned_particle = pop_particle.instantiate()
+	spawned_particle.position = pos
+	spawned_particle.emitting = true
+	self.add_child(spawned_particle)
+
+
 func dfs_tile_removal(grid) -> Array:
 	var coords_visited = {}
 	var changes = []
@@ -112,10 +127,13 @@ func _process(_delta):
 			live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
 		
 			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
+				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*3)
+				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*3)
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]
 				for coordinate in changes[1]:
-					key_map.set_cell(coordinate, -1)
+					spawn_fadeout_particle(key_map.map_to_local(coordinate)*3)
+					key_map.set_cell(coordinate, -1)	
 					grid_map.set_cell(coordinate, -1)
 				
 				var sorted_key_map = key_map.get_used_cells()
@@ -129,7 +147,6 @@ func _process(_delta):
 						$grid_handler/stage_2.show()
 					elif current_stage == 2:
 						$win_indicator.show()
-						await get_tree().create_timer(2).timeout
 						puzzle_completed.emit()
 						self.queue_free()
 
