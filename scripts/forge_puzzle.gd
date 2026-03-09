@@ -148,7 +148,6 @@ func _process(_delta):
 					elif current_stage == 2:
 						$win_indicator.show()
 						puzzle_completed.emit()
-						await get_tree().create_timer(2).timeout
 						self.queue_free()
 
 func _on_reset_button_pressed():
