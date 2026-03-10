@@ -5,4 +5,5 @@
 *.tres text eol=lf
 *.cfg text eol=lf
 *.import text eol=lf
-*.godot tedt eol=lf
+*.godot text eol=lf
+*.svg text eol=lf
