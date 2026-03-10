@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://jiapebxijfue"]
+
+[ext_resource type="Script" uid="uid://b5exbj6cw8nwm" path="res://scripts/door.gd" id="1_qfj2i"]
+[ext_resource type="Texture2D" uid="uid://hwgmao1prpt2" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Wooden Door.png" id="1_sum4q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfj2i"]
+size = Vector2(16, 29)
+
+[node name="door" type="Node2D" unique_id=1840481697]
+script = ExtResource("1_qfj2i")
+
+[node name="door_area" type="Area2D" parent="." unique_id=3858381]
+collision_layer = 3
+collision_mask = 3
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="door_area" unique_id=2145320867]
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_qfj2i")
+
+[node name="wooden_door" type="Sprite2D" parent="door_area" unique_id=1731181511]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("1_sum4q")
+
+[connection signal="body_entered" from="door_area" to="." method="_on_door_area_body_entered"]
+[connection signal="body_exited" from="door_area" to="." method="_on_door_area_body_exited"]

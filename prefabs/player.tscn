@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dyech36r42nt2" path="res://assets/Brawns_Base.png" id="4_ht1c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
-size = Vector2(120, 120)
+size = Vector2(120, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u51tk"]
 atlas = ExtResource("2_ht1c8")
@@ -116,6 +116,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("canvas_layer/sprite_2d:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_u51tk"]
 resource_name = "camera_unzoom"
@@ -134,17 +146,30 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_g2jcq"]
 resource_name = "camera_zoom"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("player_camera:zoom")
+tracks/0/path = NodePath("canvas_layer/sprite_2d:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(4, 4)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2.5, 2.5), Vector2(2.5, 2.5), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u51tk"]
@@ -154,10 +179,15 @@ _data = {
 &"camera_zoom": SubResource("Animation_g2jcq")
 }
 
+[sub_resource type="Gradient" id="Gradient_ht1c8"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g2jcq"]
+gradient = SubResource("Gradient_ht1c8")
+
 [node name="player" type="CharacterBody2D" unique_id=484850195]
 collision_layer = 2
 script = ExtResource("1_r66lb")
-metadata/_edit_group_ = true
 
 [node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1464497376]
 shape = SubResource("RectangleShape2D_su5do")
@@ -167,12 +197,11 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_jxr24")
 animation = &"brawn_idle"
-flip_v = true
 
 [node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
 limit_left = 0
 limit_top = 0
-limit_right = 2624
+limit_right = 10000
 limit_bottom = 1150
 script = ExtResource("3_ht1c8")
 
@@ -180,5 +209,13 @@ script = ExtResource("3_ht1c8")
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=991069522]
 libraries/ = SubResource("AnimationLibrary_u51tk")
+
+[node name="canvas_layer" type="CanvasLayer" parent="." unique_id=835692934]
+
+[node name="sprite_2d" type="Sprite2D" parent="canvas_layer" unique_id=1207365914]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(965, 525)
+scale = Vector2(31.765625, 19.140625)
+texture = SubResource("GradientTexture2D_g2jcq")
 
 [connection signal="timeout" from="swap_timer" to="." method="_on_swap_timer_timeout"]

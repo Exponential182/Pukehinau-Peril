@@ -13,7 +13,13 @@ var current_puzzle = null
 var can_swap = true
 var state = "brain"
 var zoomed = false
+var current_door = null
 
+var door_positions = {
+	"door1" : Vector2(2800,400),
+	"returndoor1" : Vector2(980,400)
+	
+}
 signal summon_puzzle
 func _ready():
 	puzzle_camera.enabled = false
@@ -21,13 +27,16 @@ func _ready():
 	animation.play("brain")
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ZOOM"):
-		if not zoomed:
-			$animation_player.play("camera_zoom")
-			zoomed = true
-		else:
-			$animation_player.play("camera_unzoom")
-			zoomed = false
+	if current_door != null:
+		if Input.is_action_just_pressed("ZOOM"):
+			if not zoomed:
+				$animation_player.stop()
+				$animation_player.play("camera_zoom")
+				zoomed = true
+				await get_tree().create_timer(0.75).timeout
+				self.position = door_positions[current_door]
+				await get_tree().create_timer(0.75).timeout
+				zoomed = false
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if can_start_puzzle and current_puzzle != null:
 			can_start_puzzle = false
@@ -36,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 			camera.enabled = false
 			summon_puzzle.emit(str(current_puzzle), str(state))
 
-	if not is_puzzling:
+	if not is_puzzling and not zoomed:
 		if Input.is_action_just_pressed("smack") and can_swap:
 			can_swap = false
 			$swap_timer.start(1.2)
@@ -62,6 +71,13 @@ func _physics_process(_delta: float) -> void:
 		self.velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
+
+func entered_door(door):
+	current_door = door
+	if door:
+		$"../UI/open_door".show()
+	else:
+		$"../UI/open_door".hide()
 
 func smack():
 	camera.shake(20.0, 1.0)
