@@ -80,10 +80,10 @@ func array_zeros(length):
 	return array_to_fill
 
 
-func spawn_fadeout_particle(pos: Vector2, scale: int):
+func spawn_fadeout_particle(pos: Vector2, particle_scale: int):
 	var spawned_particle = fadeout_particle.instantiate()
 	spawned_particle.position = pos
-	spawned_particle.process_material.scale = Vector2(scale, scale)
+	spawned_particle.process_material.scale = Vector2(particle_scale, particle_scale)
 	spawned_particle.emitting = true
 	self.add_child(spawned_particle)
 
@@ -151,6 +151,9 @@ func dfs_tile_removal(grid) -> Array:
 
 func _ready():
 	puzzle_completed.connect(get_parent().forge_puzzle_completed)
+	spawn_fadeout_particle(Vector2(-1000, -1000), 1)
+	spawn_pop_particle(Vector2(-1000, -1000))
+	
 	
 	for i in range(1, 6):
 		create_grid(i)
