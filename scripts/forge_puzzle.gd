@@ -2,8 +2,10 @@ extends Node2D
 
 signal puzzle_completed
 
+var stage_count = 4
 var start_grid_states = {}
 var live_grid_states = {}
+var stage_parent = null
 var target_cells = null
 var key_map = null
 var grid_map = null
@@ -12,18 +14,23 @@ var stage_scale = 0
 var current_stage = null
 @onready var fadeout_particle = preload("res://prefabs/forge_tile_fade.tscn")
 @onready var pop_particle = preload("res://prefabs/forge_tile_pop.tscn")
+@onready var forge_grid = preload("res://prefabs/forge_key_grid.tscn")
 
 
 func stage_select(stage):
+	$tutorial.hide()
 	if stage == 1:
+		stage_parent = $grid_handler/stage_1
 		target_cells = $grid_handler/stage_1/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_1/grid_layer
 		key_map = $grid_handler/stage_1/base_layer
 		bounds = Vector2i(24, 14)
 		current_stage = 1
 		stage_scale = 3
+		$tutorial.show()
 	
 	if stage == 2:
+		stage_parent = $grid_handler/stage_2
 		target_cells = $grid_handler/stage_2/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_2/grid_layer
 		key_map = $grid_handler/stage_2/base_layer
@@ -32,6 +39,7 @@ func stage_select(stage):
 		stage_scale = 4
 	
 	if stage == 3:
+		stage_parent = $grid_handler/stage_3
 		target_cells = $grid_handler/stage_3/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_3/grid_layer
 		key_map = $grid_handler/stage_3/base_layer
@@ -40,6 +48,7 @@ func stage_select(stage):
 		stage_scale = 4
 	
 	if stage == 4:
+		stage_parent = $grid_handler/stage_4
 		target_cells = $grid_handler/stage_4/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_4/grid_layer
 		key_map = $grid_handler/stage_4/base_layer
@@ -71,9 +80,10 @@ func array_zeros(length):
 	return array_to_fill
 
 
-func spawn_fadeout_particle(pos: Vector2):
+func spawn_fadeout_particle(pos: Vector2, scale: int):
 	var spawned_particle = fadeout_particle.instantiate()
 	spawned_particle.position = pos
+	spawned_particle.process_material.scale = Vector2(scale, scale)
 	spawned_particle.emitting = true
 	self.add_child(spawned_particle)
 
@@ -82,6 +92,20 @@ func spawn_pop_particle(pos: Vector2):
 	spawned_particle.position = pos
 	spawned_particle.emitting = true
 	self.add_child(spawned_particle)
+
+
+func stage_reset(stage):
+	$grid_handler.queue_free()
+	await $grid_handler.tree_exited
+	var new_grid = forge_grid.instantiate()
+	self.add_child(new_grid)
+	stage_select(stage)
+	for i in range(1, stage_count+1):
+		live_grid_states[i] = Global.matrix_copy_2d(start_grid_states[i])
+		get_node("grid_handler/stage_"+str(i)).hide()
+		if i <= current_stage:
+			get_node("stage_"+str(i)+"_button").disabled = false
+	get_node("grid_handler/stage_"+str(current_stage)).show()
 
 
 func dfs_tile_removal(grid) -> Array:
@@ -148,49 +172,51 @@ func _process(_delta):
 		
 			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
 				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale)
-				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale)
+				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale, stage_scale)
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]
 				for coordinate in changes[1]:
-					spawn_fadeout_particle(key_map.map_to_local(coordinate)*stage_scale)
+					spawn_fadeout_particle(key_map.map_to_local(coordinate)*stage_scale, stage_scale)
 					key_map.set_cell(coordinate, -1)	
 					grid_map.set_cell(coordinate, -1)
 				
 				var sorted_key_map = key_map.get_used_cells()
 				sorted_key_map.sort()
 				if sorted_key_map == target_cells:
+					await get_tree().create_timer(0.5).timeout
 					if current_stage == 1:
 						stage_select(2)
-						$checkpoint_button.show()
-						$checkpoint_button.disabled = false
+						$stage_2_button.disabled = false
 						$grid_handler/stage_1.hide()
 						$grid_handler/stage_2.show()
+						$tutorial.hide()
 					elif current_stage == 2:
-						$win_indicator.show()
+						stage_select(3)
+						$stage_3_button.disabled = false
+						$grid_handler/stage_2.hide()
+						$grid_handler/stage_3.show()
+					elif current_stage == 3:
+						stage_select(4)
+						$stage_4_button.disabled = false
+						$grid_handler/stage_3.hide()
+						$grid_handler/stage_4.show()
+					elif current_stage == 4:
 						puzzle_completed.emit()
+						$win_indicator.show()
 						self.queue_free()
 
-func _on_reset_button_pressed():
-	$grid_handler.free()
-	var keys = preload("res://prefabs/forge_key_grid.tscn").instantiate()
-	self.add_child(keys)
-	stage_select(1)
-	$checkpoint_button.hide()
-	$checkpoint_button.disabled = true
-	live_grid_states[1] = Global.matrix_copy_2d(start_grid_states[1])
-	live_grid_states[2] = Global.matrix_copy_2d(start_grid_states[2])
+
+func _stage_1_reset():
+	stage_reset(1)
 
 
-func _on_checkpoint_button_pressed() -> void:
-	$grid_handler.free()
-	var keys = preload("res://prefabs/forge_key_grid.tscn").instantiate()
-	self.add_child(keys)
-	stage_select(2)
-	$grid_handler/stage_1.hide()
-	$grid_handler/stage_2.show()
-	$checkpoint_button.show()
-	$checkpoint_button.disabled = false
-	live_grid_states[1] = Global.matrix_copy_2d(start_grid_states[1])
-	live_grid_states[2] = Global.matrix_copy_2d(start_grid_states[2])
-	
-	
+func _stage_2_reset():
+	stage_reset(2)
+
+
+func _stage_3_reset():
+	stage_reset(3)
+
+
+func _stage_4_reset():
+	stage_reset(4)
