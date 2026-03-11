@@ -8,39 +8,10 @@ var target_cells = null
 var key_map = null
 var grid_map = null
 var bounds = null
+var stage_scale = 0
 var current_stage = null
 @onready var fadeout_particle = preload("res://prefabs/forge_tile_fade.tscn")
 @onready var pop_particle = preload("res://prefabs/forge_tile_pop.tscn")
-
-func _ready():
-	var stage_1_grid = []
-	var stage_2_grid = []
-	
-	puzzle_completed.connect(get_parent().forge_puzzle_completed)
-	
-	
-	# Compose Grid for Stage 1
-	stage_select(1)
-	for i in range(bounds.y + 1):
-		stage_1_grid.append(array_zeros(bounds.x+1))
-	for pos in key_map.get_used_cells():
-		stage_1_grid[pos.y][pos.x] = 1
-	for pos in target_cells:
-		stage_1_grid[pos.y][pos.x] = 2
-	start_grid_states[1] = stage_1_grid
-	live_grid_states[1] = Global.matrix_copy_2d(stage_1_grid)
-	
-	stage_select(2)
-	for i in range(bounds.y + 1):
-		stage_2_grid.append(array_zeros(bounds.x+1))
-	for pos in key_map.get_used_cells():
-		stage_2_grid[pos.y][pos.x] = 1
-	for pos in target_cells:
-		stage_2_grid[pos.y][pos.x] = 2
-	start_grid_states[2] = stage_2_grid
-	live_grid_states[2] = Global.matrix_copy_2d(stage_2_grid)
-	
-	stage_select(1)
 
 
 func stage_select(stage):
@@ -48,17 +19,49 @@ func stage_select(stage):
 		target_cells = $grid_handler/stage_1/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_1/grid_layer
 		key_map = $grid_handler/stage_1/base_layer
-		bounds = Vector2i(35,21)
+		bounds = Vector2i(24, 14)
 		current_stage = 1
+		stage_scale = 3
 	
 	if stage == 2:
 		target_cells = $grid_handler/stage_2/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_2/grid_layer
 		key_map = $grid_handler/stage_2/base_layer
-		bounds = Vector2i(24,14)
+		bounds = Vector2i(22, 14)
 		current_stage = 2
+		stage_scale = 4
+	
+	if stage == 3:
+		target_cells = $grid_handler/stage_3/comparison_layer.get_used_cells()
+		grid_map = $grid_handler/stage_3/grid_layer
+		key_map = $grid_handler/stage_3/base_layer
+		bounds = Vector2i(17, 15)
+		current_stage = 3
+		stage_scale = 4
+	
+	if stage == 4:
+		target_cells = $grid_handler/stage_4/comparison_layer.get_used_cells()
+		grid_map = $grid_handler/stage_4/grid_layer
+		key_map = $grid_handler/stage_4/base_layer
+		bounds = Vector2i(22, 14)
+		current_stage = 4
+		stage_scale = 4
 	
 	target_cells.sort()
+
+
+func create_grid(stage_id):
+	var grid = []
+	
+	stage_select(stage_id)
+	for i in range(bounds.y + 1):
+		grid.append(array_zeros(bounds.x+1))
+	for pos in key_map.get_used_cells():
+		grid[pos.y][pos.x] = 1 # A tile exists
+	for pos in target_cells: 
+		grid[pos.y][pos.x] = 2 # A tile which needs to be save exists.
+	start_grid_states[stage_id] = Global.matrix_copy_2d(grid)
+	live_grid_states[stage_id] = Global.matrix_copy_2d(grid)
 
 
 func array_zeros(length):
@@ -82,36 +85,53 @@ func spawn_pop_particle(pos: Vector2):
 
 
 func dfs_tile_removal(grid) -> Array:
-	var coords_visited = {}
+	var visited = []
+	var height = len(grid)
+	var width = len(grid[0])
+	var directions = [Vector2i(-1, 0), Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1)]
+	for i in range(height):
+		visited.append(array_zeros(width))
 	var changes = []
-	for row_index in range(len(grid)):
-		for tile_index in range(len(grid[0])): 
-			if Vector2i(tile_index, row_index) not in coords_visited.keys() and grid[row_index][tile_index] != 0:
+	for row_index in range(height):
+		for tile_index in range(width): 
+			if visited[row_index][tile_index] == 0 and grid[row_index][tile_index] != 0:
 				var stack = []
 				var diff = []
 				var found_two = false
-				var start_pos = Vector2i(tile_index, row_index)
+				var start_pos = row_index * width + tile_index
 				stack.append(start_pos)
-				coords_visited[start_pos] = 1
+				visited[row_index][tile_index] = 1
 				while stack:
-					var pos = stack.pop_back()
-					diff.append(pos)
-					if grid[pos.y][pos.x] != 0:
-						for delta in [Vector2i(-1, 0), Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1)]:
-							var new_pos = Vector2i(pos.x + delta.x, pos.y + delta.y)
-							if new_pos not in coords_visited.keys():
-								if 0 <= new_pos.y and new_pos.y <= bounds.y and 0 <= new_pos.x and new_pos.x <= bounds.x:
-									if grid[new_pos.y][new_pos.x] != 0:
-										if grid[new_pos.y][new_pos.x] == 2:
-											found_two = true
-										coords_visited[new_pos] = 1
-										stack.append(new_pos)
+					var key = stack.pop_back()
+					var x = key % width
+					var y = key / width
+					diff.append(key)
+					if grid[y][x] != 0:
+						for delta in directions:
+							var nx = x + delta.x
+							var ny = y + delta.y
+							if 0 <= ny and ny < height and 0 <= nx and nx < width:
+								if visited[ny][nx] == 0:
+									if grid[ny][nx] != 0:
+										if grid[ny][nx] == 2:
+											found_two = true	
+										visited[ny][nx] = 1
+										stack.append(ny*width + nx)
 					
 				if not found_two:
-					for coordinate in diff:
-						grid[coordinate.y][coordinate.x] = 0
-						changes.append(coordinate)
+					for key in diff:
+						grid[key/width][key%width] = 0
+						changes.append(Vector2i(key%width, key/width))
 	return [grid, changes]
+
+
+func _ready():
+	puzzle_completed.connect(get_parent().forge_puzzle_completed)
+	
+	for i in range(1, 6):
+		create_grid(i)
+	
+	stage_select(1)
 
 
 func _process(_delta):
@@ -127,12 +147,12 @@ func _process(_delta):
 			live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x] = 0
 		
 			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
-				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*3)
-				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*3)
+				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale)
+				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale)
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]
 				for coordinate in changes[1]:
-					spawn_fadeout_particle(key_map.map_to_local(coordinate)*3)
+					spawn_fadeout_particle(key_map.map_to_local(coordinate)*stage_scale)
 					key_map.set_cell(coordinate, -1)	
 					grid_map.set_cell(coordinate, -1)
 				
