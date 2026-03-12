@@ -12,3 +12,11 @@ func _on_door_area_body_entered(body: Node2D) -> void:
 func _on_door_area_body_exited(body: Node2D) -> void:
 	if body.name == "player":
 		entered_door.emit(null)
+
+func magical_door_opening():
+	$door_area/wooden_door2.show()
+	await get_tree().create_timer(0.5).timeout
+	$door_area/wooden_door2.hide()
+	$door_area/wooden_door.z_index = 50
+	await get_tree().create_timer(0.5).timeout
+	$door_area/wooden_door.z_index = 0
