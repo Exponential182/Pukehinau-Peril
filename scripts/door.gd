@@ -1,0 +1,22 @@
+extends Node2D
+
+@onready var player = get_node("/root/main_level/player")
+signal entered_door
+func _ready() -> void:
+	entered_door.connect(get_node("/root/main_level/player").entered_door)
+func _on_door_area_body_entered(body: Node2D) -> void:
+	if body.name == "player":
+		entered_door.emit(self.name)
+
+
+func _on_door_area_body_exited(body: Node2D) -> void:
+	if body.name == "player":
+		entered_door.emit(null)
+
+func magical_door_opening():
+	$door_area/wooden_door2.show()
+	await get_tree().create_timer(0.5).timeout
+	$door_area/wooden_door2.hide()
+	$door_area/wooden_door.z_index = 50
+	await get_tree().create_timer(0.5).timeout
+	$door_area/wooden_door.z_index = 0
