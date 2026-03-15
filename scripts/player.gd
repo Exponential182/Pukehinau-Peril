@@ -28,8 +28,8 @@ func _ready():
 	animation.play("brain_idle")
 
 func _physics_process(_delta: float) -> void:
-	if current_door != null:
-		if Input.is_action_just_pressed("ZOOM"):
+	if Input.is_action_just_pressed("interact") and not is_puzzling:
+		if current_door != null:
 			if not zoomed:
 				self.position = current_door_position
 				self.velocity = Vector2.ZERO
@@ -43,8 +43,7 @@ func _physics_process(_delta: float) -> void:
 				animation.play(str(state) + "_down")
 				await get_tree().create_timer(0.75).timeout
 				zoomed = false
-	if Input.is_action_just_pressed("interact") and not is_puzzling:
-		if can_start_puzzle and current_puzzle != null:
+		elif can_start_puzzle and current_puzzle != null:
 			can_start_puzzle = false
 			is_puzzling = true
 			puzzle_camera.enabled = true
