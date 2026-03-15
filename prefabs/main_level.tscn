@@ -11,11 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ei740ovfhdb" path="res://assets/School Daze Tileset/School Daze/Stage 3/Tileset/Walls.png" id="6_78yew"]
 [ext_resource type="PackedScene" uid="uid://uf8ol5pwve7" path="res://prefabs/player.tscn" id="6_jynbf"]
 [ext_resource type="Texture2D" uid="uid://bf1ep3r36poid" path="res://assets/School Daze Tileset/School Daze/Stage 2/Tileset/Walls.png" id="7_fivn5"]
-[ext_resource type="Texture2D" uid="uid://bn5uab1cjona3" path="res://assets/School Daze Tileset/School Daze/Stage 3/Objects/Wooden Door.png" id="7_jxr24"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="8_fy1nc"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jynbf"]
-polygon = PackedVector2Array(-1286, -735, 2990, -711, 2975, 1809, -1286, 1824)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ofjge"]
 tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0)
@@ -338,24 +334,11 @@ size = Vector2(335, 168)
 [node name="lights" type="Node2D" parent="world" unique_id=1897289303]
 metadata/_edit_lock_ = true
 
-[node name="point_light_2d" type="PointLight2D" parent="world/lights" unique_id=2078539363]
-light_mask = 2
-position = Vector2(1666, -351.17)
-scale = Vector2(29.875002, 65.37)
-energy = 0.6
-texture = ExtResource("7_jxr24")
-
-[node name="point_light_2d2" type="PointLight2D" parent="world/lights" unique_id=1518796078]
-position = Vector2(2190, -351.17)
-scale = Vector2(29.875002, 65.37)
-energy = 0.6
-texture = ExtResource("7_jxr24")
-
-[node name="light_occluder_2d" type="LightOccluder2D" parent="world/lights" unique_id=687638729]
-visible = false
-z_index = 50
-position = Vector2(1209, 671)
-occluder = SubResource("OccluderPolygon2D_jynbf")
+[node name="main_light" type="DirectionalLight2D" parent="world/lights" unique_id=34145632]
+position = Vector2(-513, -580)
+energy = 0.55
+blend_mode = 1
+shadow_enabled = true
 
 [node name="tilemap" type="TileMapLayer" parent="world" unique_id=1672345720]
 texture_filter = 1
