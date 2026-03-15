@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bs0ic2ou5d18q" path="res://assets/Brain_change.png" id="2_u51tk"]
 [ext_resource type="Texture2D" uid="uid://bn3clvt2jtkw5" path="res://assets/Brawn_spritesetfull.png" id="3_g2jcq"]
 [ext_resource type="Script" uid="uid://bcax5sywvc6ye" path="res://scripts/player_camera.gd" id="3_ht1c8"]
-[ext_resource type="Texture2D" uid="uid://dyech36r42nt2" path="res://assets/Brawns_Base.png" id="3_kbsxf"]
 [ext_resource type="Texture2D" uid="uid://bk2n2oiqa8lx" path="res://assets/Brawn_spriteset.png" id="4_ht1c8"]
+[ext_resource type="Texture2D" uid="uid://d3iert4qud60u" path="res://assets/Brawn_change.png" id="6_rgeog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
 size = Vector2(92, 142)
@@ -20,17 +20,17 @@ region = Rect2(0, 0, 50, 64)
 atlas = ExtResource("2_u51tk")
 region = Rect2(0, 64, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cklxg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xpr7"]
 atlas = ExtResource("2_u51tk")
 region = Rect2(0, 128, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yi4ui"]
-atlas = ExtResource("2_u51tk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4knd"]
+atlas = ExtResource("6_rgeog")
 region = Rect2(0, 64, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0umtd"]
-atlas = ExtResource("3_kbsxf")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2gt5"]
+atlas = ExtResource("6_rgeog")
+region = Rect2(0, 0, 50, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8jxos"]
 atlas = ExtResource("2_g2jcq")
@@ -113,22 +113,22 @@ atlas = ExtResource("2_g2jcq")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2v6jp"]
-atlas = ExtResource("3_kbsxf")
-region = Rect2(0, 0, 64, 64)
+atlas = ExtResource("6_rgeog")
+region = Rect2(0, 0, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r5rtq"]
-atlas = ExtResource("2_u51tk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjmal"]
+atlas = ExtResource("6_rgeog")
 region = Rect2(0, 64, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7xpr7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cklxg"]
 atlas = ExtResource("2_u51tk")
 region = Rect2(0, 128, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b4knd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi4ui"]
 atlas = ExtResource("2_u51tk")
 region = Rect2(0, 64, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2gt5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0umtd"]
 atlas = ExtResource("2_u51tk")
 region = Rect2(0, 0, 50, 64)
 
@@ -222,13 +222,13 @@ animations = [{
 "texture": SubResource("AtlasTexture_e3k5d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cklxg")
+"texture": SubResource("AtlasTexture_7xpr7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yi4ui")
+"texture": SubResource("AtlasTexture_b4knd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0umtd")
+"texture": SubResource("AtlasTexture_i2gt5")
 }],
 "loop": false,
 "name": &"brain_change",
@@ -324,16 +324,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_2v6jp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r5rtq")
+"texture": SubResource("AtlasTexture_pjmal")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7xpr7")
+"texture": SubResource("AtlasTexture_cklxg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b4knd")
+"texture": SubResource("AtlasTexture_yi4ui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i2gt5")
+"texture": SubResource("AtlasTexture_0umtd")
 }],
 "loop": false,
 "name": &"brawn_change",
@@ -530,10 +530,11 @@ shape = SubResource("RectangleShape2D_su5do")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="." unique_id=1178543682]
 texture_filter = 1
-position = Vector2(2, 0)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_jxr24")
-animation = &"brawn_change"
+animation = &"brain_change"
+frame = 4
+frame_progress = 1.0
 
 [node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
 limit_left = 0

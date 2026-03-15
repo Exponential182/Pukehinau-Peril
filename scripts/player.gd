@@ -14,6 +14,7 @@ var can_swap = true
 var state = "brain"
 var zoomed = false
 var current_door = null
+var current_door_position = Vector2(0,0)
 
 var door_positions = {
 	"door1" : Vector2(2800,335),
@@ -30,12 +31,16 @@ func _physics_process(_delta: float) -> void:
 	if current_door != null:
 		if Input.is_action_just_pressed("ZOOM"):
 			if not zoomed:
+				self.position = current_door_position
+				self.velocity = Vector2.ZERO
+				animation.play(str(state) + "_up")
 				$animation_player.stop()
 				$animation_player.play("camera_zoom")
 				zoomed = true
 				$"../world/doors".find_child(str(current_door)).magical_door_opening()
 				await get_tree().create_timer(0.75).timeout
 				self.position = door_positions[current_door]
+				animation.play(str(state) + "_down")
 				await get_tree().create_timer(0.75).timeout
 				zoomed = false
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
@@ -51,6 +56,7 @@ func _physics_process(_delta: float) -> void:
 			can_swap = false
 			velocity = Vector2.ZERO
 			$swap_timer.start(1.2)
+			animation.offset.x = 1
 			if state == "brain":
 				state = "brawn"
 				speed = 500.0
@@ -61,34 +67,43 @@ func _physics_process(_delta: float) -> void:
 				speed = 300.0
 			smack()
 		var direction_horizontal = null
-		if Input.is_action_pressed("left") and can_swap:
+		if Input.is_action_pressed("left") and can_swap and not Input.is_action_pressed("right"):
 			velocity.x = speed * -1
 			direction_horizontal = "left"
-		elif Input.is_action_pressed("right") and can_swap:
+			animation.offset.x = 0
+		elif Input.is_action_pressed("right") and can_swap and not Input.is_action_pressed("left"):
 			velocity.x = speed * 1
 			direction_horizontal = "right"
+			animation.offset.x = 0
 		else:
 			self.velocity.x = move_toward(velocity.x, 0, speed)
 		var direction_vertical = null
-		if Input.is_action_pressed("up") and can_swap:
+		if Input.is_action_pressed("up") and can_swap and not Input.is_action_pressed("down"):
 			velocity.y = speed * -1
 			direction_vertical = "up"
-		elif Input.is_action_pressed("down") and can_swap:
+			animation.offset.x = 0
+		elif Input.is_action_pressed("down") and can_swap and not Input.is_action_pressed("up"):
 			velocity.y = speed * 1
 			direction_vertical = "down"
+			animation.offset.x = 1
 		else:
 			self.velocity.y = move_toward(velocity.y, 0, speed)
 		if can_swap:
 			if direction_horizontal:
-				animation.play(str(state) + "_" + str(direction_horizontal))
+				animation.play(str(state) + "_left")
+				if direction_horizontal == "right":
+					animation.flip_h = true
+				else:
+					animation.flip_h = false
 			elif direction_vertical:
 				animation.play(str(state) + "_" + str(direction_vertical))
 			else:
 				animation.play(str(state)+ "_idle")
 	move_and_slide()
 
-func entered_door(door):
+func entered_door(door,door_position):
 	current_door = door
+	current_door_position = door_position - Vector2(0,-80)
 	if door:
 		$"../UI/open_door".show()
 	else:
