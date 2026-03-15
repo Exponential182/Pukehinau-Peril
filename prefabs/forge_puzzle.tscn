@@ -28,7 +28,7 @@ theme_override_font_sizes/font_size = 30
 text = "Reset to Grid 1"
 
 [node name="stage_2_button" type="Button" parent="." unique_id=1690203314]
-z_index = 105
+z_index = 101
 offset_left = 1648.0
 offset_top = 120.0
 offset_right = 1908.0
@@ -38,7 +38,7 @@ disabled = true
 text = "Reset to Grid 2"
 
 [node name="stage_3_button" type="Button" parent="." unique_id=2132778536]
-z_index = 105
+z_index = 101
 offset_left = 1648.0
 offset_top = 224.0
 offset_right = 1908.0
@@ -48,7 +48,7 @@ disabled = true
 text = "Reset to Grid 3"
 
 [node name="stage_4_button" type="Button" parent="." unique_id=900943175]
-z_index = 105
+z_index = 101
 offset_left = 1648.0
 offset_top = 336.0
 offset_right = 1908.0
@@ -59,7 +59,7 @@ text = "Reset to Grid 4"
 
 [node name="win_indicator" type="Label" parent="." unique_id=384919517]
 visible = false
-z_index = 110
+z_index = 103
 offset_left = 770.0
 offset_top = 69.0
 offset_right = 1239.0
@@ -68,7 +68,7 @@ theme_override_font_sizes/font_size = 100
 text = "YOU WIN!"
 
 [node name="tutorial" type="Label" parent="." unique_id=1992936829]
-z_index = 120
+z_index = 101
 offset_left = 1223.0
 offset_top = 785.0
 offset_right = 1908.0
