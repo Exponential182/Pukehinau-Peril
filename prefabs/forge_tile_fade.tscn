@@ -16,7 +16,7 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_wwgiw")
 
 [node name="forge_tile_fade" type="GPUParticles2D" unique_id=1829862622]
-z_index = 150
+z_index = 102
 scale = Vector2(3, 3)
 emitting = false
 amount = 1
