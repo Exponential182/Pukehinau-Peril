@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var animation = $player_sprite
 @onready var puzzles = get_node("/root/main_level/puzzles")
 var speed = 300.0
+var base_speed = 300.0
+var pushing_speed = 100.0
 @export var spawn_position := Vector2(350, 200)
 var can_start_puzzle = false
 var is_puzzling = false
@@ -32,7 +34,11 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if is_pushing_desk:
-		pushed_desk.position += Input.get_vector("left", "right", "up", "down") * speed * delta
+		var player_to_desk : Vector2 = (pushed_desk.position - self.position).normalized()
+		var input_vector = Input.get_vector("left", "right", "up", "down")
+		if abs(acos(player_to_desk.dot(input_vector))) <= PI/4.0:
+			pushed_desk.position = lerp(pushed_desk.position, pushed_desk.position + input_vector * speed * delta, 0.5)
+		
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
 			if not zoomed:
@@ -63,12 +69,22 @@ func _physics_process(delta: float) -> void:
 			animation.offset.x = 1
 			if state == "brain":
 				state = "brawn"
-				speed = 500.0
+				base_speed = 500.0
+				pushing_speed = 300.0
+				if speed == 300.0:
+					speed = base_speed
+				else:
+					speed = pushing_speed
 				animation.play("brain_change")
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
-				speed = 300.0
+				base_speed = 300.0
+				pushing_speed = 100.0
+				if speed == 500.0:
+					speed = base_speed
+				else:
+					speed = pushing_speed
 			smack()
 		var direction_horizontal = null
 		if Input.is_action_pressed("left") and can_swap and not Input.is_action_pressed("right"):
@@ -131,13 +147,13 @@ func _on_swap_timer_timeout() -> void:
 	animation.play(str(state)+"_idle")
 
 
-func desk_entered(desk):
+func _desk_entered(desk):
 	is_pushing_desk = true
 	pushed_desk = desk
-	speed -= 280
+	speed = pushing_speed
 
 
-func _desk_exited(desk):
+func _desk_exited():
 	is_pushing_desk = false
 	pushed_desk = null
-	speed += 280
+	speed = base_speed

@@ -6,9 +6,31 @@
 [node name="desk_puzzle" type="Node2D" unique_id=27530958]
 
 [node name="player" parent="." unique_id=484850195 instance=ExtResource("1_amryo")]
+position = Vector2(73, 93)
+
+[node name="movable_desk5" parent="." unique_id=60968287 instance=ExtResource("2_bqp3g")]
+position = Vector2(1355, 820)
+
+[node name="movable_desk4" parent="." unique_id=889749246 instance=ExtResource("2_bqp3g")]
+position = Vector2(870, 366)
 
 [node name="movable_desk" parent="." unique_id=577175055 instance=ExtResource("2_bqp3g")]
-position = Vector2(363, 206)
+position = Vector2(224, 548)
 
-[connection signal="desk_entered" from="movable_desk" to="player" method="desk_entered"]
+[node name="movable_desk6" parent="." unique_id=301303908 instance=ExtResource("2_bqp3g")]
+position = Vector2(358, 504)
+
+[node name="movable_desk3" parent="." unique_id=1682848356 instance=ExtResource("2_bqp3g")]
+position = Vector2(545, 361)
+
+[node name="movable_desk2" parent="." unique_id=1680575867 instance=ExtResource("2_bqp3g")]
+position = Vector2(444, 606)
+
+[connection signal="desk_entered" from="movable_desk4" to="player" method="desk_entered"]
+[connection signal="desk_exited" from="movable_desk4" to="player" method="_desk_exited"]
+[connection signal="desk_entered" from="movable_desk" to="player" method="_desk_entered"]
 [connection signal="desk_exited" from="movable_desk" to="player" method="_desk_exited"]
+[connection signal="desk_entered" from="movable_desk6" to="player" method="_desk_entered"]
+[connection signal="desk_exited" from="movable_desk6" to="player" method="_desk_exited"]
+[connection signal="desk_entered" from="movable_desk3" to="player" method="_desk_entered"]
+[connection signal="desk_exited" from="movable_desk3" to="player" method="_desk_exited"]
