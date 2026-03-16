@@ -33,6 +33,7 @@ scale = Vector2(6, 6)
 texture = ExtResource("1_sum4q")
 
 [node name="static_body_2d" type="StaticBody2D" parent="." unique_id=559138310]
+position = Vector2(0, -21.075)
 collision_layer = 3
 collision_mask = 3
 

@@ -17,8 +17,8 @@ var current_door = null
 var current_door_position = Vector2(0,0)
 
 var door_positions = {
-	"door1" : Vector2(2800,335),
-	"returndoor1" : Vector2(980,335)
+	"door1" : [Vector2(2800,335),],
+	"returndoor1" : [Vector2(980,335),]
 	
 }
 signal summon_puzzle
@@ -28,7 +28,6 @@ func _ready():
 	animation.play("brain_idle")
 
 func _physics_process(_delta: float) -> void:
-	print(animation.animation)
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
 			if not zoomed:
@@ -125,4 +124,3 @@ func smack():
 func _on_swap_timer_timeout() -> void:
 	can_swap = true
 	animation.play(str(state)+"_idle")
-	print("hello")

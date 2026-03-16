@@ -14,14 +14,13 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 		lights.hide()
 		player.velocity = Vector2.ZERO
 	else:
-		print("hello")
 		fix_player()
 
 
 func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")
 	fix_player()
-	$"../world/lights/main_light".hide()
+	$"../animation_player".play("lights")
 	puzzles["vertical_puzzle"][1] = true
 func forge_puzzle_completed():
 	$"../puzzle_areas/forge_puzzle".modulate = Color("green")
