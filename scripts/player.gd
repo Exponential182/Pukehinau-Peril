@@ -16,6 +16,9 @@ var zoomed = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
+var is_pushing_desk = false
+var pushed_desk = null
+
 var door_positions = {
 	"door1" : [Vector2(2800,335),],
 	"returndoor1" : [Vector2(980,335),]
@@ -23,11 +26,13 @@ var door_positions = {
 }
 signal summon_puzzle
 func _ready():
-	puzzle_camera.enabled = false
+	#puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brain_idle")
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if is_pushing_desk:
+		pushed_desk.position += Input.get_vector("left", "right", "up", "down") * speed * delta
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
 			if not zoomed:
@@ -124,3 +129,15 @@ func smack():
 func _on_swap_timer_timeout() -> void:
 	can_swap = true
 	animation.play(str(state)+"_idle")
+
+
+func desk_entered(desk):
+	is_pushing_desk = true
+	pushed_desk = desk
+	speed -= 280
+
+
+func _desk_exited(desk):
+	is_pushing_desk = false
+	pushed_desk = null
+	speed += 280

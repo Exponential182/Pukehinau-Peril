@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ccljpja5rnax2"]
+
+[ext_resource type="PackedScene" uid="uid://uf8ol5pwve7" path="res://prefabs/player.tscn" id="1_amryo"]
+[ext_resource type="PackedScene" uid="uid://ce55wgavweih1" path="res://prefabs/movable_desk.tscn" id="2_bqp3g"]
+
+[node name="desk_puzzle" type="Node2D" unique_id=27530958]
+
+[node name="player" parent="." unique_id=484850195 instance=ExtResource("1_amryo")]
+
+[node name="movable_desk" parent="." unique_id=577175055 instance=ExtResource("2_bqp3g")]
+position = Vector2(363, 206)
+
+[connection signal="desk_entered" from="movable_desk" to="player" method="desk_entered"]
+[connection signal="desk_exited" from="movable_desk" to="player" method="_desk_exited"]
