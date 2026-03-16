@@ -28,6 +28,7 @@ func _ready():
 	animation.play("brain_idle")
 
 func _physics_process(_delta: float) -> void:
+	print(animation.animation)
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
 			if not zoomed:
@@ -96,7 +97,7 @@ func _physics_process(_delta: float) -> void:
 					animation.flip_h = false
 			elif direction_vertical:
 				animation.play(str(state) + "_" + str(direction_vertical))
-			else:
+			if velocity.length() < 0.1:
 				animation.play(str(state)+ "_idle")
 	move_and_slide()
 
@@ -124,3 +125,4 @@ func smack():
 func _on_swap_timer_timeout() -> void:
 	can_swap = true
 	animation.play(str(state)+"_idle")
+	print("hello")

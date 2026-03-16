@@ -544,6 +544,7 @@ limit_bottom = 1150
 script = ExtResource("3_ht1c8")
 
 [node name="swap_timer" type="Timer" parent="." unique_id=996996033]
+one_shot = true
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=991069522]
 libraries/ = SubResource("AnimationLibrary_u51tk")
