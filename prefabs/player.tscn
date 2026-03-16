@@ -521,7 +521,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_ht1c8")
 
 [node name="player" type="CharacterBody2D" unique_id=484850195]
-collision_layer = 2
+collision_layer = 3
 script = ExtResource("1_r66lb")
 
 [node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1464497376]

@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://uf8ol5pwve7" path="res://prefabs/player.tscn" id="6_jynbf"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="8_fy1nc"]
 [ext_resource type="Texture2D" uid="uid://bujgufg540xaf" path="res://assets/New Piskel.png" id="14_66lda"]
+[ext_resource type="Script" uid="uid://ddf52e8jf2fam" path="res://scripts/dialogue.gd" id="14_78yew"]
+[ext_resource type="Script" uid="uid://fbosu0vyjyid" path="res://scripts/dialogue_area.gd" id="16_fivn5"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ofjge"]
 tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0)
@@ -433,6 +435,12 @@ pattern_1 = SubResource("TileMapPattern_v5q0s")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
 size = Vector2(177, 280)
 
+[sub_resource type="Gradient" id="Gradient_66lda"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_78yew"]
+gradient = SubResource("Gradient_66lda")
+
 [sub_resource type="Animation" id="Animation_2237u"]
 length = 0.001
 tracks/0/type = "value"
@@ -470,6 +478,9 @@ _data = {
 &"lights": SubResource("Animation_v5q0s")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78yew"]
+size = Vector2(202, 158)
+
 [node name="main_level" type="Node2D" unique_id=1141564264]
 
 [node name="world" type="Node2D" parent="." unique_id=663481402]
@@ -484,7 +495,7 @@ blend_mode = 1
 shadow_enabled = true
 
 [node name="light_swtich_light" type="PointLight2D" parent="world/lights" unique_id=190207213]
-position = Vector2(532, 137)
+position = Vector2(540.8, 132.8)
 energy = 0.36
 texture = ExtResource("1_v5q0s")
 texture_scale = 0.35
@@ -549,7 +560,7 @@ text = "Forge Puzzle"
 metadata/_edit_use_anchors_ = true
 
 [node name="vertical_puzzle" type="Area2D" parent="puzzle_areas" unique_id=2119357602]
-position = Vector2(647, 300)
+position = Vector2(655.8, 295.8)
 collision_mask = 3
 priority = 1
 script = ExtResource("2_fypyd")
@@ -584,7 +595,7 @@ position = Vector2(960, 540)
 
 [node name="player" parent="." unique_id=484850195 instance=ExtResource("6_jynbf")]
 z_index = 20
-position = Vector2(416, 173)
+position = Vector2(81, 413)
 metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1762167688]
@@ -613,17 +624,88 @@ theme_override_font_sizes/font_size = 50
 text = "Press \"E\" to attempt puzzle"
 autowrap_mode = 2
 
+[node name="dialogue_text" type="Label" parent="UI" unique_id=70026303]
+z_index = 120
+offset_left = 1599.0
+offset_top = 22.0
+offset_right = 1917.0
+offset_bottom = 210.0
+theme_override_fonts/font = ExtResource("8_fy1nc")
+theme_override_font_sizes/font_size = 50
+text = "Press \"E\" to read"
+autowrap_mode = 2
+
+[node name="dialogue" type="Node2D" parent="UI" unique_id=2089645933]
+visible = false
+position = Vector2(960, 889)
+script = ExtResource("14_78yew")
+
+[node name="text" type="Label" parent="UI/dialogue" unique_id=750823322]
+z_index = 26
+texture_filter = 1
+offset_left = -735.0
+offset_top = -110.695
+offset_right = 1523.4619
+offset_bottom = 251.305
+scale = Vector2(0.65, 0.65)
+theme_override_fonts/font = ExtResource("8_fy1nc")
+theme_override_font_sizes/font_size = 64
+text = "Student is present in class Student is in the sick bay Student has a study period Student is in an examination Student is participating in a school activity (whether on site, like a sports day, or off site, like a camp or school trip) Student is on work experience Student has been internally stood down (ie, removed from class but still at school)
+"
+autowrap_mode = 2
+
+[node name="dialogue_background" type="Sprite2D" parent="UI/dialogue" unique_id=347531242]
+scale = Vector2(5.871094, 256)
+texture = SubResource("GradientTexture1D_78yew")
+
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1284199382]
 libraries/ = SubResource("AnimationLibrary_66lda")
 
 [node name="new_piskel" type="Sprite2D" parent="." unique_id=1479650259]
 texture_filter = 1
-position = Vector2(530, 139)
+position = Vector2(538.8, 134.8)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("14_66lda")
+
+[node name="dialogue_areas" type="Node2D" parent="." unique_id=1222447760]
+
+[node name="locked_door" type="Area2D" parent="dialogue_areas" unique_id=199754934]
+position = Vector2(1190, 274)
+script = ExtResource("16_fivn5")
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="dialogue_areas/locked_door" unique_id=234304991]
+position = Vector2(9, 13)
+shape = SubResource("RectangleShape2D_78yew")
+
+[node name="collision_shape_2d2" type="CollisionShape2D" parent="dialogue_areas/locked_door" unique_id=566537888]
+position = Vector2(611, 18)
+shape = SubResource("RectangleShape2D_78yew")
+
+[node name="sprite_2d" type="Sprite2D" parent="dialogue_areas/locked_door" unique_id=1804220734]
+texture = ExtResource("2_ofjge")
+
+[node name="sprite_2d2" type="Sprite2D" parent="dialogue_areas/locked_door" unique_id=878683345]
+position = Vector2(614, 1)
+texture = ExtResource("2_ofjge")
+
+[node name="intro" type="Area2D" parent="dialogue_areas" unique_id=455200064]
+position = Vector2(1498, 538)
+script = ExtResource("16_fivn5")
+metadata/_edit_group_ = true
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="dialogue_areas/intro" unique_id=1259156657]
+position = Vector2(9, 13)
+shape = SubResource("RectangleShape2D_78yew")
+
+[node name="sprite_2d" type="Sprite2D" parent="dialogue_areas/intro" unique_id=485726230]
+texture = ExtResource("2_ofjge")
 
 [connection signal="body_entered" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_exited"]
 [connection signal="body_entered" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_exited"]
 [connection signal="summon_puzzle" from="player" to="puzzles" method="_on_player_summon_puzzle"]
+[connection signal="body_entered" from="dialogue_areas/locked_door" to="dialogue_areas/locked_door" method="_on_body_entered"]
+[connection signal="body_exited" from="dialogue_areas/locked_door" to="dialogue_areas/locked_door" method="_on_body_exited"]
+[connection signal="body_entered" from="dialogue_areas/intro" to="dialogue_areas/intro" method="_on_body_entered"]
+[connection signal="body_exited" from="dialogue_areas/intro" to="dialogue_areas/intro" method="_on_body_exited"]

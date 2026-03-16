@@ -13,6 +13,7 @@ var current_puzzle = null
 var can_swap = true
 var state = "brain"
 var zoomed = false
+var texting = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
@@ -50,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 			camera.enabled = false
 			summon_puzzle.emit(str(current_puzzle), str(state))
 
-	if not is_puzzling and not zoomed and can_swap:
+	if not is_puzzling and not zoomed and can_swap and not texting:
 		if Input.is_action_just_pressed("smack") and can_swap:
 			can_swap = false
 			velocity = Vector2.ZERO
