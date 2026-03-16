@@ -625,6 +625,7 @@ text = "Press \"E\" to attempt puzzle"
 autowrap_mode = 2
 
 [node name="dialogue_text" type="Label" parent="UI" unique_id=70026303]
+visible = false
 z_index = 120
 offset_left = 1599.0
 offset_top = 22.0
