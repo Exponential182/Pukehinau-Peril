@@ -24,8 +24,8 @@ var pushed_box = null
 var last_box = null
 
 var door_positions = {
-	"door1" : [Vector2(2800,335),],
-	"returndoor1" : [Vector2(980,335),]
+	"door1" : Vector2(2800,335),
+	"returndoor1" : Vector2(980,335)
 	
 }
 signal summon_puzzle
@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 					animation.flip_h = false
 			elif direction_vertical:
 				animation.play(str(state) + "_" + str(direction_vertical))
-			if velocity.length() < 0.1:
+			else:
 				animation.play(str(state)+ "_idle")
 	
 	if is_box_puzzle_active:

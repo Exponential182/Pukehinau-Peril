@@ -121,10 +121,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="combo_timer" type="Timer" parent="canvas_layer" unique_id=1685809194]
 wait_time = 0.5
-one_shot = true
 
 [node name="speed_timer" type="Timer" parent="canvas_layer" unique_id=1032653830]
-one_shot = true
 
 [node name="win" type="Node2D" parent="canvas_layer" unique_id=2081957352]
 visible = false

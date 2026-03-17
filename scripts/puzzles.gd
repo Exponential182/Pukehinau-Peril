@@ -12,15 +12,14 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 		self.add_child(spawned_puzzle)
 		spawned_puzzle.position = Vector2.ZERO
 		lights.hide()
-		player.velocity = Vector2.ZERO
 	else:
+		print("hello")
 		fix_player()
 
 
 func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")
 	fix_player()
-	$"../animation_player".play("lights")
 	puzzles["vertical_puzzle"][1] = true
 func forge_puzzle_completed():
 	$"../puzzle_areas/forge_puzzle".modulate = Color("green")
@@ -31,5 +30,4 @@ func fix_player():
 	player.is_puzzling = false
 	player.camera.enabled = true
 	$puzzle_camera.enabled = false
-	player.can_start_puzzle = true
 	lights.show()
