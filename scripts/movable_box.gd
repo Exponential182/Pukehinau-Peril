@@ -1,14 +1,14 @@
 extends StaticBody2D
 
-signal desk_entered(desk: Node)
-signal desk_exited()
+signal box_entered(box: Node)
+signal box_exited()
 
 
 func _on_body_entered(body):
 	if body.name == "player":
-		emit_signal("desk_entered", self)
+		emit_signal("box_entered", self)
 
 
 func _on_body_exited(body):
 	if body.name == "player":
-		emit_signal("desk_exited")
+		emit_signal("box_exited")
