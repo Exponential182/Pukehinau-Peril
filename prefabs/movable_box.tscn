@@ -9,12 +9,10 @@ size = Vector2(136, 136)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0n8dq"]
 size = Vector2(128, 128)
 
-[node name="movable_box" type="StaticBody2D" unique_id=27813517]
-scale = Vector2(0.95, 0.95)
+[node name="movable_box" type="StaticBody2D" unique_id=472312501]
 script = ExtResource("1_u4rne")
 
 [node name="box_texture" type="Sprite2D" parent="." unique_id=1294328538]
-texture_filter = 1
 texture = ExtResource("2_ivc40")
 
 [node name="player_detection_area" type="Area2D" parent="." unique_id=1016049742]

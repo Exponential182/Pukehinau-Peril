@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var puzzles = get_node("/root/main_level/puzzles")
 var speed = 300.0
 var base_speed = 300.0
-var pulling_speed = 100.0
+var pushing_speed = 100.0
 @export var spawn_position := Vector2(350, 200)
 var can_start_puzzle = false
 var is_puzzling = false
@@ -19,8 +19,8 @@ var current_door = null
 var current_door_position = Vector2(0,0)
 
 @export var is_box_puzzle_active = true #false is normal
-var is_pulling_box = false
-var pulled_box = null
+var is_pushing_box = false
+var pushed_box = null
 var last_box = null
 
 var door_positions = {
@@ -33,11 +33,9 @@ func _ready():
 	#puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brain_idle")
+	box_puzzle_started()
 
 func _physics_process(delta: float) -> void:
-	if is_box_puzzle_active:
-		box_puzzle_interaction(delta)
-	
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
 			if not zoomed:
@@ -69,21 +67,21 @@ func _physics_process(delta: float) -> void:
 			if state == "brain":
 				state = "brawn"
 				base_speed = 500.0
-				pulling_speed = 300.0
+				pushing_speed = 300.0
 				if speed == 300.0:
 					speed = base_speed
 				else:
-					speed = pulling_speed
+					speed = pushing_speed
 				animation.play("brain_change")
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
 				base_speed = 300.0
-				pulling_speed = 100.0
+				pushing_speed = 100.0
 				if speed == 500.0:
 					speed = base_speed
 				else:
-					speed = pulling_speed
+					speed = pushing_speed
 			smack()
 		var direction_horizontal = null
 		if Input.is_action_pressed("left") and can_swap and not Input.is_action_pressed("right"):
@@ -118,6 +116,9 @@ func _physics_process(delta: float) -> void:
 				animation.play(str(state) + "_" + str(direction_vertical))
 			if velocity.length() < 0.1:
 				animation.play(str(state)+ "_idle")
+	
+	if is_box_puzzle_active:
+		box_puzzle_interaction(delta)
 	move_and_slide()
 
 func entered_door(door,door_position):
@@ -151,42 +152,45 @@ func _box_entered(box):
 
 
 func _box_exited():
-	if !pulled_box:
+	if !pushed_box:
 		last_box = null
 
 
 func box_puzzle_interaction(delta):
 	if Input.is_action_just_pressed("interact") and last_box:
 		box_puzzle_started()
-		is_pulling_box = not is_pulling_box
-		if is_pulling_box:
-			pulled_box = last_box
-			speed = pulling_speed
-			pulled_box.modulate = Color("green")
+		is_pushing_box = not is_pushing_box
+		if is_pushing_box:
+			pushed_box = last_box
+			speed = pushing_speed
+			pushed_box.modulate = Color("green")
 		else:
-			pulled_box.modulate = Color("white")
-			pulled_box = null
+			pushed_box.modulate = Color("white")
+			pushed_box = null
 			speed = base_speed
 	
-	if pulled_box:
-		var player_to_box : Vector2 = (pulled_box.position - self.position)
+	if pushed_box:
+		var player_to_box : Vector2 = (pushed_box.position - self.position)
 		if player_to_box.length() >= 130.0:
 			speed = base_speed
-			pulled_box.modulate = Color("white")
-			pulled_box = null
-			is_pulling_box = false
+			pushed_box.modulate = Color("white")
+			pushed_box = null
+			is_pushing_box = false
 		else:
 			player_to_box = player_to_box.normalized()
 			var input_vector = Input.get_vector("left", "right", "up", "down")
-			if abs(acos(player_to_box.dot(input_vector))) >= PI*0.85:
-				pulled_box.position = lerp(pulled_box.position, pulled_box.position + input_vector * speed * delta, 1)
+			if abs(acos(player_to_box.dot(input_vector))) <= PI*0.2 and state == "brawn":
+				pushed_box.position = lerp(pushed_box.position, pushed_box.position + input_vector * speed * delta, 1)
 
 
 func box_puzzle_started():
-	$player_hitbox.shape.size = Vector2(92, 126)
-	$player_hitbox.position = Vector2(2, -1)
+	$player_hitbox.shape.size = Vector2(92, 120)
+	$player_hitbox.position = Vector2(2, 2)
+	$player_camera.limit_right = 1920
+	$player_camera.limit_bottom = 1080
 
 
 func box_puzzle_ended():
 	$player_hitbox.shape.size = Vector2(92, 142)
 	$player_hitbox.position = Vector2(2, -9)
+	$player_hitbox.limit_right = 10000
