@@ -117,7 +117,7 @@ func _physics_process(delta: float) -> void:
 					animation.flip_h = false
 			elif direction_vertical:
 				animation.play(str(state) + "_" + str(direction_vertical))
-			else:
+			if velocity.length() < 0.1:
 				animation.play(str(state)+ "_idle")
 	
 	if is_box_puzzle_active:

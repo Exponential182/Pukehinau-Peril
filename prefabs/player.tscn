@@ -542,6 +542,7 @@ limit_top = 0
 limit_right = 3200
 limit_bottom = 1088
 script = ExtResource("3_ht1c8")
+metadata/_edit_lock_ = true
 
 [node name="swap_timer" type="Timer" parent="." unique_id=996996033]
 one_shot = true
@@ -556,5 +557,6 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(965, 525)
 scale = Vector2(31.765625, 19.140625)
 texture = SubResource("GradientTexture2D_g2jcq")
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="swap_timer" to="." method="_on_swap_timer_timeout"]

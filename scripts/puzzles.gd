@@ -15,7 +15,6 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 		player.velocity = Vector2.ZERO
 		$"../UI/interact".hide()
 	else:
-		print("hello")
 		fix_player()
 
 
@@ -35,4 +34,5 @@ func fix_player():
 	player.is_puzzling = false
 	player.camera.enabled = true
 	$puzzle_camera.enabled = false
+	player.can_start_puzzle = true
 	lights.show()
