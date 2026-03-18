@@ -4,7 +4,7 @@ signal box_entered(box: Node)
 signal box_exited()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_collide(Vector2.ZERO)
 
 

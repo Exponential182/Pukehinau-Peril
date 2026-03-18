@@ -165,7 +165,7 @@ func box_puzzle_interaction(delta):
 			speed = pushing_speed
 			pushed_box.modulate = Color("green")
 		else:
-			pushed_box.modulate = Color("white")
+			pushed_box.modulate = Color("#ffff62")
 			pushed_box = null
 			speed = base_speed
 	
