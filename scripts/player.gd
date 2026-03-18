@@ -171,7 +171,7 @@ func box_puzzle_interaction(delta):
 	
 	if pushed_box:
 		var player_to_box : Vector2 = (pushed_box.position - self.position)
-		if player_to_box.length() >= 130.0:
+		if player_to_box.length() >= 135.0:
 			speed = base_speed
 			pushed_box.modulate = Color("white")
 			pushed_box = null
@@ -180,7 +180,7 @@ func box_puzzle_interaction(delta):
 			player_to_box = player_to_box.normalized()
 			var input_vector = Input.get_vector("left", "right", "up", "down")
 			var angle = abs(acos(player_to_box.dot(input_vector))) 
-			if (angle >= PI*0.8 or angle <= 0.2) and state == "brawn":
+			if (angle >= PI*0.8 or angle <= PI*0.2) and state == "brawn":
 				pushed_box.position = lerp(pushed_box.position, pushed_box.position + input_vector * speed * delta, 1)
 
 
