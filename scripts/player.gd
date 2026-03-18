@@ -64,12 +64,16 @@ func _physics_process(_delta: float) -> void:
 				speed = 500.0
 				animation.play("brain_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
+				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = true
+				await get_tree().physics_frame
 				if can_start_puzzle:
 					$"../UI/interact".show()
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
+				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = false
+				await get_tree().physics_frame
 				if can_start_puzzle:
 					$"../UI/interact".show()
 				speed = 300.0

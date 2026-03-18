@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	if min_height > area_position or max_height < area_position:
 		direction *= -1
 		wait += 1
-	if Input.is_action_just_pressed("smack") and can_combo:
+	if Input.is_action_just_pressed("smack") and can_combo or Input.is_action_just_pressed("interact") and can_combo:
 		wait = 0
 		combo_multiplier = 1 + (0.1*combo)
 		can_combo = false

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5exbj6cw8nwm" path="res://scripts/door.gd" id="1_qfj2i"]
 [ext_resource type="Texture2D" uid="uid://dnyd7do88n1p3" path="res://assets/windows(2).png" id="2_qfj2i"]
+[ext_resource type="Texture2D" uid="uid://q37wveoawnuo" path="res://assets/windows.png" id="3_gx6vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfj2i"]
 size = Vector2(0.1, 29)
@@ -543,8 +544,17 @@ texture = ExtResource("2_qfj2i")
 40:19/0 = 0
 41:19/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iv2is"]
+texture = ExtResource("3_gx6vt")
+margins = Vector2i(525, 4)
+3:9/0 = 0
+3:10/0 = 0
+8:9/0 = 0
+8:10/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_iv2is"]
 sources/0 = SubResource("TileSetAtlasSource_gx6vt")
+sources/1 = SubResource("TileSetAtlasSource_iv2is")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gx6vt"]
 size = Vector2(96, 73)
@@ -563,13 +573,13 @@ shape = SubResource("RectangleShape2D_qfj2i")
 [node name="tile_map_layer2" type="TileMapLayer" parent="door_area" unique_id=821575302]
 texture_filter = 1
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAD+//z/AAAaAAgAAAD+//3/AAAaAAkAAAD+//7/AAAaAAoAAAD+////AAAaAAsAAAD+/wAAAAAaAAwAAAD+/wEAAAAaAA0AAAD+/wIAAAAaAA4AAAD///z/AAAbAAgAAAD///3/AAAbAAkAAAD///7/AAAbAAoAAAD/////AAAbAAsAAAD//wAAAAAbAAwAAAD//wEAAAAbAA0AAAD//wIAAAAbAA4AAAAAAPz/AAAcAAgAAAAAAP3/AAAcAAkAAAAAAP7/AAAcAAoAAAAAAP//AAAcAAsAAAAAAAAAAAAcAAwAAAAAAAEAAAAcAA0AAAAAAAIAAAAcAA4AAAABAPz/AAAdAAgAAAABAP3/AAAdAAkAAAABAP7/AAAdAAoAAAABAP//AAAdAAsAAAABAAAAAAAdAAwAAAABAAEAAAAdAA0AAAABAAIAAAAdAA4AAAA=")
+tile_map_data = PackedByteArray("AAD+//z/AAAaAAgAAAD+//3/AAAaAAkAAAD+//7/AAAaAAoAAAD+////AAAaAAsAAAD+/wAAAAAaAAwAAAD+/wEAAAAaAA0AAAD+/wIAAAAaAA4AAAD///z/AAAbAAgAAAD///3/AAAbAAkAAAD///7/AAAbAAoAAAD/////AAAbAAsAAAD//wAAAAAbAAwAAAD//wEAAAAbAA0AAAD//wIAAAAbAA4AAAAAAPz/AAAcAAgAAAAAAP3/AAAcAAkAAAAAAP7/AAAcAAoAAAAAAP//AAAcAAsAAAAAAAAAAAAcAAwAAAAAAAEAAAAcAA0AAAAAAAIAAAAcAA4AAAABAPz/AAAdAAgAAAABAP3/AAAdAAkAAAABAP7/AAAdAAoAAAABAP//AAAdAAsAAAABAAEAAAAdAA0AAAABAAIAAAAdAA4AAAABAAAAAAAdAAwAAAA=")
 tile_set = SubResource("TileSet_iv2is")
 
 [node name="tile_map_layer" type="TileMapLayer" parent="door_area" unique_id=2104306706]
 texture_filter = 1
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAD+//z/AAAmAA0AAAD+//3/AAAmAA4AAAD+//7/AAAmAA8AAAD+////AAAmABAAAAD+/wAAAAAmABEAAAD+/wEAAAAmABIAAAD+/wIAAAAmABMAAAD///z/AAAnAA0AAAD///3/AAAnAA4AAAD///7/AAAnAA8AAAD/////AAAnABAAAAD//wAAAAAnABEAAAD//wEAAAAnABIAAAD//wIAAAAnABMAAAAAAPz/AAAoAA0AAAAAAP3/AAAoAA4AAAAAAP7/AAAoAA8AAAAAAP//AAAoABAAAAAAAAAAAAAoABEAAAAAAAEAAAAoABIAAAAAAAIAAAAoABMAAAABAPz/AAApAA0AAAABAP3/AAApAA4AAAABAP7/AAApAA8AAAABAP//AAApABAAAAABAAAAAAApABEAAAABAAEAAAApABIAAAABAAIAAAApABMAAAA=")
+tile_map_data = PackedByteArray("AAD+//z/AAAmAA0AAAD+//3/AAAmAA4AAAD+//7/AAAmAA8AAAD+////AAAmABAAAAD+/wAAAAAmABEAAAD+/wEAAAAmABIAAAD+/wIAAAAmABMAAAD///z/AAAnAA0AAAD///3/AAAnAA4AAAD///7/AAAnAA8AAAD/////AAAnABAAAAD//wAAAAAnABEAAAD//wEAAAAnABIAAAD//wIAAAAnABMAAAAAAPz/AAAoAA0AAAAAAP3/AAAoAA4AAAAAAP7/AAAoAA8AAAAAAP//AAAoABAAAAAAAAAAAAAoABEAAAAAAAEAAAAoABIAAAAAAAIAAAAoABMAAAABAPz/AAApAA0AAAABAP3/AAApAA4AAAABAP7/AAApAA8AAAABAP//AQAIAAkAAAABAAAAAQAIAAoAAAABAAEAAAApABIAAAABAAIAAAApABMAAAA=")
 tile_set = SubResource("TileSet_iv2is")
 
 [node name="static_body_2d" type="StaticBody2D" parent="." unique_id=559138310]
