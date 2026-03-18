@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	if min_height > area_position or max_height < area_position:
 		direction *= -1
 		wait += 1
-	if Input.is_action_just_pressed("smack") and can_combo:
+	if Input.is_action_just_pressed("smack") and can_combo or Input.is_action_just_pressed("interact") and can_combo:
 		wait = 0
 		combo_multiplier = 1 + (0.1*combo)
 		can_combo = false
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			in_range = true
 		if in_range:
 			combo += 1
-			var progress_adition = combo_multiplier * 10 + 5
+			var progress_adition = combo_multiplier * 100 + 5
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
 		else:
