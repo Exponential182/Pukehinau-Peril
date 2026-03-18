@@ -1,10 +1,10 @@
 extends Node2D
 var dialogues = { 
 	"intro" : [
-"Student is present in class Student is in the sick bay Student has a study period Student is in an examination Student is participating in a school activity (whether on site, like a sports day, or off site, like a camp or school trip) Student is on work experience Student has been internally stood down (ie, removed from class but still at school) Student is attending a Secondary Tertiary Programme Student is attending Alternative Education",
-"SOMETHINGSDHLKJH KLJHSDF KJHDS FLKDSHF LKDS HFLKDSJ FHLKSD FHLKDSJF HDYFOWHDLK EJHFLKWJ HDLKJF HELWKJ HDLFIEUWFNIUDHWLFIEHWLFKJDWFL",
-"akdljfhkjl a kdjfshlk lkajsehf ekjw halkjsdhf  qeafwasdf"],
-	"locked_door" : ["Looks like they went home for the day"]
+"Man, it's so dark in here.",
+"I should probably turn the lights on...",],
+	"locked_door" : ["Looks like they went home for the day"],
+	"wrong_player" : ["I'm not sure if I'm the right man for this job..."]
 	
 }
 var visible_characters = 0
@@ -12,11 +12,11 @@ var state = "new_text"
 var max_characters = 10
 var text_stages = 1
 var current_stage = 0
-var current_dialogue = null
+var current_dialogue = "intro"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	change_text()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,8 +50,9 @@ func change_text():
 				state = "new_text"
 				$text.visible_characters = 0
 				self.hide()
-				await get_tree().create_timer(0.2).timeout
+				await get_tree().create_timer(0.25).timeout
 				$"../../player".texting = false
+
 			else:
 				current_stage += 1
 				state = "typing"

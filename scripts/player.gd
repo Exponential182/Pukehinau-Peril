@@ -11,22 +11,24 @@ var can_start_puzzle = false
 var is_puzzling = false
 var current_puzzle = null
 var can_swap = true
-var state = "brain"
+var state = "brawn"
 var zoomed = false
 var texting = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
 var door_positions = {
-	"door1" : [Vector2(2800,335),],
-	"returndoor1" : [Vector2(980,335),]
+	"door1" : Vector2(2790,335),
+	"door2" : Vector2(2530,334),
+	"returndoor1" : Vector2(1472,335),
 	
 }
 signal summon_puzzle
 func _ready():
 	puzzle_camera.enabled = false
 	camera.enabled = true
-	animation.play("brain_idle")
+	animation.play("brawn_idle")
+	$"../world/black".show()
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
@@ -61,9 +63,15 @@ func _physics_process(_delta: float) -> void:
 				state = "brawn"
 				speed = 500.0
 				animation.play("brain_change")
+				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
+				if can_start_puzzle:
+					$"../UI/interact".show()
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
+				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
+				if can_start_puzzle:
+					$"../UI/interact".show()
 				speed = 300.0
 			smack()
 		var direction_horizontal = null
@@ -105,9 +113,10 @@ func entered_door(door,door_position):
 	current_door = door
 	current_door_position = door_position - Vector2(0,-80)
 	if door:
-		$"../UI/open_door".show()
+		$"../UI/interact".show()
 	else:
-		$"../UI/open_door".hide()
+		$"../UI/interact".hide()
+		$"../UI/interact2".hide()
 
 func smack():
 	await get_tree().create_timer(0.8).timeout

@@ -14,9 +14,9 @@ func _on_door_area_body_exited(body: Node2D) -> void:
 		entered_door.emit(null,Vector2.ZERO)
 
 func magical_door_opening():
-	$door_area/wooden_door2.show()
+	$door_area/tile_map_layer.hide()
 	await get_tree().create_timer(0.5).timeout
-	$door_area/wooden_door2.hide()
-	$door_area/wooden_door.z_index = 50
+	$door_area/tile_map_layer.show()
+	$door_area/tile_map_layer.z_index = 50
 	await get_tree().create_timer(0.5).timeout
-	$door_area/wooden_door.z_index = 0
+	$door_area/tile_map_layer.z_index = 0

@@ -13,6 +13,7 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 		spawned_puzzle.position = Vector2.ZERO
 		lights.hide()
 		player.velocity = Vector2.ZERO
+		$"../UI/interact".hide()
 	else:
 		fix_player()
 
@@ -21,12 +22,14 @@ func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")
 	fix_player()
 	$"../animation_player".play("lights")
+	$"../puzzle_areas/vertical_puzzle/area".disabled = true
 	puzzles["vertical_puzzle"][1] = true
+	$"../dialogue_areas/wrong_player".position.y += 1000
 func forge_puzzle_completed():
 	$"../puzzle_areas/forge_puzzle".modulate = Color("green")
 	fix_player()
 	puzzles["forge_puzzle"][1] = true
-
+	$"../puzzle_areas/forge_puzzle/area".disabled = true
 func fix_player():
 	player.is_puzzling = false
 	player.camera.enabled = true

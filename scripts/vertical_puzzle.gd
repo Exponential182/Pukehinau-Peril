@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		vertical_puzzle_completed.emit()
 		self.queue_free()
 	elif progress_bar.value > 0.1:
-		progress_bar.value -= 0.03 * (1+0.1*wait*wait)
+		progress_bar.value -= wait * 0.03 * (1+0.1*wait)
 		pass
 	else:
 		$fail.show()
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			in_range = true
 		if in_range:
 			combo += 1
-			var progress_adition = combo_multiplier * 10 + 5
+			var progress_adition = combo_multiplier * 100 + 5
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
 		else:
