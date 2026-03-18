@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		vertical_puzzle_completed.emit()
 		self.queue_free()
 	elif progress_bar.value > 0.1:
-		progress_bar.value -= wait * 0.03 * (1+0.1*wait)
+		progress_bar.value -= 0.03 * (1+0.1*wait*wait)
 		pass
 	else:
 		$fail.show()

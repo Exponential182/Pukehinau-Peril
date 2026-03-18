@@ -13,9 +13,8 @@ var can_start_puzzle = false
 var is_puzzling = false
 var current_puzzle = null
 var can_swap = true
-var state = "brawn"
+var state = "brain"
 var zoomed = false
-var texting = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
@@ -25,17 +24,16 @@ var pushed_box = null
 var last_box = null
 
 var door_positions = {
-	"door1" : Vector2(2790,335),
-	"door2" : Vector2(2530,334),
-	"returndoor1" : Vector2(1472,335),
+	"door1" : Vector2(2800,335),
+	"returndoor1" : Vector2(980,335)
 	
 }
 signal summon_puzzle
 func _ready():
 	#puzzle_camera.enabled = false
 	camera.enabled = true
-	animation.play("brawn_idle")
-	$"../world/black".show()
+	animation.play("brain_idle")
+	box_puzzle_started()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
@@ -60,7 +58,7 @@ func _physics_process(delta: float) -> void:
 			camera.enabled = false
 			summon_puzzle.emit(str(current_puzzle), str(state))
 
-	if not is_puzzling and not zoomed and can_swap and not texting:
+	if not is_puzzling and not zoomed and can_swap:
 		if Input.is_action_just_pressed("smack") and can_swap:
 			can_swap = false
 			velocity = Vector2.ZERO
@@ -75,16 +73,15 @@ func _physics_process(delta: float) -> void:
 				else:
 					speed = pushing_speed
 				animation.play("brain_change")
-				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
-				if can_start_puzzle:
-					$"../UI/interact".show()
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
-				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
-				if can_start_puzzle:
-					$"../UI/interact".show()
-				speed = 300.0
+				base_speed = 300.0
+				pushing_speed = 100.0
+				if speed == 500.0:
+					speed = base_speed
+				else:
+					speed = pushing_speed
 			smack()
 		var direction_horizontal = null
 		if Input.is_action_pressed("left") and can_swap and not Input.is_action_pressed("right"):
@@ -128,10 +125,9 @@ func entered_door(door,door_position):
 	current_door = door
 	current_door_position = door_position - Vector2(0,-80)
 	if door:
-		$"../UI/interact".show()
+		$"../UI/open_door".show()
 	else:
-		$"../UI/interact".hide()
-		$"../UI/interact2".hide()
+		$"../UI/open_door".hide()
 
 func smack():
 	await get_tree().create_timer(0.8).timeout
