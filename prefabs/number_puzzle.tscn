@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dcgyu2l2e8pao"]
+
+[ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="1_0gd6h"]
+[ext_resource type="Script" uid="uid://vpbp8khdkb5j" path="res://scripts/number_puzzle.gd" id="1_e7xsf"]
+[ext_resource type="AudioStream" uid="uid://bx16bnylila7v" path="res://assets/single_beep.mp3" id="3_ajpmj"]
+
+[node name="number_puzzle" type="Node2D" unique_id=1819065234]
+script = ExtResource("1_e7xsf")
+
+[node name="button" type="Button" parent="." unique_id=1296708423]
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 325.0
+offset_bottom = 350.0
+theme = ExtResource("1_0gd6h")
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="button2" type="Button" parent="." unique_id=63414561]
+offset_left = 350.0
+offset_top = 50.0
+offset_right = 650.0
+offset_bottom = 350.0
+theme = ExtResource("1_0gd6h")
+text = "2"
+metadata/_edit_use_anchors_ = true
+
+[node name="button3" type="Button" parent="." unique_id=1809881495]
+offset_left = 675.0
+offset_top = 50.0
+offset_right = 975.0
+offset_bottom = 350.0
+theme = ExtResource("1_0gd6h")
+text = "3"
+metadata/_edit_use_anchors_ = true
+
+[node name="button4" type="Button" parent="." unique_id=397046084]
+offset_left = 25.0
+offset_top = 375.0
+offset_right = 325.0
+offset_bottom = 675.0
+theme = ExtResource("1_0gd6h")
+text = "4"
+metadata/_edit_use_anchors_ = true
+
+[node name="button5" type="Button" parent="." unique_id=1776449907]
+offset_left = 350.0
+offset_top = 375.0
+offset_right = 650.0
+offset_bottom = 675.0
+theme = ExtResource("1_0gd6h")
+text = "5"
+metadata/_edit_use_anchors_ = true
+
+[node name="button6" type="Button" parent="." unique_id=1304261810]
+offset_left = 675.0
+offset_top = 375.0
+offset_right = 975.0
+offset_bottom = 675.0
+theme = ExtResource("1_0gd6h")
+text = "6"
+metadata/_edit_use_anchors_ = true
+
+[node name="button7" type="Button" parent="." unique_id=426148339]
+offset_left = 25.0
+offset_top = 700.0
+offset_right = 325.0
+offset_bottom = 1000.00006
+theme = ExtResource("1_0gd6h")
+text = "7"
+metadata/_edit_use_anchors_ = true
+
+[node name="button8" type="Button" parent="." unique_id=397166158]
+offset_left = 350.0
+offset_top = 700.0
+offset_right = 650.0
+offset_bottom = 1000.00006
+theme = ExtResource("1_0gd6h")
+text = "8"
+metadata/_edit_use_anchors_ = true
+
+[node name="button9" type="Button" parent="." unique_id=625705632]
+offset_left = 675.0
+offset_top = 700.0
+offset_right = 975.0
+offset_bottom = 1000.00006
+theme = ExtResource("1_0gd6h")
+text = "9"
+metadata/_edit_use_anchors_ = true
+
+[node name="button10" type="Button" parent="." unique_id=1824640638]
+offset_left = 1000.0
+offset_top = 375.0
+offset_right = 1300.0
+offset_bottom = 675.0
+theme = ExtResource("1_0gd6h")
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="delete" type="Button" parent="." unique_id=631315145]
+offset_left = 1000.0
+offset_top = 700.0
+offset_right = 1900.0
+offset_bottom = 1000.0
+theme = ExtResource("1_0gd6h")
+text = "Clear"
+
+[node name="replay" type="Button" parent="." unique_id=1620264605]
+offset_left = 1325.0
+offset_top = 375.0
+offset_right = 1900.0
+offset_bottom = 675.0
+theme = ExtResource("1_0gd6h")
+theme_override_font_sizes/font_size = 200
+text = "Replay"
+metadata/_edit_use_anchors_ = true
+
+[node name="line_edit" type="LineEdit" parent="." unique_id=488905342]
+offset_left = 1000.0
+offset_top = 50.0
+offset_right = 1900.0
+offset_bottom = 350.0
+theme = ExtResource("1_0gd6h")
+placeholder_text = "Repeat..."
+editable = false
+caret_blink = true
+metadata/_edit_use_anchors_ = true
+
+[node name="beep" type="AudioStreamPlayer2D" parent="." unique_id=1254499034]
+stream = ExtResource("3_ajpmj")
+
+[connection signal="pressed" from="button" to="." method="add_digit" binds= [1]]
+[connection signal="pressed" from="button2" to="." method="add_digit" binds= [2]]
+[connection signal="pressed" from="button3" to="." method="add_digit" binds= [3]]
+[connection signal="pressed" from="button4" to="." method="add_digit" binds= [4]]
+[connection signal="pressed" from="button5" to="." method="add_digit" binds= [5]]
+[connection signal="pressed" from="button6" to="." method="add_digit" binds= [6]]
+[connection signal="pressed" from="button7" to="." method="add_digit" binds= [7]]
+[connection signal="pressed" from="button8" to="." method="add_digit" binds= [8]]
+[connection signal="pressed" from="button9" to="." method="add_digit" binds= [9]]
+[connection signal="pressed" from="button10" to="." method="add_digit" binds= [0]]
+[connection signal="pressed" from="delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]

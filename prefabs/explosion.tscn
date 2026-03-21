@@ -25,7 +25,7 @@ color_ramp = SubResource("GradientTexture1D_ah2ku")
 
 [node name="explosion_particles" type="GPUParticles2D" unique_id=406331604]
 emitting = false
-amount = 12
+amount = 6
 texture = ExtResource("1_ah2ku")
 one_shot = true
 explosiveness = 1.0
