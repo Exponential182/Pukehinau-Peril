@@ -5,9 +5,9 @@ extends CharacterBody2D
 @onready var puzzle_camera = $"../puzzles/puzzle_camera"
 @onready var animation = $player_sprite
 @onready var puzzles = get_node("/root/main_level/puzzles")
-var speed = 300.0
-var base_speed = 300.0
-var pushing_speed = 100.0
+var speed = 500.0
+var base_speed = 500.0
+var pushing_speed = 300.0
 @export var spawn_position := Vector2(350, 200)
 var can_start_puzzle = false
 var is_puzzling = false
@@ -19,7 +19,7 @@ var texting = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
-@export var is_box_puzzle_active = true #false is normal
+@export var is_box_puzzle_active = false
 var is_pushing_box = false
 var pushed_box = null
 var last_box = null
@@ -32,7 +32,7 @@ var door_positions = {
 }
 signal summon_puzzle
 func _ready():
-	#puzzle_camera.enabled = false
+	puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brawn_idle")
 	$"../world/black".show()
@@ -125,6 +125,7 @@ func _physics_process(delta: float) -> void:
 				animation.play(str(state)+ "_idle")
 	
 	if is_box_puzzle_active:
+		print("puzzle")
 		box_puzzle_interaction(delta)
 	move_and_slide()
 
@@ -157,6 +158,7 @@ func _on_swap_timer_timeout() -> void:
 
 func _box_entered(box):
 	last_box = box
+
 
 
 func _box_exited():
@@ -195,11 +197,10 @@ func box_puzzle_interaction(delta):
 func box_puzzle_started():
 	$player_hitbox.shape.size = Vector2(92, 120)
 	$player_hitbox.position = Vector2(2, 2)
-	$player_camera.limit_right = 1920
-	$player_camera.limit_bottom = 1080
+	is_box_puzzle_active = true
 
 
 func box_puzzle_ended():
 	$player_hitbox.shape.size = Vector2(92, 142)
 	$player_hitbox.position = Vector2(2, -9)
-	$player_hitbox.limit_right = 10000
+	is_box_puzzle_active = false
