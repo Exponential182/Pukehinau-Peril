@@ -11,12 +11,14 @@ which may help you navigate Pukehinau easier.",
 "Good luck.",
 "Man, it's so dark in here.",
 "I should probably turn the lights on...",],
-	"shortened_intro" : ["I should probably turn the lights on before exploring."],
+	"stop_exploring" : ["I should probably turn the lights on before exploring."],
 	"locked_door" : ["Looks like they went home for the day"],
 	"wrong_player" : ["I'm not sure if I'm the right person for this job..."],
 	"wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"alt_wrong_player" : ["I'm not sure if I'm the right person for this job..."],
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
+	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
+	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
 
 }
 var visible_ratio = 0
@@ -25,7 +27,7 @@ var max_characters = 10
 var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
-var current_dialogue = "shortened_intro"
+var current_dialogue = "stop_exploring"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -19,13 +19,15 @@ var current_door_position = Vector2(0,0)
 
 var door_positions = {
 	"door1" : Vector2(1472,-300),
-	"door2" : Vector2(2530,334),
+	"door2" : Vector2(2784,-300),
 	"returndoor1" : Vector2(1472,335),
 	
 }
 var door_limits = {
 	"door1" : Vector4(510,2430,0,-1220),
-	"returndoor1" : Vector4(0,3200,1088,0)
+	"door2" :Vector4(1824,3744,0,-1280),
+	"returndoor1" : Vector4(0,3200,1088,0),
+	"returndoor2" : Vector4(0,3200,1088,0),
 }
 signal summon_puzzle
 func _ready():
@@ -111,13 +113,21 @@ func enter_door():
 	if not zoomed:
 		self.velocity = Vector2.ZERO
 		$animation_player.stop()
-
+		var show_black = false
 		if str(current_door)[0] == "r":
 			$animation_player.play("camera_unzoom")
 			animation.play(str(state) + "_down")
+			show_black = true
 		else:
 			$animation_player.play("camera_zoom")
 			animation.play(str(state) + "_up")
+			$"../world/black3".hide()
+			if str(current_door)[4] == "1":
+				$"../world/black1".show()
+				$"../world/black2".hide()
+			else:
+				$"../world/black2".show()
+				$"../world/black1".hide()
 		zoomed = true
 		$"../world/doors".find_child(str(current_door)).magical_door_opening()
 		await get_tree().create_timer(0.75).timeout
@@ -129,8 +139,9 @@ func enter_door():
 		$player_camera.limit_bottom = camera_bounds.z
 		await get_tree().create_timer(0.75).timeout
 		zoomed = false
-		
-	
+		if show_black:
+			$"../world/black3".show()
+
 func smack():
 	await get_tree().create_timer(0.8).timeout
 	camera.shake(20.0, 1.0)

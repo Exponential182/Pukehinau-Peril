@@ -28,6 +28,20 @@ label_settings = SubResource("LabelSettings_1n3ne")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="credits" type="Label" parent="." unique_id=427827721]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 800.0
+offset_right = 505.0
+offset_bottom = 1157.0
+text = "A game by:
+22124/Aine
+22328/Hayden
+22053/Matthew
+"
+label_settings = SubResource("LabelSettings_1n3ne")
+vertical_alignment = 1
+
 [node name="start_button" type="Button" parent="." unique_id=1787614412]
 layout_mode = 0
 offset_left = 823.0
