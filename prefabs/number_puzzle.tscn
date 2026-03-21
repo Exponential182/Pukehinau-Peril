@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="1_0gd6h"]
 [ext_resource type="Script" uid="uid://vpbp8khdkb5j" path="res://scripts/number_puzzle.gd" id="1_e7xsf"]
-[ext_resource type="AudioStream" uid="uid://db7ghpouehv0" path="res://assets/Beep.mp3" id="3_ajpmj"]
+[ext_resource type="AudioStream" uid="uid://bx16bnylila7v" path="res://assets/single_beep.mp3" id="3_ajpmj"]
 
 [node name="number_puzzle" type="Node2D" unique_id=1819065234]
 script = ExtResource("1_e7xsf")
@@ -121,10 +121,23 @@ offset_top = 50.0
 offset_right = 1900.0
 offset_bottom = 350.0
 theme = ExtResource("1_0gd6h")
+placeholder_text = "Repeat..."
 editable = false
+caret_blink = true
 metadata/_edit_use_anchors_ = true
 
 [node name="beep" type="AudioStreamPlayer2D" parent="." unique_id=1254499034]
 stream = ExtResource("3_ajpmj")
 
-[connection signal="pressed" from="button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="button" to="." method="add_digit" binds= [1]]
+[connection signal="pressed" from="button2" to="." method="add_digit" binds= [2]]
+[connection signal="pressed" from="button3" to="." method="add_digit" binds= [3]]
+[connection signal="pressed" from="button4" to="." method="add_digit" binds= [4]]
+[connection signal="pressed" from="button5" to="." method="add_digit" binds= [5]]
+[connection signal="pressed" from="button6" to="." method="add_digit" binds= [6]]
+[connection signal="pressed" from="button7" to="." method="add_digit" binds= [7]]
+[connection signal="pressed" from="button8" to="." method="add_digit" binds= [8]]
+[connection signal="pressed" from="button9" to="." method="add_digit" binds= [9]]
+[connection signal="pressed" from="button10" to="." method="add_digit" binds= [0]]
+[connection signal="pressed" from="delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]

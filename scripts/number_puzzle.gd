@@ -6,40 +6,36 @@ var can_input = false
 var number_buttons = []
 
 func _ready() -> void:
-	for i in range(7):
+	for i in range(8):
 		random_number.append(randi_range(0, 9))
-	print(random_number)
-	number_buttons.resize(10)
-	number_buttons[0] = $button10
-	number_buttons[1] = $button
-	number_buttons[2] = $button2
-	number_buttons[3] = $button3
-	number_buttons[4] = $button4
-	number_buttons[5] = $button5
-	number_buttons[6] = $button6
-	number_buttons[7] = $button7
-	number_buttons[8] = $button8
-	number_buttons[9] = $button9
-	
-	$button.pressed.connect(add_digit.bind(1))
-	$button2.pressed.connect(add_digit.bind(2))
-	$button3.pressed.connect(add_digit.bind(3))
-	$button4.pressed.connect(add_digit.bind(4))
-	$button5.pressed.connect(add_digit.bind(5))
-	$button6.pressed.connect(add_digit.bind(6))
-	$button7.pressed.connect(add_digit.bind(7))
-	$button8.pressed.connect(add_digit.bind(8))
-	$button9.pressed.connect(add_digit.bind(9))
-	$button10.pressed.connect(add_digit.bind(0))
-	$delete.pressed.connect(_on_delete_pressed)
-	$replay.pressed.connect(_on_replay_pressed)
-	
-	show_sequence()
+	number_buttons = [$button10,$button,$button2,$button3,$button4,$button5,$button6,$button7,$button8,$button9]
 	var all_buttons = number_buttons + [$delete, $replay]
 	for btn in all_buttons:
 		btn.pivot_offset = btn.size / 2
 		btn.mouse_entered.connect(_on_button_hover.bind(btn))
 		btn.mouse_exited.connect(_on_button_unhover.bind(btn))
+	show_sequence()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		match event.keycode:
+			KEY_0, KEY_KP_0: add_digit(0)
+			KEY_1, KEY_KP_1: add_digit(1)
+			KEY_2, KEY_KP_2: add_digit(2)
+			KEY_3, KEY_KP_3: add_digit(3)
+			KEY_4, KEY_KP_4: add_digit(4)
+			KEY_5, KEY_KP_5: add_digit(5)
+			KEY_6, KEY_KP_6: add_digit(6)
+			KEY_7, KEY_KP_7: add_digit(7)
+			KEY_8, KEY_KP_8: add_digit(8)
+			KEY_9, KEY_KP_9: add_digit(9)
+			KEY_BACKSPACE: _on_delete_pressed()
+			KEY_R: _on_replay_pressed()
+
+func play_beep(digit: int) -> void:
+	$beep.stop()
+	$beep.pitch_scale = 0.5 + (digit * 0.1)
+	$beep.play()
 
 func flash_color(color: Color) -> void:
 	$"../number_puzzle".modulate = color
@@ -66,12 +62,9 @@ func _reveal_next_digit(index: int) -> void:
 		$replay.disabled = false
 		set_buttons_disabled(false)
 		return
-	
 	var digit = random_number[index]
 	number_buttons[digit].disabled = false
-	$beep.stop()
-	$beep.pitch_scale = 0.5 + (digit * 0.1)
-	$beep.play()
+	play_beep(digit)
 	$line_edit.text += str(digit)
 	await get_tree().create_timer(0.5).timeout
 	number_buttons[digit].disabled = true
@@ -80,9 +73,7 @@ func _reveal_next_digit(index: int) -> void:
 func add_digit(digit: int) -> void:
 	if not can_input:
 		return
-	$beep.stop()
-	$beep.pitch_scale = 0.5 + (digit * 0.1)
-	$beep.play()
+	play_beep(digit)
 	$line_edit.text += str(digit)
 	if $line_edit.text.length() >= stage:
 		check_input()
@@ -90,25 +81,20 @@ func add_digit(digit: int) -> void:
 func check_input() -> void:
 	if not can_input:
 		return
-	
 	var correct = ""
 	for i in range(stage):
 		correct += str(random_number[i])
-	
 	if $line_edit.text == correct:
-		if stage == 7:
+		if stage == 8:
 			$"../number_puzzle".modulate = Color.BLUE
 			print("nice")
-			#matthew flashy particles
 		else:
 			can_input = false
 			await flash_color(Color.GREEN)
-			# good sfx
 			stage += 1
 			await get_tree().create_timer(0.5).timeout
 			show_sequence()
 	else:
-		#bad sfx
 		can_input = false
 		await flash_color(Color.RED)
 		show_sequence()
@@ -123,7 +109,6 @@ func _on_replay_pressed() -> void:
 
 func _on_button_hover(btn: Button) -> void:
 	btn.scale = Vector2(1.035, 1.035)
-	
 
 func _on_button_unhover(btn: Button) -> void:
 	btn.scale = Vector2(1.0, 1.0)
