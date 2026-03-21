@@ -2,124 +2,129 @@
 
 [ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="1_0gd6h"]
 [ext_resource type="Script" uid="uid://vpbp8khdkb5j" path="res://scripts/number_puzzle.gd" id="1_e7xsf"]
+[ext_resource type="AudioStream" uid="uid://db7ghpouehv0" path="res://assets/Beep.mp3" id="3_ajpmj"]
 
 [node name="number_puzzle" type="Node2D" unique_id=1819065234]
 script = ExtResource("1_e7xsf")
 
 [node name="button" type="Button" parent="." unique_id=1296708423]
-offset_left = 52.0
-offset_top = 43.0
-offset_right = 352.0
-offset_bottom = 343.0
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 325.0
+offset_bottom = 350.0
 theme = ExtResource("1_0gd6h")
 text = "1"
 metadata/_edit_use_anchors_ = true
 
 [node name="button2" type="Button" parent="." unique_id=63414561]
-offset_left = 370.0
-offset_top = 40.0
-offset_right = 670.0
-offset_bottom = 340.0
+offset_left = 350.0
+offset_top = 50.0
+offset_right = 650.0
+offset_bottom = 350.0
 theme = ExtResource("1_0gd6h")
 text = "2"
 metadata/_edit_use_anchors_ = true
 
 [node name="button3" type="Button" parent="." unique_id=1809881495]
-offset_left = 689.0
-offset_top = 38.0
-offset_right = 989.0
-offset_bottom = 338.0
+offset_left = 675.0
+offset_top = 50.0
+offset_right = 975.0
+offset_bottom = 350.0
 theme = ExtResource("1_0gd6h")
 text = "3"
 metadata/_edit_use_anchors_ = true
 
 [node name="button4" type="Button" parent="." unique_id=397046084]
-offset_left = 51.0
-offset_top = 355.0
-offset_right = 351.0
-offset_bottom = 654.9983
+offset_left = 25.0
+offset_top = 375.0
+offset_right = 325.0
+offset_bottom = 675.0
 theme = ExtResource("1_0gd6h")
 text = "4"
 metadata/_edit_use_anchors_ = true
 
 [node name="button5" type="Button" parent="." unique_id=1776449907]
-offset_left = 371.0
-offset_top = 355.0
-offset_right = 671.0
-offset_bottom = 654.9983
+offset_left = 350.0
+offset_top = 375.0
+offset_right = 650.0
+offset_bottom = 675.0
 theme = ExtResource("1_0gd6h")
 text = "5"
 metadata/_edit_use_anchors_ = true
 
 [node name="button6" type="Button" parent="." unique_id=1304261810]
-offset_left = 688.0
-offset_top = 355.0
-offset_right = 988.0
-offset_bottom = 654.9983
+offset_left = 675.0
+offset_top = 375.0
+offset_right = 975.0
+offset_bottom = 675.0
 theme = ExtResource("1_0gd6h")
 text = "6"
 metadata/_edit_use_anchors_ = true
 
 [node name="button7" type="Button" parent="." unique_id=426148339]
-offset_left = 49.0
-offset_top = 670.0
-offset_right = 349.0
-offset_bottom = 970.00006
+offset_left = 25.0
+offset_top = 700.0
+offset_right = 325.0
+offset_bottom = 1000.00006
 theme = ExtResource("1_0gd6h")
 text = "7"
 metadata/_edit_use_anchors_ = true
 
 [node name="button8" type="Button" parent="." unique_id=397166158]
-offset_left = 366.0
-offset_top = 670.0
-offset_right = 666.0
-offset_bottom = 970.00006
+offset_left = 350.0
+offset_top = 700.0
+offset_right = 650.0
+offset_bottom = 1000.00006
 theme = ExtResource("1_0gd6h")
 text = "8"
 metadata/_edit_use_anchors_ = true
 
 [node name="button9" type="Button" parent="." unique_id=625705632]
-offset_left = 689.0
-offset_top = 670.0
-offset_right = 989.0
-offset_bottom = 970.00006
+offset_left = 675.0
+offset_top = 700.0
+offset_right = 975.0
+offset_bottom = 1000.00006
 theme = ExtResource("1_0gd6h")
 text = "9"
 metadata/_edit_use_anchors_ = true
 
 [node name="button10" type="Button" parent="." unique_id=1824640638]
-offset_left = 1010.0
-offset_top = 355.0
-offset_right = 1310.0
-offset_bottom = 654.9983
+offset_left = 1000.0
+offset_top = 375.0
+offset_right = 1300.0
+offset_bottom = 675.0
 theme = ExtResource("1_0gd6h")
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="delete" type="Button" parent="." unique_id=631315145]
-offset_left = 1009.0
-offset_top = 685.0
-offset_right = 1903.0
-offset_bottom = 968.00024
+offset_left = 1000.0
+offset_top = 700.0
+offset_right = 1900.0
+offset_bottom = 1000.0
 theme = ExtResource("1_0gd6h")
 text = "Clear"
 
 [node name="replay" type="Button" parent="." unique_id=1620264605]
-offset_left = 1321.0
-offset_top = 367.0
-offset_right = 1905.0
-offset_bottom = 650.00055
+offset_left = 1325.0
+offset_top = 375.0
+offset_right = 1900.0
+offset_bottom = 675.0
 theme = ExtResource("1_0gd6h")
+theme_override_font_sizes/font_size = 200
 text = "Replay"
 metadata/_edit_use_anchors_ = true
 
 [node name="line_edit" type="LineEdit" parent="." unique_id=488905342]
-offset_left = 1047.0
-offset_top = 54.998
-offset_right = 1906.0
-offset_bottom = 337.998
+offset_left = 1000.0
+offset_top = 50.0
+offset_right = 1900.0
+offset_bottom = 350.0
 theme = ExtResource("1_0gd6h")
 editable = false
 metadata/_edit_use_anchors_ = true
+
+[node name="beep" type="AudioStreamPlayer2D" parent="." unique_id=1254499034]
+stream = ExtResource("3_ajpmj")
 
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]

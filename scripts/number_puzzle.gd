@@ -35,6 +35,11 @@ func _ready() -> void:
 	$replay.pressed.connect(_on_replay_pressed)
 	
 	show_sequence()
+	var all_buttons = number_buttons + [$delete, $replay]
+	for btn in all_buttons:
+		btn.pivot_offset = btn.size / 2
+		btn.mouse_entered.connect(_on_button_hover.bind(btn))
+		btn.mouse_exited.connect(_on_button_unhover.bind(btn))
 
 func flash_color(color: Color) -> void:
 	$"../number_puzzle".modulate = color
@@ -64,6 +69,9 @@ func _reveal_next_digit(index: int) -> void:
 	
 	var digit = random_number[index]
 	number_buttons[digit].disabled = false
+	$beep.stop()
+	$beep.pitch_scale = 0.5 + (digit * 0.1)
+	$beep.play()
 	$line_edit.text += str(digit)
 	await get_tree().create_timer(0.5).timeout
 	number_buttons[digit].disabled = true
@@ -72,6 +80,9 @@ func _reveal_next_digit(index: int) -> void:
 func add_digit(digit: int) -> void:
 	if not can_input:
 		return
+	$beep.stop()
+	$beep.pitch_scale = 0.5 + (digit * 0.1)
+	$beep.play()
 	$line_edit.text += str(digit)
 	if $line_edit.text.length() >= stage:
 		check_input()
@@ -88,14 +99,16 @@ func check_input() -> void:
 		if stage == 7:
 			$"../number_puzzle".modulate = Color.BLUE
 			print("nice")
+			#matthew flashy particles
 		else:
 			can_input = false
 			await flash_color(Color.GREEN)
+			# good sfx
 			stage += 1
 			await get_tree().create_timer(0.5).timeout
 			show_sequence()
 	else:
-		print("bad")
+		#bad sfx
 		can_input = false
 		await flash_color(Color.RED)
 		show_sequence()
@@ -107,3 +120,10 @@ func _on_delete_pressed() -> void:
 
 func _on_replay_pressed() -> void:
 	show_sequence()
+
+func _on_button_hover(btn: Button) -> void:
+	btn.scale = Vector2(1.035, 1.035)
+	
+
+func _on_button_unhover(btn: Button) -> void:
+	btn.scale = Vector2(1.0, 1.0)
