@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://q37wveoawnuo" path="res://assets/windows.png" id="3_gx6vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfj2i"]
-size = Vector2(0.1, 29)
+size = Vector2(0.383, 18)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gx6vt"]
 texture = ExtResource("2_qfj2i")
@@ -567,6 +567,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="door_area" unique_id=2145320867]
+position = Vector2(0.85, -25)
 scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_qfj2i")
 
