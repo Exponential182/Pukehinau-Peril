@@ -23,6 +23,7 @@ var current_door_position = Vector2(0,0)
 var is_pushing_box = false
 var pushed_box = null
 var last_box = null
+var box_puzzle_position = Vector2(1700.0, 0)
 
 var door_positions = {
 	"door1" : Vector2(2790,335),
@@ -124,8 +125,11 @@ func _physics_process(delta: float) -> void:
 			if velocity.length() < 0.1:
 				animation.play(str(state)+ "_idle")
 	
+	if last_box:
+		$"../UI/interact".show()
+	else:
+		$"../UI/interact".hide()
 	if is_box_puzzle_active:
-		print("puzzle")
 		box_puzzle_interaction(delta)
 	move_and_slide()
 
@@ -168,7 +172,6 @@ func _box_exited():
 
 func box_puzzle_interaction(delta):
 	if Input.is_action_just_pressed("interact") and last_box:
-		box_puzzle_started()
 		is_pushing_box = not is_pushing_box
 		if is_pushing_box:
 			pushed_box = last_box
@@ -180,7 +183,7 @@ func box_puzzle_interaction(delta):
 			speed = base_speed
 	
 	if pushed_box:
-		var player_to_box : Vector2 = (pushed_box.position - self.position)
+		var player_to_box : Vector2 = (pushed_box.position + box_puzzle_position - self.position)
 		if player_to_box.length() >= 135.0:
 			speed = base_speed
 			pushed_box.modulate = Color("white")
@@ -194,13 +197,15 @@ func box_puzzle_interaction(delta):
 				pushed_box.position = lerp(pushed_box.position, pushed_box.position + input_vector * speed * delta, 1)
 
 
-func box_puzzle_started():
-	$player_hitbox.shape.size = Vector2(92, 120)
-	$player_hitbox.position = Vector2(2, 2)
-	is_box_puzzle_active = true
+func box_puzzle_started(body):
+	if body.name == "player":
+		$player_hitbox.shape.size = Vector2(92, 120)
+		$player_hitbox.position = Vector2(2, 2)
+		is_box_puzzle_active = true
 
 
-func box_puzzle_ended():
-	$player_hitbox.shape.size = Vector2(92, 142)
-	$player_hitbox.position = Vector2(2, -9)
-	is_box_puzzle_active = false
+func box_puzzle_ended(body):
+	if body.name == "player":
+		$player_hitbox.shape.size = Vector2(92, 142)
+		$player_hitbox.position = Vector2(2, -9)
+		is_box_puzzle_active = false

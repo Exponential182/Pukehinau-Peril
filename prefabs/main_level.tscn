@@ -1304,10 +1304,7 @@ sources/0 = SubResource("TileSetAtlasSource_atu1i")
 size = Vector2(74, 210)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvws3"]
-size = Vector2(64, 640)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6x2kj"]
-size = Vector2(34, 128)
+size = Vector2(1664, 832)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78yew"]
 size = Vector2(234, 158)
@@ -1466,7 +1463,6 @@ _data = {
 metadata/_edit_lock_ = true
 
 [node name="main_light" type="DirectionalLight2D" parent="world/lights" unique_id=34145632]
-visible = false
 position = Vector2(-513, -580)
 energy = 0.55
 blend_mode = 1
@@ -1500,7 +1496,6 @@ tile_set = SubResource("TileSet_kki0e")
 metadata/_edit_lock_ = true
 
 [node name="black" type="TileMapLayer" parent="world" unique_id=1565791124]
-visible = false
 z_index = 5
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -1601,20 +1596,13 @@ theme_override_font_sizes/font_size = 38
 text = "Lights"
 metadata/_edit_use_anchors_ = true
 
-[node name="box_area_entered" type="Area2D" parent="puzzle_areas" unique_id=2051677850]
+[node name="box_puzzle" type="Area2D" parent="puzzle_areas" unique_id=2051677850]
 z_index = 30
 position = Vector2(1732, 576)
 
-[node name="area" type="CollisionShape2D" parent="puzzle_areas/box_area_entered" unique_id=1958825584]
+[node name="area" type="CollisionShape2D" parent="puzzle_areas/box_puzzle" unique_id=1958825584]
+position = Vector2(800, 96)
 shape = SubResource("RectangleShape2D_gvws3")
-
-[node name="box_area_exited" type="Area2D" parent="puzzle_areas" unique_id=1579242931]
-z_index = 30
-position = Vector2(3285, 965)
-
-[node name="area" type="CollisionShape2D" parent="puzzle_areas/box_area_exited" unique_id=482811834]
-position = Vector2(62, -5)
-shape = SubResource("RectangleShape2D_6x2kj")
 
 [node name="dialogue_areas" type="Node2D" parent="." unique_id=1222447760]
 
@@ -1667,7 +1655,7 @@ position = Vector2(1700, 0)
 position = Vector2(960, 540)
 
 [node name="player" parent="." unique_id=484850195 instance=ExtResource("6_jynbf")]
-z_index = 20
+z_index = 30
 position = Vector2(388, 358)
 metadata/_edit_lock_ = true
 
@@ -1698,7 +1686,6 @@ text = "Press \"E\" to interact"
 autowrap_mode = 2
 
 [node name="dialogue" type="Node2D" parent="UI" unique_id=2089645933]
-visible = false
 position = Vector2(960, 889)
 script = ExtResource("14_78yew")
 
@@ -1742,6 +1729,8 @@ libraries/ = SubResource("AnimationLibrary_66lda")
 [connection signal="body_exited" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_exited"]
 [connection signal="body_entered" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/vertical_puzzle" to="puzzle_areas/vertical_puzzle" method="_on_body_exited"]
+[connection signal="body_entered" from="puzzle_areas/box_puzzle" to="player" method="box_puzzle_started"]
+[connection signal="body_exited" from="puzzle_areas/box_puzzle" to="player" method="box_puzzle_ended"]
 [connection signal="body_entered" from="dialogue_areas/locked_door" to="dialogue_areas/locked_door" method="_on_body_entered"]
 [connection signal="body_exited" from="dialogue_areas/locked_door" to="dialogue_areas/locked_door" method="_on_body_exited"]
 [connection signal="body_entered" from="dialogue_areas/wrong_player" to="dialogue_areas/wrong_player" method="_on_body_entered"]
