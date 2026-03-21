@@ -89,9 +89,9 @@ func check_input() -> void:
 		correct += str(random_number[i])
 	if $line_edit.text == correct:
 		if stage == 8:
+			await play_win_melody()
 			$"../number_puzzle".modulate = Color.WHITE
 			$ending.show()
-			number_puzzle_completed.emit()
 		else:
 			can_input = false
 			await flash_color(Color.GREEN)
@@ -102,6 +102,13 @@ func check_input() -> void:
 		can_input = false
 		await flash_color(Color.RED)
 		show_sequence()
+
+func play_win_melody() -> void:
+	for i in range(10):
+		$beep.stop()
+		$beep.pitch_scale = 0.5 + (i * 0.1)
+		$beep.play()
+		await get_tree().create_timer(0.15).timeout
 
 func _on_delete_pressed() -> void:
 	if not can_input:

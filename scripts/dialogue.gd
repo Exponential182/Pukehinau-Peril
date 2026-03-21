@@ -22,6 +22,7 @@ which may help you navigate Pukehinau easier.",
 	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
 	"rodkiss_good" :["Good"],
 	"rodkiss_bad" : ["Bad"],
+	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
 var state = "new_text"
