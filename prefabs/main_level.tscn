@@ -1400,9 +1400,6 @@ size = Vector2(354, 199)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8o3y"]
 size = Vector2(116, 158)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvws3"]
-size = Vector2(192, 158)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nuly2"]
 size = Vector2(116, 158)
 

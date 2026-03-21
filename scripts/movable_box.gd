@@ -16,7 +16,6 @@ func _physics_process(_delta: float) -> void:
 
 func _on_body_entered(body):
 	if body.name == "player":
-		print("entered")
 		box_entered.emit(self)
 
 

@@ -119,6 +119,11 @@ func _physics_process(delta: float) -> void:
 		$"../UI/interact".hide()
 	if is_box_puzzle_active:
 		box_puzzle_interaction(delta)
+		$"../puzzles/box_puzzle/reset_button".show()
+		$"../puzzles/box_puzzle/reset_button".disabled = false
+	else:
+		$"../puzzles/box_puzzle/reset_button".hide()
+		$"../puzzles/box_puzzle/reset_button".disabled = true
 	move_and_slide()
 
 func entered_door(door,door_position):
@@ -184,7 +189,6 @@ func _box_entered(box):
 	last_box = box
 
 
-
 func _box_exited():
 	if !pushed_box:
 		last_box = null
@@ -204,7 +208,7 @@ func box_puzzle_interaction(delta):
 	
 	if pushed_box:
 		var player_to_box : Vector2 = (pushed_box.position + box_puzzle_position - self.position)
-		if player_to_box.length() >= 135.0:
+		if player_to_box.length() >= 145.0:
 			speed = base_speed
 			pushed_box.modulate = Color("white")
 			pushed_box = null
