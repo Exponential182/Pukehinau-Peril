@@ -4,6 +4,7 @@ extends Node2D
 @onready var puzzles = {
 	"vertical_puzzle" : [preload("res://prefabs/vertical_puzzle.tscn"), false, "brain"],
 	"forge_puzzle" : [preload("res://prefabs/forge_puzzle.tscn"), false, "brawn"],
+	"number_puzzle" : [preload("res://prefabs/number_puzzle.tscn"),false,"brain"]
 }
 
 func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
@@ -17,7 +18,13 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 	else:
 		fix_player()
 
-
+func number_puzzle_completed(ending):
+	$"../puzzle_areas/number_puzzle".modulate = Color("green")
+	fix_player()
+	$"../puzzle_areas/number_puzzle/area".disabled = true
+	puzzles["number_puzzle"][1] = true
+	print("hello")
+	$"../dialogue_areas/rodkiss".rodkiss_level = "rodkiss_" +str(ending)
 func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")
 	fix_player()

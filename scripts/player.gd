@@ -33,7 +33,7 @@ var door_positions = {
 }
 var door_limits = {
 	"door1" : Vector4(510,2430,0,-1220),
-	"door2" :Vector4(1824,3744,0,-1280),
+	"door2" :Vector4(1824,3744,0,-1472),
 	"returndoor1" : Vector4(0,3200,1088,0),
 	"returndoor2" : Vector4(0,3200,1088,0),
 }

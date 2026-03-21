@@ -5,7 +5,10 @@ var stage = 1
 var can_input = false
 var number_buttons = []
 
+signal number_puzzle_completed
+
 func _ready() -> void:
+	number_puzzle_completed.connect(get_parent().number_puzzle_completed)
 	for i in range(8):
 		random_number.append(randi_range(0, 9))
 	number_buttons = [$button10,$button,$button2,$button3,$button4,$button5,$button6,$button7,$button8,$button9]
@@ -86,8 +89,9 @@ func check_input() -> void:
 		correct += str(random_number[i])
 	if $line_edit.text == correct:
 		if stage == 8:
-			$"../number_puzzle".modulate = Color.BLUE
-			print("nice")
+			$"../number_puzzle".modulate = Color.WHITE
+			$ending.show()
+			number_puzzle_completed.emit()
 		else:
 			can_input = false
 			await flash_color(Color.GREEN)
@@ -112,3 +116,13 @@ func _on_button_hover(btn: Button) -> void:
 
 func _on_button_unhover(btn: Button) -> void:
 	btn.scale = Vector2(1.0, 1.0)
+
+
+func _on_good_pressed() -> void:
+	number_puzzle_completed.emit("good")
+	self.queue_free()
+
+
+func _on_bad_pressed() -> void:
+	number_puzzle_completed.emit("bad")
+	self.queue_free()

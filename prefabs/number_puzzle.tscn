@@ -4,8 +4,25 @@
 [ext_resource type="Script" uid="uid://vpbp8khdkb5j" path="res://scripts/number_puzzle.gd" id="1_e7xsf"]
 [ext_resource type="AudioStream" uid="uid://bx16bnylila7v" path="res://assets/single_beep.mp3" id="3_ajpmj"]
 
+[sub_resource type="Gradient" id="Gradient_ajpmj"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2frex"]
+gradient = SubResource("Gradient_ajpmj")
+
+[sub_resource type="Gradient" id="Gradient_2frex"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rvc6t"]
+gradient = SubResource("Gradient_2frex")
+
 [node name="number_puzzle" type="Node2D" unique_id=1819065234]
 script = ExtResource("1_e7xsf")
+
+[node name="sprite_2d" type="Sprite2D" parent="." unique_id=555046928]
+position = Vector2(961, 538.5)
+scale = Vector2(31.03125, 17.828125)
+texture = SubResource("GradientTexture2D_2frex")
 
 [node name="button" type="Button" parent="." unique_id=1296708423]
 offset_left = 25.0
@@ -129,6 +146,43 @@ metadata/_edit_use_anchors_ = true
 [node name="beep" type="AudioStreamPlayer2D" parent="." unique_id=1254499034]
 stream = ExtResource("3_ajpmj")
 
+[node name="ending" type="Node2D" parent="." unique_id=22380832]
+visible = false
+
+[node name="sprite_2d" type="Sprite2D" parent="ending" unique_id=699975895]
+position = Vector2(986.5, 572.5)
+scale = Vector2(31.828125, 18.890625)
+texture = SubResource("GradientTexture2D_rvc6t")
+
+[node name="label" type="Label" parent="ending" unique_id=418848221]
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 203.0
+theme = ExtResource("1_0gd6h")
+text = "Burnside Admin Computer"
+horizontal_alignment = 1
+
+[node name="good" type="Button" parent="ending" unique_id=1049367000]
+offset_left = 71.0
+offset_top = 352.0
+offset_right = 871.0
+offset_bottom = 752.0003
+theme = ExtResource("1_0gd6h")
+theme_override_font_sizes/font_size = 145
+text = "Give everyone
+Full marks"
+
+[node name="bad" type="Button" parent="ending" unique_id=1923579370]
+offset_left = 1052.0
+offset_top = 352.0
+offset_right = 1852.0
+offset_bottom = 752.0003
+theme = ExtResource("1_0gd6h")
+theme_override_font_sizes/font_size = 145
+text = "Shut down
+School server"
+
 [connection signal="pressed" from="button" to="." method="add_digit" binds= [1]]
 [connection signal="pressed" from="button2" to="." method="add_digit" binds= [2]]
 [connection signal="pressed" from="button3" to="." method="add_digit" binds= [3]]
@@ -141,3 +195,5 @@ stream = ExtResource("3_ajpmj")
 [connection signal="pressed" from="button10" to="." method="add_digit" binds= [0]]
 [connection signal="pressed" from="delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="ending/good" to="." method="_on_good_pressed"]
+[connection signal="pressed" from="ending/bad" to="." method="_on_bad_pressed"]

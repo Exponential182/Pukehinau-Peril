@@ -3,7 +3,10 @@
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="1_86k24"]
 
 [resource]
+default_font = ExtResource("1_86k24")
 Button/font_sizes/font_size = 256
 Button/fonts/font = ExtResource("1_86k24")
+Label/font_sizes/font_size = 128
+Label/fonts/font = ExtResource("1_86k24")
 LineEdit/font_sizes/font_size = 256
 LineEdit/fonts/font = ExtResource("1_86k24")

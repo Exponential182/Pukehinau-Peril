@@ -19,7 +19,9 @@ which may help you navigate Pukehinau easier.",
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
-
+	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
+	"rodkiss_good" :["Good"],
+	"rodkiss_bad" : ["Bad"],
 }
 var visible_ratio = 0
 var state = "new_text"
@@ -28,6 +30,7 @@ var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
 var current_dialogue = "stop_exploring"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
