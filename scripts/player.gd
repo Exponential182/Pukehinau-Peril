@@ -18,10 +18,14 @@ var current_door = null
 var current_door_position = Vector2(0,0)
 
 var door_positions = {
-	"door1" : Vector2(2790,335),
+	"door1" : Vector2(1472,-300),
 	"door2" : Vector2(2530,334),
 	"returndoor1" : Vector2(1472,335),
 	
+}
+var door_limits = {
+	"door1" : Vector4(510,2430,0,-1220),
+	"returndoor1" : Vector4(0,3200,1088,0)
 }
 signal summon_puzzle
 func _ready():
@@ -33,19 +37,7 @@ func _ready():
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling:
 		if current_door != null:
-			if not zoomed:
-				self.position = current_door_position
-				self.velocity = Vector2.ZERO
-				animation.play(str(state) + "_up")
-				$animation_player.stop()
-				$animation_player.play("camera_zoom")
-				zoomed = true
-				$"../world/doors".find_child(str(current_door)).magical_door_opening()
-				await get_tree().create_timer(0.75).timeout
-				self.position = door_positions[current_door]
-				animation.play(str(state) + "_down")
-				await get_tree().create_timer(0.75).timeout
-				zoomed = false
+			enter_door()
 		elif can_start_puzzle and current_puzzle != null:
 			can_start_puzzle = false
 			is_puzzling = true
@@ -65,17 +57,11 @@ func _physics_process(_delta: float) -> void:
 				animation.play("brain_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = true
-				await get_tree().physics_frame
-				if can_start_puzzle:
-					$"../UI/interact".show()
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = false
-				await get_tree().physics_frame
-				if can_start_puzzle:
-					$"../UI/interact".show()
 				speed = 300.0
 			smack()
 		var direction_horizontal = null
@@ -115,19 +101,42 @@ func _physics_process(_delta: float) -> void:
 
 func entered_door(door,door_position):
 	current_door = door
-	current_door_position = door_position - Vector2(0,-80)
+	current_door_position = door_position
 	if door:
 		$"../UI/interact".show()
 	else:
 		$"../UI/interact".hide()
-		$"../UI/interact2".hide()
 
+func enter_door():
+	if not zoomed:
+		self.velocity = Vector2.ZERO
+		$animation_player.stop()
+
+		if str(current_door)[0] == "r":
+			$animation_player.play("camera_unzoom")
+			animation.play(str(state) + "_down")
+		else:
+			$animation_player.play("camera_zoom")
+			animation.play(str(state) + "_up")
+		zoomed = true
+		$"../world/doors".find_child(str(current_door)).magical_door_opening()
+		await get_tree().create_timer(0.75).timeout
+		self.position = door_positions[current_door]
+		var camera_bounds = door_limits[current_door]
+		$player_camera.limit_left = camera_bounds.x
+		$player_camera.limit_top = camera_bounds.w
+		$player_camera.limit_right = camera_bounds.y
+		$player_camera.limit_bottom = camera_bounds.z
+		await get_tree().create_timer(0.75).timeout
+		zoomed = false
+		
+	
 func smack():
 	await get_tree().create_timer(0.8).timeout
 	camera.shake(20.0, 1.0)
 	var spawned_explosion = explosion.instantiate()
 	if state == "brawn":
-		spawned_explosion.texture = preload("res://assets/Brawn_icon.png")
+		spawned_explosion.texture = preload("res://assets/image.png")
 	else:
 		spawned_explosion.texture = preload("res://assets/Brain_icon.png")
 	spawned_explosion.position = self.position

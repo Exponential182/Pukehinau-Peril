@@ -25,7 +25,7 @@ var max_characters = 10
 var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
-var current_dialogue = "intro"
+var current_dialogue = "shortened_intro"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,10 +51,6 @@ func change_text():
 		if state == "typing":
 			$text.visible_ratio = 1
 		if state == "new_text":
-			if current_dialogue == "wrong_player":
-				times_stupid += 1
-				if times_stupid > 2:
-					current_dialogue = "wrong_player2"
 			self.show()
 			$"../../player".texting = true
 			$"../../player".velocity = Vector2.ZERO
@@ -79,6 +75,7 @@ func change_text():
 			else:
 				current_stage += 1
 				state = "typing"
+				print(current_dialogue)
 				$text.text = dialogues[current_dialogue][current_stage]
 				$text.visible_ratio = 0
 				max_characters = dialogues[current_dialogue][current_stage].length()
