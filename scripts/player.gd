@@ -124,6 +124,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		$"../puzzles/box_puzzle/reset_button".hide()
 		$"../puzzles/box_puzzle/reset_button".disabled = true
+		if pushed_box:
+			pushed_box.modulate = Color("#ffff62")
+			pushed_box = null
+			speed = base_speed
 	move_and_slide()
 
 func entered_door(door,door_position):
@@ -201,7 +205,7 @@ func box_puzzle_interaction(delta):
 			pushed_box = last_box
 			speed = pushing_speed
 			pushed_box.modulate = Color("green")
-		else:
+		elif pushed_box:
 			pushed_box.modulate = Color("#ffff62")
 			pushed_box = null
 			speed = base_speed
