@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+const PUZZLE_BOUNDS = Rect2(Vector2(1956, 256), Vector2(1408, 768))
+const BOX_HALF_SIZE = Vector2(64, 64)
+
 @onready var explosion = preload("res://prefabs/explosion.tscn")
 @onready var camera = $player_camera
 @onready var puzzle_camera = $"../puzzles/puzzle_camera"
@@ -193,7 +196,6 @@ func _box_exited():
 	if !pushed_box:
 		last_box = null
 
-
 func box_puzzle_interaction(delta):
 	if Input.is_action_just_pressed("interact") and last_box:
 		is_pushing_box = not is_pushing_box
@@ -216,10 +218,14 @@ func box_puzzle_interaction(delta):
 		else:
 			player_to_box = player_to_box.normalized()
 			var input_vector = Input.get_vector("left", "right", "up", "down")
-			var angle = abs(acos(player_to_box.dot(input_vector))) 
+			var angle = abs(acos(player_to_box.dot(input_vector)))
 			if (angle >= PI*0.8 or angle <= PI*0.2) and state == "brawn":
-				pushed_box.position = lerp(pushed_box.position, pushed_box.position + input_vector * speed * delta, 1)
-
+				var new_pos = pushed_box.global_position + input_vector * speed * delta
+				
+				new_pos.x = clamp(new_pos.x, PUZZLE_BOUNDS.position.x + BOX_HALF_SIZE.x, PUZZLE_BOUNDS.end.x - BOX_HALF_SIZE.x)
+				new_pos.y = clamp(new_pos.y, PUZZLE_BOUNDS.position.y + BOX_HALF_SIZE.y, PUZZLE_BOUNDS.end.y - BOX_HALF_SIZE.y)
+				
+				pushed_box.global_position = new_pos
 
 func box_puzzle_started(body):
 	if body.name == "player":
@@ -230,6 +236,6 @@ func box_puzzle_started(body):
 
 func box_puzzle_ended(body):
 	if body.name == "player":
-		$player_hitbox.shape.size = Vector2(92, 142)
+		$player_hitbox.shape.size = Vector2(92, 148)
 		$player_hitbox.position = Vector2(2, -9)
 		is_box_puzzle_active = false
