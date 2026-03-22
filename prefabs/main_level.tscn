@@ -2351,15 +2351,16 @@ position = Vector2(-49.75, 3)
 shape = SubResource("RectangleShape2D_6x2kj")
 
 [node name="label" type="Label" parent="puzzle_areas/number_puzzle" unique_id=734887615]
-offset_left = -168.04
-offset_top = 107.04
-offset_right = 132.96
-offset_bottom = 184.03995
+offset_left = -284.99994
+offset_top = 47.99996
+offset_right = 29.000061
+offset_bottom = 188.99997
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 50
-text = "Forge Puzzle"
+text = "The Marking 
+Mainframe"
 metadata/_edit_use_anchors_ = true
 
 [node name="vertical_puzzle" type="Area2D" parent="puzzle_areas" unique_id=2119357602]
