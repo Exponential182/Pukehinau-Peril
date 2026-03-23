@@ -76,11 +76,13 @@ func _physics_process(delta: float) -> void:
 				animation.play("brain_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = true
+				$"../dialogue_areas/wrong_player2/collision_shape_2d".disabled = false
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = false
+				$"../dialogue_areas/wrong_player2/collision_shape_2d".disabled = true
 				speed = 300.0
 			smack()
 		var direction_horizontal = null
