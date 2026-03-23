@@ -78,6 +78,10 @@ func change_text():
 				$"../../player".texting = false
 				$"../../animation_player".play("resetE")
 				$text2.hide()
+				if current_dialogue == "rodkiss_good" or current_dialogue == "rodkiss_bad":
+					$"../../animation_player".play("fade_to_black")
+					await $"../../animation_player".animation_finished
+					get_tree().change_scene_to_file("res://prefabs/credit.tscn")
 			else:
 				current_stage += 1
 				state = "typing"

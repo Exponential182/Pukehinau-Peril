@@ -2055,6 +2055,10 @@ size = Vector2(182, 151)
 [sub_resource type="Gradient" id="Gradient_66lda"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_atu1i"]
+gradient = SubResource("Gradient_66lda")
+width = 349
+
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_78yew"]
 gradient = SubResource("Gradient_66lda")
 
@@ -2107,6 +2111,57 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/dialogue_background2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/dialogue_background2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(-0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_swjyn"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/dialogue_background2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/dialogue_background2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_v5q0s"]
@@ -2184,6 +2239,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66lda"]
 _data = {
 &"RESET": SubResource("Animation_2237u"),
+&"fade_to_black": SubResource("Animation_swjyn"),
 &"lights": SubResource("Animation_v5q0s"),
 &"pressE": SubResource("Animation_iqjog"),
 &"resetE": SubResource("Animation_csty0")
@@ -2498,6 +2554,13 @@ position = Vector2(469, 398)
 metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1762167688]
+
+[node name="dialogue_background2" type="Sprite2D" parent="UI" unique_id=1608522195]
+visible = false
+position = Vector2(960, 578.635)
+scale = Vector2(6.341, 1347.304)
+texture = SubResource("GradientTexture1D_atu1i")
+metadata/_edit_lock_ = true
 
 [node name="interact" type="Label" parent="UI" unique_id=643234205]
 visible = false
