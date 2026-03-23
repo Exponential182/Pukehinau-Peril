@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bem8ps3mjx3dq" path="res://scripts/forge_puzzle.gd" id="1_y8w8l"]
 [ext_resource type="PackedScene" uid="uid://dn3o3iwc116lo" path="res://prefabs/forge_key_grid.tscn" id="3_6rt1s"]
-[ext_resource type="Texture2D" uid="uid://wa6okxa0m5tx" path="res://assets/blue_background.svg" id="4_6rt1s"]
+[ext_resource type="Texture2D" uid="uid://ng1on8sk2813" path="res://assets/wooden_crate_backgroudn.png" id="3_714mt"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="4_714mt"]
 
 [node name="forge_puzzle" type="Node2D" unique_id=2044794346]
@@ -14,8 +14,10 @@ script = ExtResource("1_y8w8l")
 
 [node name="background" type="Sprite2D" parent="." unique_id=13490364]
 z_index = 99
-scale = Vector2(12, 6.786)
-texture = ExtResource("4_6rt1s")
+texture_filter = 1
+position = Vector2(-278, -489.99997)
+scale = Vector2(40, 40)
+texture = ExtResource("3_714mt")
 centered = false
 
 [node name="stage_1_button" type="Button" parent="." unique_id=512851482]
