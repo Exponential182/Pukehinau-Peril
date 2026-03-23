@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://3foxnjsuynsx" path="res://scripts/stop_exploring.gd" id="17_csty0"]
 [ext_resource type="PackedScene" uid="uid://ccljpja5rnax2" path="res://prefabs/box_puzzle.tscn" id="19_gvws3"]
 [ext_resource type="Script" uid="uid://3xusoi5h6dg0" path="res://scripts/rodkiss.gd" id="19_nuly2"]
+[ext_resource type="Texture2D" uid="uid://dyech36r42nt2" path="res://assets/Brawns_Base.png" id="22_swjyn"]
 [ext_resource type="Texture2D" uid="uid://bnhkmowvdk7c1" path="res://assets/New Piskel(1).png" id="24_atu1i"]
 
 [sub_resource type="Gradient" id="Gradient_csty0"]
@@ -2050,7 +2051,7 @@ size = Vector2(116, 158)
 size = Vector2(74, 275)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5xaj"]
-size = Vector2(182, 151)
+size = Vector2(383, 151)
 
 [sub_resource type="Gradient" id="Gradient_66lda"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -2326,7 +2327,6 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="black1" type="TileMapLayer" parent="world" unique_id=1685122871]
-visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2335,6 +2335,7 @@ tile_set = SubResource("TileSet_swjyn")
 metadata/_edit_lock_ = true
 
 [node name="black2" type="TileMapLayer" parent="world" unique_id=1597144420]
+visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2530,7 +2531,13 @@ script = ExtResource("19_nuly2")
 metadata/_edit_group_ = true
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="dialogue_areas/rodkiss" unique_id=1265697648]
+position = Vector2(-18.5, 0)
 shape = SubResource("RectangleShape2D_s5xaj")
+
+[node name="sprite_2d" type="Sprite2D" parent="dialogue_areas/rodkiss" unique_id=1745375599]
+position = Vector2(26, -11)
+scale = Vector2(1.8125, 1.34375)
+texture = ExtResource("22_swjyn")
 
 [node name="puzzles" type="Node2D" parent="." unique_id=1624483270]
 z_index = 25

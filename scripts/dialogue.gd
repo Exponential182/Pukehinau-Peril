@@ -20,8 +20,24 @@ which may help you navigate Pukehinau easier.",
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
 	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
-	"rodkiss_good" :["Good"],
-	"rodkiss_bad" : ["Bad"],
+	"rodkiss_good" :[
+	"I finished already? I'm on fire today.",
+	"*You tell him what you did*",
+	"You did WHAT?",
+	"Why didn't I think of that. I don't think the moderators will be happy though.",
+	".                                                          
+	..                                                        
+	...                                                           
+	At least I can go home. See ya tomorow!"],
+	"rodkiss_bad" : [
+"I finished already? I'm on fire today.",
+"*You tell him what you did*",
+"You did WHAT?",
+"That's going to take ages to fix, I'm probably going to get in trouble for that.",
+".                                     
+..                                      
+...                                            
+At least I can go home. See ya tomorow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
@@ -56,9 +72,10 @@ func change_text():
 	if current_dialogue:
 		if state == "typing":
 			$text.visible_ratio = 1
-		if state == "new_text":
+		if state == "new_text" and not $"../../player".texting:
 			self.show()
 			$"../../player".texting = true
+			$"../../player".move_texting = false
 			$"../../player".velocity = Vector2.ZERO
 			$"../../player".animation.play(str($"../../player".state) + "_idle")
 			state = "typing"
@@ -73,8 +90,9 @@ func change_text():
 			if current_stage == text_stages:
 				state = "new_text"
 				$text.visible_ratio = 0
+				$"../../player".move_texting = true
 				self.hide()
-				await get_tree().create_timer(0.25).timeout
+				await get_tree().create_timer(1).timeout
 				$"../../player".texting = false
 				$"../../animation_player".play("resetE")
 				$text2.hide()
@@ -85,7 +103,6 @@ func change_text():
 			else:
 				current_stage += 1
 				state = "typing"
-				print(current_dialogue)
 				$text.text = dialogues[current_dialogue][current_stage]
 				$text.visible_ratio = 0
 				max_characters = dialogues[current_dialogue][current_stage].length()
