@@ -73,14 +73,13 @@ text = "YOU WIN!"
 
 [node name="tutorial" type="Label" parent="." unique_id=1992936829]
 z_index = 101
-offset_left = 1223.0
-offset_top = 785.0
-offset_right = 1908.0
-offset_bottom = 1074.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 713.0
+offset_bottom = 299.0
 theme_override_fonts/font = ExtResource("4_714mt")
 theme_override_font_sizes/font_size = 42
-text = "Hold left click while hovering over squares to cut out the shape. You can reset the puzzle if needed. Be careful not to cut the red lines! When cutting a piece off the main shape, the small piece will dissappear, so you don't have to remove every square."
-horizontal_alignment = 2
+text = "Hold left click while hovering over squares to cut out the shape outlined in red. You can reset by pressing the buttons in the top right."
 autowrap_mode = 2
 
 [connection signal="pressed" from="stage_1_button" to="." method="_stage_1_reset"]
