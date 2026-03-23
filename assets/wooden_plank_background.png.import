@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ng1on8sk2813"
-path="res://.godot/imported/wooden_crate_backgroudn.png-075e1b403352a581df547336d4962e1c.ctex"
+uid="uid://clttadga5eyab"
+path="res://.godot/imported/wooden_plank_background.png-8c50b77d9ea3907d98962678ec39b34c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wooden_crate_backgroudn.png"
-dest_files=["res://.godot/imported/wooden_crate_backgroudn.png-075e1b403352a581df547336d4962e1c.ctex"]
+source_file="res://assets/wooden_plank_background.png"
+dest_files=["res://.godot/imported/wooden_plank_background.png-8c50b77d9ea3907d98962678ec39b34c.ctex"]
 
 [params]
 

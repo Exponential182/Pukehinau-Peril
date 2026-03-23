@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bem8ps3mjx3dq" path="res://scripts/forge_puzzle.gd" id="1_y8w8l"]
 [ext_resource type="PackedScene" uid="uid://dn3o3iwc116lo" path="res://prefabs/forge_key_grid.tscn" id="3_6rt1s"]
-[ext_resource type="Texture2D" uid="uid://ng1on8sk2813" path="res://assets/wooden_crate_backgroudn.png" id="3_714mt"]
+[ext_resource type="Texture2D" uid="uid://clttadga5eyab" path="res://assets/wooden_plank_background.png" id="3_714mt"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="4_714mt"]
 
 [node name="forge_puzzle" type="Node2D" unique_id=2044794346]
@@ -15,10 +15,11 @@ script = ExtResource("1_y8w8l")
 [node name="background" type="Sprite2D" parent="." unique_id=13490364]
 z_index = 99
 texture_filter = 1
-position = Vector2(-278, -489.99997)
-scale = Vector2(40, 40)
+texture_repeat = 2
 texture = ExtResource("3_714mt")
 centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1920, 1080)
 
 [node name="stage_1_button" type="Button" parent="." unique_id=512851482]
 z_index = 105
@@ -28,7 +29,7 @@ offset_right = 1908.0
 offset_bottom = 106.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
-text = "Reset to Grid 1"
+text = "Reset to Level 1"
 
 [node name="stage_2_button" type="Button" parent="." unique_id=1690203314]
 z_index = 101
@@ -39,7 +40,7 @@ offset_bottom = 210.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
 disabled = true
-text = "Reset to Grid 2"
+text = "Reset to Level 2"
 
 [node name="stage_3_button" type="Button" parent="." unique_id=2132778536]
 z_index = 101
@@ -50,7 +51,7 @@ offset_bottom = 314.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
 disabled = true
-text = "Reset to Grid 3"
+text = "Reset to Level 3"
 
 [node name="stage_4_button" type="Button" parent="." unique_id=900943175]
 z_index = 101
@@ -61,7 +62,7 @@ offset_bottom = 426.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
 disabled = true
-text = "Reset to Grid 4"
+text = "Reset to Level 4"
 
 [node name="win_indicator" type="Label" parent="." unique_id=384919517]
 visible = false
