@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c3rx334bi11gh"]
 
 [ext_resource type="Script" uid="uid://cle6oabqydtew" path="res://scripts/menu_script.gd" id="1_1n3ne"]
+[ext_resource type="AudioStream" uid="uid://bjtofda2cuyjy" path="res://assets/SFX/Pixel Floors, Gentle Doors.mp3" id="2_eib0j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n3ne"]
 font_size = 50
@@ -50,5 +51,9 @@ offset_right = 1093.0
 offset_bottom = 501.0
 theme_override_font_sizes/font_size = 40
 text = "Play"
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=643890639]
+stream = ExtResource("2_eib0j")
+autoplay = true
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]

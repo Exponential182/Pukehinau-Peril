@@ -30,7 +30,7 @@ var max_characters = 10
 var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
-var current_dialogue = "stop_exploring"
+var current_dialogue = "intro"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,13 +50,17 @@ func _process(delta: float) -> void:
 		state = "finished"
 		$"../../animation_player".play("pressE")
 		$text2.show()
+		$"../../song".stop()
 	
 
 func change_text():
 	if current_dialogue:
 		if state == "typing":
 			$text.visible_ratio = 1
-		if state == "new_text":
+			$"../../song".stop()
+		if state == "new_text" and not $"../../player".texting:
+			$"../../song".play()
+			$"../../animation_player2".play("enter_puzzle")
 			self.show()
 			$"../../player".texting = true
 			$"../../player".velocity = Vector2.ZERO
@@ -77,8 +81,10 @@ func change_text():
 				await get_tree().create_timer(0.25).timeout
 				$"../../player".texting = false
 				$"../../animation_player".play("resetE")
+				$"../../animation_player2".play("exit_puzzle")
 				$text2.hide()
 			else:
+				$"../../song".play()
 				current_stage += 1
 				state = "typing"
 				print(current_dialogue)
