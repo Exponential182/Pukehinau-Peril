@@ -47,6 +47,9 @@ func _ready():
 	camera.enabled = true
 	animation.play("brawn_idle")
 	$"../world/black".show()
+	$"../world/black1".show()
+	$"../world/black2".show()
+	$"../world/black3".show()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling and not texting:
@@ -162,6 +165,8 @@ func enter_door():
 		zoomed = true
 		$"../world/doors".find_child(str(current_door)).magical_door_opening()
 		await get_tree().create_timer(0.75).timeout
+		if current_door == "door2":
+			$"../world/lights/main_light".energy = 0.55
 		self.position = door_positions[current_door]
 		var camera_bounds = door_limits[current_door]
 		$player_camera.limit_left = camera_bounds.x

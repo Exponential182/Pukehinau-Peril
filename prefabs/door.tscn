@@ -557,7 +557,7 @@ sources/0 = SubResource("TileSetAtlasSource_gx6vt")
 sources/1 = SubResource("TileSetAtlasSource_iv2is")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gx6vt"]
-size = Vector2(96, 73)
+size = Vector2(96, 80)
 
 [node name="door" type="Node2D" unique_id=1840481697]
 script = ExtResource("1_qfj2i")
