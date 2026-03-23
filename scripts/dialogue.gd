@@ -66,13 +66,16 @@ func _process(delta: float) -> void:
 		state = "finished"
 		$"../../animation_player".play("pressE")
 		$text2.show()
+		$"../../text".stop()
 	
 
 func change_text():
 	if current_dialogue:
 		if state == "typing":
 			$text.visible_ratio = 1
+			$"../../text".stop()
 		if state == "new_text" and not $"../../player".texting:
+			$"../../animation_player2".play("enter_puzzle")
 			self.show()
 			$"../../player".texting = true
 			$"../../player".move_texting = false
@@ -86,9 +89,11 @@ func change_text():
 			text_stages = (dialogues[current_dialogue].size() -1)
 			$"../../animation_player".play("resetE")
 			$text2.hide()
+			$"../../text".play()
 		elif state == "finished":
 			if current_stage == text_stages:
 				state = "new_text"
+				$"../../text".stop()
 				$text.visible_ratio = 0
 				$"../../player".move_texting = true
 				self.hide()
@@ -100,6 +105,8 @@ func change_text():
 					$"../../animation_player".play("fade_to_black")
 					await $"../../animation_player".animation_finished
 					get_tree().change_scene_to_file("res://prefabs/credit.tscn")
+				else:
+					$"../../animation_player2".play("exit_puzzle")
 			else:
 				current_stage += 1
 				state = "typing"
