@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bewj2yqosem4s"]
 
-[ext_resource type="Texture2D" uid="uid://b1680xe3jesfv" path="res://assets/blank_metal.svg" id="1_lr2d3"]
+[ext_resource type="Texture2D" uid="uid://b1680xe3jesfv" path="res://assets/Sprites/blank_metal.svg" id="1_lr2d3"]
 [ext_resource type="Script" uid="uid://deqjuvmobyxar" path="res://scripts/particle_clear.gd" id="2_1f33y"]
 
 [sub_resource type="Curve" id="Curve_1f33y"]

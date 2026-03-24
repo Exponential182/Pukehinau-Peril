@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dn3o3iwc116lo"]
 
-[ext_resource type="Texture2D" uid="uid://dtwakimsjt4e7" path="res://assets/grid_outline.svg" id="1_lkls4"]
-[ext_resource type="TileSet" uid="uid://cjynbal2diwac" path="res://assets/key_tile_map.tres" id="2_xtb1p"]
+[ext_resource type="Texture2D" uid="uid://dtwakimsjt4e7" path="res://assets/Sprites/grid_outline.svg" id="1_lkls4"]
+[ext_resource type="TileSet" uid="uid://cjynbal2diwac" path="res://assets/Sprites/key_tile_map.tres" id="2_xtb1p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8w8l"]
 texture = ExtResource("1_lkls4")

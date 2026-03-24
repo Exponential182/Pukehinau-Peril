@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://br3iji2pmohh2"]
 
-[ext_resource type="Texture2D" uid="uid://cs5cc4ra13od2" path="res://assets/hot_metal.svg" id="1_0uhc5"]
+[ext_resource type="Texture2D" uid="uid://cs5cc4ra13od2" path="res://assets/Sprites/hot_metal.svg" id="1_0uhc5"]
 [ext_resource type="Script" uid="uid://deqjuvmobyxar" path="res://scripts/particle_clear.gd" id="2_0uhc5"]
 
 [sub_resource type="Curve" id="Curve_ychd5"]

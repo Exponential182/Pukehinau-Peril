@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dndpx1jwwsrt2"]
 
-[ext_resource type="Texture2D" uid="uid://bhjdb8aw8f57t" path="res://assets/Brawn_icon.png" id="1_ah2ku"]
+[ext_resource type="Texture2D" uid="uid://bhjdb8aw8f57t" path="res://assets/Sprites/Brawn_icon.png" id="1_ah2ku"]
 [ext_resource type="Script" uid="uid://deqjuvmobyxar" path="res://scripts/particle_clear.gd" id="2_ah2ku"]
 
 [sub_resource type="Gradient" id="Gradient_psxt3"]

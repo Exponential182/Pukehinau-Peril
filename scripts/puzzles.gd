@@ -15,6 +15,7 @@ func _on_player_summon_puzzle(puzzle_name,player_state) -> void:
 		lights.hide()
 		player.velocity = Vector2.ZERO
 		$"../UI/interact".hide()
+		$"../animation_player".play("enter_puzzle")
 	else:
 		fix_player()
 
@@ -32,6 +33,7 @@ func vertical_puzzle_completed():
 	puzzles["vertical_puzzle"][1] = true
 	$"../dialogue_areas/wrong_player".position.y += 1000
 	$"../dialogue_areas/stop_exploring/collision_polygon_2d".disabled = true
+	$"../animation_player2".play("exit_puzzle")
 func forge_puzzle_completed():
 	$"../world/doors/door2".is_enterable = true
 	$"../world/doors/door2/sprite_2d".hide()
@@ -40,6 +42,7 @@ func forge_puzzle_completed():
 	puzzles["forge_puzzle"][1] = true
 	$"../puzzle_areas/forge_puzzle/area".disabled = true
 	$"../dialogue_areas/alt_wrong_player".position.y += 1000
+	$"../animation_player".play("exit_puzzle")
 func fix_player():
 	player.is_puzzling = false
 	player.camera.enabled = true

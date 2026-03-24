@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ccljpja5rnax2"]
 
 [ext_resource type="Script" uid="uid://vjw20gkp1yef" path="res://scripts/box_puzzle.gd" id="1_clyxy"]
-[ext_resource type="Texture2D" uid="uid://cmtjn6kucd32t" path="res://assets/simple_floors_ang_walls.png" id="1_p0gf4"]
+[ext_resource type="Texture2D" uid="uid://cmtjn6kucd32t" path="res://assets/Sprites/simple_floors_ang_walls.png" id="1_p0gf4"]
 [ext_resource type="Texture2D" uid="uid://b7q5ealxi6j4u" path="res://assets/School Daze Tileset/School Daze/Stage 3/Tileset/Floors.png" id="2_clyxy"]
 [ext_resource type="PackedScene" uid="uid://ce55wgavweih1" path="res://prefabs/movable_box.tscn" id="2_p0gf4"]
 

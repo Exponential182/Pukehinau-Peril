@@ -1,5 +1,5 @@
 extends Node
-var show_credits = false
+var game_complete = false
 func matrix_copy_2d(matrix) -> Array:
 	var copy = []
 	for row in matrix:

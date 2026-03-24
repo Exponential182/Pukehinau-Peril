@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ce55wgavweih1"]
 
 [ext_resource type="Script" uid="uid://cyh74pop4nqtx" path="res://scripts/movable_box.gd" id="1_u4rne"]
-[ext_resource type="Texture2D" uid="uid://dks1nk64fcv8f" path="res://assets/crate.png" id="2_ivc40"]
+[ext_resource type="Texture2D" uid="uid://dks1nk64fcv8f" path="res://assets/Sprites/crate.png" id="2_ivc40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivc40"]
 size = Vector2(136, 136)

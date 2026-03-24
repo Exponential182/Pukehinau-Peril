@@ -19,12 +19,12 @@ which may help you navigate Pukehinau easier.",
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
-	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
+	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all disappeared somehow..."],
 	"rodkiss_good" :[
 	"I finished already? I'm on fire today.",
 	"*You tell him what you did*",
 	"You did WHAT?",
-	"Why didn't I think of that. I don't think the moderators will be happy though.",
+	"Why didn't I think of that? I don't think the moderators will be happy though.",
 	".                                                          
 	..                                                        
 	...                                                           
@@ -33,11 +33,11 @@ which may help you navigate Pukehinau easier.",
 "I finished already? I'm on fire today.",
 "*You tell him what you did*",
 "You did WHAT?",
-"That's going to take ages to fix, I'm probably going to get in trouble for that.",
+"That server’s going to take a whole day to fix, I might get in trouble for that.",
 ".                                     
 ..                                      
 ...                                            
-At least I can go home. See ya tomorow!"],
+At least I can go home. See ya tomorrow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
@@ -46,7 +46,7 @@ var max_characters = 10
 var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
-var current_dialogue = "stop_exploring"
+var current_dialogue = "intro"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,13 +66,17 @@ func _process(delta: float) -> void:
 		state = "finished"
 		$"../../animation_player".play("pressE")
 		$text2.show()
+		$"../../song".stop()
 	
 
 func change_text():
 	if current_dialogue:
 		if state == "typing":
 			$text.visible_ratio = 1
+			$"../../song".stop()
 		if state == "new_text" and not $"../../player".texting:
+			$"../../song".play()
+			$"../../animation_player2".play("enter_puzzle")
 			self.show()
 			$"../../player".texting = true
 			$"../../player".move_texting = false
@@ -88,6 +92,7 @@ func change_text():
 			$text2.hide()
 		elif state == "finished":
 			if current_stage == text_stages:
+				$"../../animation_player2".play("exit_puzzle")
 				state = "new_text"
 				$text.visible_ratio = 0
 				$"../../player".move_texting = true
@@ -101,6 +106,7 @@ func change_text():
 					await $"../../animation_player".animation_finished
 					get_tree().change_scene_to_file("res://prefabs/credit.tscn")
 			else:
+				$"../../song".play()
 				current_stage += 1
 				state = "typing"
 				$text.text = dialogues[current_dialogue][current_stage]
