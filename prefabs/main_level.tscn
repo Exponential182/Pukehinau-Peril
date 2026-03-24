@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://3xusoi5h6dg0" path="res://scripts/rodkiss.gd" id="19_nuly2"]
 [ext_resource type="Texture2D" uid="uid://dyech36r42nt2" path="res://assets/Brawns_Base.png" id="22_swjyn"]
 [ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/main_world.mp3" id="27_swjyn"]
+[ext_resource type="AudioStream" uid="uid://b73rd7ve67ty2" path="res://assets/Dialogue.mp3" id="28_a8o3y"]
 
 [sub_resource type="Gradient" id="Gradient_csty0"]
 
@@ -1737,6 +1738,36 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_a8o3y"]
+resource_name = "enter_puzzle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("music_player:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_3fpug"]
+resource_name = "exit_puzzle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("music_player:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -10.0]
+}
+
 [sub_resource type="Animation" id="Animation_swjyn"]
 resource_name = "fade_to_black"
 tracks/0/type = "value"
@@ -1839,6 +1870,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66lda"]
 _data = {
 &"RESET": SubResource("Animation_2237u"),
+&"enter_puzzle": SubResource("Animation_a8o3y"),
+&"exit_puzzle": SubResource("Animation_3fpug"),
 &"fade_to_black": SubResource("Animation_swjyn"),
 &"lights": SubResource("Animation_v5q0s"),
 &"pressE": SubResource("Animation_iqjog"),
@@ -2302,11 +2335,17 @@ metadata/_edit_lock_ = true
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1284199382]
 libraries/ = SubResource("AnimationLibrary_66lda")
 
+[node name="animation_player2" type="AnimationPlayer" parent="." unique_id=740039442]
+libraries/ = SubResource("AnimationLibrary_66lda")
+
 [node name="music_player" type="AudioStreamPlayer" parent="." unique_id=1940725622]
 stream = ExtResource("27_swjyn")
-volume_db = -10.0
+volume_db = -80.0
 autoplay = true
 parameters/looping = true
+
+[node name="song" type="AudioStreamPlayer" parent="." unique_id=1469252334]
+stream = ExtResource("28_a8o3y")
 
 [connection signal="body_entered" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_exited"]
