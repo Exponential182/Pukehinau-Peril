@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://du370rxia1q02"]
 
 [ext_resource type="Script" uid="uid://bem8ps3mjx3dq" path="res://scripts/forge_puzzle.gd" id="1_y8w8l"]
+[ext_resource type="AudioStream" uid="uid://di1bp8gx8q1x" path="res://assets/SFX/tile_pop.ogg" id="2_714mt"]
 [ext_resource type="PackedScene" uid="uid://dn3o3iwc116lo" path="res://prefabs/forge_key_grid.tscn" id="3_6rt1s"]
 [ext_resource type="Texture2D" uid="uid://clttadga5eyab" path="res://assets/Sprites/wooden_plank_background.png" id="3_714mt"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="4_714mt"]
@@ -9,6 +10,9 @@
 light_mask = 2
 z_index = 100
 script = ExtResource("1_y8w8l")
+
+[node name="pop_sound" type="AudioStreamPlayer" parent="." unique_id=1341326884]
+stream = ExtResource("2_714mt")
 
 [node name="grid_handler" parent="." unique_id=397140835 instance=ExtResource("3_6rt1s")]
 
