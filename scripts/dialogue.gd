@@ -33,7 +33,7 @@ which may help you navigate Pukehinau easier.",
 "I finished already? I'm on fire today.",
 "*You tell him what you did*",
 "You did WHAT?",
-"That's going to take ages to fix, I'm probably going to get in trouble for that.",
+"That server’s going to take a whole day to fix, I might get in trouble for that.",
 ".                                     
 ..                                      
 ...                                            
