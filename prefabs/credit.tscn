@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vbcn8qdf76f7" path="res://scripts/node_3d.gd" id="1_a8hd2"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="2_ou2ry"]
-[ext_resource type="AudioStream" uid="uid://chdm6ehw6qtgh" path="res://assets/credits_music.mp3" id="3_slcei"]
+[ext_resource type="AudioStream" uid="uid://bjasw1f42pqth" path="res://assets/Star_wars_theme.mp3" id="3_slcei"]
 [ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="4_slcei"]
 
 [sub_resource type="Environment" id="Environment_a8hd2"]
@@ -82,7 +82,7 @@ font_size = 1024
 line_spacing = -128.0
 
 [node name="label_3d2" type="Label3D" parent="scrolltext" unique_id=19262747]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27.608894, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
 text = "Thank you for playing
 
 Lead Artist - Aine O'Connor
@@ -102,7 +102,11 @@ Mr. Rodkiss
 Claude & Gemini
 Godot Forums
 Aesprite & Github
+
+Music:
 John Williams & London Symphony Orchestra
+Emma_MA - Retro Movie Theme Pack
+VWolfDog - Menu Music
 
 
 In loving memory of our Trello Board

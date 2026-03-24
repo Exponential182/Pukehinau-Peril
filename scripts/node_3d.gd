@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 		speed = 1
 	$scrolltext.position.y += delta * speed
 	$audio_stream_player_3d.pitch_scale = 1* speed
-	if $scrolltext.position.y > 55 and not transitioning:
+	if $scrolltext.position.y > 58 and not transitioning:
 		transitioning = true
 		can_speed = false
 		$animation_player.play("fade")
