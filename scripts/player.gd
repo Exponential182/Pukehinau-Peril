@@ -19,6 +19,7 @@ var can_swap = true
 var state = "brawn"
 var zoomed = false
 var texting = false
+var move_texting = false
 var current_door = null
 var current_door_position = Vector2(0,0)
 
@@ -48,7 +49,7 @@ func _ready():
 	$"../world/black".show()
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("interact") and not is_puzzling:
+	if Input.is_action_just_pressed("interact") and not is_puzzling and not texting:
 		if current_door != null:
 			enter_door()
 		elif can_start_puzzle and current_puzzle != null:
@@ -58,7 +59,7 @@ func _physics_process(delta: float) -> void:
 			camera.enabled = false
 			summon_puzzle.emit(str(current_puzzle), str(state))
 
-	if not is_puzzling and not zoomed and can_swap and not texting:
+	if not is_puzzling and not zoomed and can_swap and move_texting:
 		if Input.is_action_just_pressed("smack") and can_swap:
 			can_swap = false
 			velocity = Vector2.ZERO
@@ -75,11 +76,13 @@ func _physics_process(delta: float) -> void:
 				animation.play("brain_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = false
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = true
+				$"../dialogue_areas/wrong_player2/collision_shape_2d".disabled = false
 			elif state == "brawn":
 				state = "brain"
 				animation.play("brawn_change")
 				$"../dialogue_areas/wrong_player/collision_shape_2d".disabled = true
 				$"../dialogue_areas/alt_wrong_player/collision_shape_2d".disabled = false
+				$"../dialogue_areas/wrong_player2/collision_shape_2d".disabled = true
 				speed = 300.0
 			smack()
 		var direction_horizontal = null
@@ -127,6 +130,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		$"../puzzles/box_puzzle/reset_button".hide()
 		$"../puzzles/box_puzzle/reset_button".disabled = true
+		if pushed_box:
+			pushed_box.modulate = Color("#ffff62")
+			pushed_box = null
+			speed = base_speed
 	move_and_slide()
 
 func entered_door(door,door_position):
@@ -203,7 +210,7 @@ func box_puzzle_interaction(delta):
 			pushed_box = last_box
 			speed = pushing_speed
 			pushed_box.modulate = Color("green")
-		else:
+		elif pushed_box:
 			pushed_box.modulate = Color("#ffff62")
 			pushed_box = null
 			speed = base_speed

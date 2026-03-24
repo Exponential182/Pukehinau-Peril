@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c3rx334bi11gh"]
 
 [ext_resource type="Script" uid="uid://cle6oabqydtew" path="res://scripts/menu_script.gd" id="1_1n3ne"]
+[ext_resource type="AudioStream" uid="uid://cu5k8e5jcu4n2" path="res://assets/menu_music.mp3" id="2_eib0j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n3ne"]
 font_size = 50
@@ -50,5 +51,11 @@ offset_right = 1093.0
 offset_bottom = 501.0
 theme_override_font_sizes/font_size = 40
 text = "Play"
+
+[node name="audio_stream_player" type="AudioStreamPlayer" parent="." unique_id=30760292]
+stream = ExtResource("2_eib0j")
+volume_db = 8.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]

@@ -25,7 +25,7 @@ scale_max = 0.7
 emission_curve = SubResource("CurveTexture_ayi8j")
 
 [node name="forge_tile_pop" type="GPUParticles2D" unique_id=406331604]
-z_index = 102
+z_index = 103
 emitting = false
 texture = ExtResource("1_0uhc5")
 one_shot = true

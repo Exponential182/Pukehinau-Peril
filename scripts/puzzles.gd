@@ -23,7 +23,6 @@ func number_puzzle_completed(ending):
 	fix_player()
 	$"../puzzle_areas/number_puzzle/area".disabled = true
 	puzzles["number_puzzle"][1] = true
-	print("hello")
 	$"../dialogue_areas/rodkiss".rodkiss_level = "rodkiss_" +str(ending)
 func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")

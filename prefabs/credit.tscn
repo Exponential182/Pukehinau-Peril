@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://2o3etqf1udjk"]
+
+[ext_resource type="Script" uid="uid://vbcn8qdf76f7" path="res://scripts/node_3d.gd" id="1_a8hd2"]
+[ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Jersey10-Regular.ttf" id="2_ou2ry"]
+[ext_resource type="AudioStream" uid="uid://bjasw1f42pqth" path="res://assets/Star_wars_theme.mp3" id="3_slcei"]
+[ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="4_slcei"]
+
+[sub_resource type="Environment" id="Environment_a8hd2"]
+background_mode = 1
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.1263
+
+[sub_resource type="Animation" id="Animation_ou2ry"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("scrolltext/label_3d2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mwlxq"]
+resource_name = "fade"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("scrolltext/label_3d2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 0.08838857),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("audio_stream_player_3d:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-20.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_slcei"]
+_data = {
+&"RESET": SubResource("Animation_ou2ry"),
+&"fade": SubResource("Animation_mwlxq")
+}
+
+[node name="credit" type="Node3D" unique_id=28085067]
+script = ExtResource("1_a8hd2")
+
+[node name="camera_3d" type="Camera3D" parent="." unique_id=1399418489]
+transform = Transform3D(1, 0, 0, 0, 0.6639262, -0.7477981, 0, 0.7477981, 0.6639262, 0, 0.5, 7.395)
+fov = 90.0
+far = 1000.0
+
+[node name="world_environment" type="WorldEnvironment" parent="." unique_id=81010962]
+environment = SubResource("Environment_a8hd2")
+
+[node name="scrolltext" type="Node3D" parent="." unique_id=1742424967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075, 0)
+
+[node name="label_3d" type="Label3D" parent="scrolltext" unique_id=433134864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+text = "PUKEHINAU PERIL"
+font = ExtResource("2_ou2ry")
+font_size = 1024
+line_spacing = -128.0
+
+[node name="label_3d2" type="Label3D" parent="scrolltext" unique_id=19262747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+text = "Thank you for playing
+
+Lead Artist - Aine O'Connor
+Lead Level Designer -  Hayden Clemence
+Lead Programmer - Matthew Thomas
+Lead Programmer II - Hayden Clemence
+
+
+Lead Merge Conflict Creator - Hayden Clemence
+Lead Merge Conflict Fixer - Matthew Thomas
+Lead Pixel Art Hater - Aine O'Connor
+Lead Voice Actor - Mr. Rodkiss
+
+
+Special Thanks to:
+Mr. Rodkiss
+Claude & Gemini
+Godot Forums
+Aesprite & Github
+
+Music:
+John Williams & London Symphony Orchestra
+Emma_MA - Retro Movie Theme Pack
+VWolfDog - Menu Music
+
+
+In loving memory of our Trello Board
+
+
+We don't endorse actual hacking 
+or destroying schools, 
+please don't do that.
+
+Roses are Red, Violets are Blue, 
+If the game is broken, Godot I blame you.
+
+See you next term :)"
+font = ExtResource("2_ou2ry")
+font_size = 384
+line_spacing = -128.0
+autowrap_trim_flags = 0
+
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1803785137]
+libraries/ = SubResource("AnimationLibrary_slcei")
+
+[node name="audio_stream_player_3d" type="AudioStreamPlayer3D" parent="." unique_id=1485258671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.4370365)
+stream = ExtResource("3_slcei")
+volume_db = -19.9
+max_db = -0.5
+autoplay = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=29249742]
+
+[node name="label" type="Label" parent="UI" unique_id=1199819764]
+modulate = Color(1, 1, 1, 0.14509805)
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 268.0
+offset_bottom = 42.0
+theme = ExtResource("4_slcei")
+theme_override_font_sizes/font_size = 32
+text = "Hold SPACE to speed up"
