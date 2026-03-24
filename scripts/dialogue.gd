@@ -92,6 +92,7 @@ func change_text():
 			$text2.hide()
 		elif state == "finished":
 			if current_stage == text_stages:
+				$"../../animation_player2".play("exit_puzzle")
 				state = "new_text"
 				$text.visible_ratio = 0
 				$"../../player".move_texting = true
@@ -99,7 +100,6 @@ func change_text():
 				await get_tree().create_timer(1).timeout
 				$"../../player".texting = false
 				$"../../animation_player".play("resetE")
-				$"../../animation_player2".play("exit_puzzle")
 				$text2.hide()
 				if current_dialogue == "rodkiss_good" or current_dialogue == "rodkiss_bad":
 					$"../../animation_player".play("fade_to_black")
