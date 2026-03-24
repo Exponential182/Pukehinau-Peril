@@ -19,7 +19,7 @@ which may help you navigate Pukehinau easier.",
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
-	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
+	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all disappeared somehow..."],
 	"rodkiss_good" :[
 	"I finished already? I'm on fire today.",
 	"*You tell him what you did*",
