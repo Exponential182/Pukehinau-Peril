@@ -19,12 +19,12 @@ which may help you navigate Pukehinau easier.",
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
-	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all dissappeared somehow..."],
+	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all disappeared somehow..."],
 	"rodkiss_good" :[
 	"I finished already? I'm on fire today.",
 	"*You tell him what you did*",
 	"You did WHAT?",
-	"Why didn't I think of that. I don't think the moderators will be happy though.",
+	"Why didn't I think of that? I don't think the moderators will be happy though.",
 	".                                                          
 	..                                                        
 	...                                                           
@@ -37,7 +37,7 @@ which may help you navigate Pukehinau easier.",
 ".                                     
 ..                                      
 ...                                            
-At least I can go home. See ya tomorow!"],
+At least I can go home. See ya tomorrow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
