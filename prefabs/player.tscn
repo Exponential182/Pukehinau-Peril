@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://uf8ol5pwve7"]
 
 [ext_resource type="Script" uid="uid://b4ji52sphyeik" path="res://scripts/player.gd" id="1_r66lb"]
-[ext_resource type="Texture2D" uid="uid://dg1wmyywjdu2x" path="res://assets/Brain_spritesetfull.png" id="2_g2jcq"]
-[ext_resource type="Texture2D" uid="uid://ds6r88pf6swe2" path="res://assets/Brain_spriteset.png" id="2_ht1c8"]
-[ext_resource type="Texture2D" uid="uid://bs0ic2ou5d18q" path="res://assets/Brain_change.png" id="2_u51tk"]
-[ext_resource type="Texture2D" uid="uid://bn3clvt2jtkw5" path="res://assets/Brawn_spritesetfull.png" id="3_g2jcq"]
+[ext_resource type="Texture2D" uid="uid://dg1wmyywjdu2x" path="res://assets/Sprites/Brain_spritesetfull.png" id="2_g2jcq"]
+[ext_resource type="Texture2D" uid="uid://ds6r88pf6swe2" path="res://assets/Sprites/Brain_spriteset.png" id="2_ht1c8"]
+[ext_resource type="Texture2D" uid="uid://bs0ic2ou5d18q" path="res://assets/Sprites/Brain_change.png" id="2_u51tk"]
+[ext_resource type="Texture2D" uid="uid://bn3clvt2jtkw5" path="res://assets/Sprites/Brawn_spritesetfull.png" id="3_g2jcq"]
 [ext_resource type="Script" uid="uid://bcax5sywvc6ye" path="res://scripts/player_camera.gd" id="3_ht1c8"]
-[ext_resource type="Texture2D" uid="uid://bk2n2oiqa8lx" path="res://assets/Brawn_spriteset.png" id="4_ht1c8"]
-[ext_resource type="Texture2D" uid="uid://d3iert4qud60u" path="res://assets/Brawn_change.png" id="6_rgeog"]
+[ext_resource type="Texture2D" uid="uid://bk2n2oiqa8lx" path="res://assets/Sprites/Brawn_spriteset.png" id="4_ht1c8"]
+[ext_resource type="Texture2D" uid="uid://d3iert4qud60u" path="res://assets/Sprites/Brawn_change.png" id="6_rgeog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
 size = Vector2(92, 100)

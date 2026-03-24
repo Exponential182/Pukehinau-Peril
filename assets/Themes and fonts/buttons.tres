@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://be1y2sbetlsc3"]
+
+[ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="1_86k24"]
+
+[resource]
+default_font = ExtResource("1_86k24")
+Button/font_sizes/font_size = 256
+Button/fonts/font = ExtResource("1_86k24")
+Label/font_sizes/font_size = 128
+Label/fonts/font = ExtResource("1_86k24")
+LineEdit/font_sizes/font_size = 256
+LineEdit/fonts/font = ExtResource("1_86k24")

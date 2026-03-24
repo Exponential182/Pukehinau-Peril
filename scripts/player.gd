@@ -182,9 +182,9 @@ func smack():
 	camera.shake(20.0, 1.0)
 	var spawned_explosion = explosion.instantiate()
 	if state == "brawn":
-		spawned_explosion.texture = preload("res://assets/image.png")
+		spawned_explosion.texture = preload("res://assets/Sprites/image.png")
 	else:
-		spawned_explosion.texture = preload("res://assets/Brain_icon.png")
+		spawned_explosion.texture = preload("res://assets/Sprites/Brain_icon.png")
 	spawned_explosion.position = self.position
 	spawned_explosion.emitting = true
 	get_parent().add_child(spawned_explosion)

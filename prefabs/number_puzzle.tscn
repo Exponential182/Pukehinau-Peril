@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcgyu2l2e8pao"]
 
-[ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/buttons.tres" id="1_0gd6h"]
+[ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/Themes and fonts/buttons.tres" id="1_0gd6h"]
 [ext_resource type="Script" uid="uid://vpbp8khdkb5j" path="res://scripts/number_puzzle.gd" id="1_e7xsf"]
-[ext_resource type="AudioStream" uid="uid://dobj7c5bgx71j" path="res://assets/number_beep.tres" id="3_ajpmj"]
+[ext_resource type="AudioStream" uid="uid://dobj7c5bgx71j" path="res://assets/SFX/number_beep.tres" id="3_ajpmj"]
 
 [sub_resource type="Gradient" id="Gradient_ajpmj"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
