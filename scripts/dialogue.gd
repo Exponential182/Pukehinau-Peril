@@ -24,7 +24,7 @@ which may help you navigate Pukehinau easier.",
 	"I finished already? I'm on fire today.",
 	"*You tell him what you did*",
 	"You did WHAT?",
-	"Why didn't I think of that. I don't think the moderators will be happy though.",
+	"Why didn't I think of that? I don't think the moderators will be happy though.",
 	".                                                          
 	..                                                        
 	...                                                           
