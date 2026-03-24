@@ -15,5 +15,6 @@ func _physics_process(delta: float) -> void:
 		can_speed = false
 		$animation_player.play("fade")
 		$UI/label.hide()
+		Global.game_complete = true
 		await $animation_player.animation_finished
 		get_tree().change_scene_to_file("res://prefabs/main_menu.tscn")
