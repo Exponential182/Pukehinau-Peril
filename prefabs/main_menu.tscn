@@ -31,16 +31,15 @@ vertical_alignment = 1
 
 [node name="credits" type="Label" parent="." unique_id=427827721]
 layout_mode = 0
-offset_left = 5.0
-offset_top = 800.0
-offset_right = 505.0
-offset_bottom = 1157.0
-text = "A game by:
-22124/Aine
-22328/Hayden
-22053/Matthew
-"
+offset_left = 648.0
+offset_top = 483.0
+offset_right = 1271.0
+offset_bottom = 840.0
+text = "MR. RODKISS VOICELINES
+AUDIO IS VERY STRONGLY
+RECOMMENDED"
 label_settings = SubResource("LabelSettings_1n3ne")
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="start_button" type="Button" parent="." unique_id=1787614412]
@@ -52,6 +51,16 @@ offset_bottom = 501.0
 theme_override_font_sizes/font_size = 40
 text = "Play"
 
+[node name="credits2" type="Button" parent="." unique_id=1770644891]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 1001.0
+offset_right = 300.0
+offset_bottom = 1064.0
+theme_override_font_sizes/font_size = 40
+text = "Replay Credits"
+
 [node name="audio_stream_player" type="AudioStreamPlayer" parent="." unique_id=30760292]
 stream = ExtResource("2_eib0j")
 volume_db = 8.0
@@ -59,3 +68,4 @@ autoplay = true
 parameters/looping = true
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="credits2" to="." method="_on_credits_2_pressed"]

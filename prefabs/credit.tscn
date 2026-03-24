@@ -117,7 +117,8 @@ or destroying schools,
 please don't do that.
 
 Roses are Red, Violets are Blue, 
-If the game is broken, Godot I blame you.
+If the game is broken,
+Godot I blame you.
 
 See you next term :)"
 font = ExtResource("2_ou2ry")
@@ -131,8 +132,8 @@ libraries/ = SubResource("AnimationLibrary_slcei")
 [node name="audio_stream_player_3d" type="AudioStreamPlayer3D" parent="." unique_id=1485258671]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.4370365)
 stream = ExtResource("3_slcei")
-volume_db = -19.9
-max_db = -0.5
+volume_db = 5.0
+max_db = 0.0
 autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=29249742]

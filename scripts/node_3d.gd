@@ -17,3 +17,4 @@ func _physics_process(delta: float) -> void:
 		$UI/label.hide()
 		await $animation_player.animation_finished
 		get_tree().change_scene_to_file("res://prefabs/main_menu.tscn")
+		Global.show_credits = true
