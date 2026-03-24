@@ -26,7 +26,7 @@ func stage_select(stage):
 		key_map = $grid_handler/stage_1/base_layer
 		bounds = Vector2i(24, 14)
 		current_stage = 1
-		stage_scale = 3
+		stage_scale = 4
 		$tutorial.show()
 	
 	if stage == 2:
