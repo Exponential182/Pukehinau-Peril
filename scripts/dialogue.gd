@@ -37,7 +37,7 @@ which may help you navigate Pukehinau easier.",
 ".                                     
 ..                                      
 ...                                            
-At least I can go home. See ya tomorow!"],
+At least I can go home. See ya tomorrow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
