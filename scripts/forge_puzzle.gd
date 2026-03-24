@@ -2,6 +2,7 @@ extends Node2D
 
 signal puzzle_completed
 
+var input_lock = false
 var stage_count = 4
 var start_grid_states = {}
 var live_grid_states = {}
@@ -26,7 +27,7 @@ func stage_select(stage):
 		key_map = $grid_handler/stage_1/base_layer
 		bounds = Vector2i(24, 14)
 		current_stage = 1
-		stage_scale = 3
+		stage_scale = 4
 		$tutorial.show()
 	
 	if stage == 2:
@@ -162,7 +163,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_pressed("left_click"):
+	if Input.is_action_pressed("left_click") and not input_lock:
 		var absolute_input_pos = get_viewport().get_mouse_position()
 		var base_layer_tile_pos = key_map.local_to_map(key_map.to_local(absolute_input_pos))
 		var grid_layer_tile_pos = grid_map.local_to_map(grid_map.to_local(absolute_input_pos))
@@ -186,7 +187,9 @@ func _process(_delta):
 				var sorted_key_map = key_map.get_used_cells()
 				sorted_key_map.sort()
 				if sorted_key_map == target_cells:
+					input_lock = true
 					await get_tree().create_timer(0.5).timeout
+					input_lock = false
 					if current_stage == 1:
 						stage_select(2)
 						$stage_2_button.disabled = false
