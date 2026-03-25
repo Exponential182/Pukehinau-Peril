@@ -1,4 +1,12 @@
 extends Node2D
+var rodkiss_dialogues = {
+	"rodkiss_1" : preload("res://assets/SFX/pukehinau_peril_audio/whosentyou-[AudioTrimmer.com].mp3"),
+	"rodkiss_2" : preload("res://assets/SFX/pukehinau_peril_audio/finishedalready-[AudioTrimmer.com].mp3"),
+	"rodkiss_3" : preload("res://assets/SFX/pukehinau_peril_audio/youdidwhat-[AudioTrimmer.com].mp3"),
+	"rodkiss_good" : preload("res://assets/SFX/pukehinau_peril_audio/thinkofthat-[AudioTrimmer.com].mp3"),
+	"rodkiss_bad" : preload("res://assets/SFX/pukehinau_peril_audio/serverfixed-[AudioTrimmer.com].mp3"),
+	"rodkiss_4" : preload("res://assets/SFX/pukehinau_peril_audio/gohome-[AudioTrimmer.com].mp3")
+}
 var dialogues = { 
 	"intro" : [
 "In the depths of Pukehinau, long after the cleaners went home, a single teacher is trapped, drowning in hundreds of assessments handed in at the last minute.",
@@ -20,25 +28,25 @@ Good luck.",
 	"alt_wrong_player2" : ["If this was a videogame, I would probably try pressing SPACE once I can move around."],
 	"push_or_pull" : ["You can't remember if you're supposed to push or pull this door, so it's probably better to leave it shut."],
 	"cant_stop" : ["Don't turn back now, Mr. Rodkiss needs your help!"],
-	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it all disappeared somehow..."],
+	"rodkiss_1" : ["Who sent you?... Oh, it's you... I've got so much work to mark, I wish it just all disappeared somehow..."],
 	"rodkiss_good" :[
-	"I finished already? I'm on fire today.",
+	"Oh, I'm finished already? I'm on fire today.",
 	"*You tell him what you did*",
 	"You did WHAT?",
-	"Why didn't I think of that? I don't think the moderators will be happy though.",
+	"Hmm, why didn't I think of that? I don't think the moderators will be happy though.",
 	".                                                          
 	..                                                        
 	...                                                           
-	At least I can go home. See ya tomorow!"],
+	Well, at least I can go home. See you tomorow!"],
 	"rodkiss_bad" : [
-"I finished already? I'm on fire today.",
+"Oh, I'm finished already? I'm on fire today.",
 "*You tell him what you did*",
 "You did WHAT?",
-"That server’s going to take a whole day to fix, I might get in trouble for that.",
+"... That server’s going to take a whole day to fix, I might get in trouble for that.",
 ".                                     
 ..                                      
 ...                                            
-At least I can go home. See ya tomorrow!"],
+Well, at least I can go home. See you tomorrow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
@@ -47,6 +55,7 @@ var max_characters = 10
 var text_stages = 1
 var current_stage = 0
 var times_stupid = 0
+var rodkiss_speed = 0.32
 var current_dialogue = "intro"
 
 
@@ -62,7 +71,7 @@ func _process(delta: float) -> void:
 	var characters_per_sec = 50
 	var character_limit = clamp(max_characters,50,150)
 	if $text.visible_ratio < 1 and state == "typing":
-		$text.visible_ratio += 1 * delta * (characters_per_sec)/(character_limit)
+		$text.visible_ratio += 1 * delta * rodkiss_speed * (characters_per_sec)/(character_limit)
 	elif $text.visible_ratio >= 1 and state != "finished":
 		state = "finished"
 		$"../../animation_player".play("pressE")
@@ -73,10 +82,20 @@ func _process(delta: float) -> void:
 func change_text():
 	if current_dialogue:
 		if state == "typing":
-			$text.visible_ratio = 1
-			$"../../song".stop()
+			if rodkiss_speed == 1:
+				$text.visible_ratio = 1
+				$"../../song".stop()
 		if state == "new_text" and not $"../../player".texting:
-			$"../../song".play()
+			if str(current_dialogue)[0] != "r":
+				$"../../song".play()
+				rodkiss_speed = 1
+			else:
+				$"../../rodkiss_audio".play()
+				if current_dialogue == "rodkiss_1":
+					rodkiss_speed = 0.32
+				else:
+					$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_2"]
+					$"../../rodkiss_audio".play()
 			$"../../animation_player2".play("enter_puzzle")
 			self.show()
 			$"../../player".texting = true
@@ -93,7 +112,6 @@ func change_text():
 			$text2.hide()
 		elif state == "finished":
 			if current_stage == text_stages:
-				$"../../animation_player2".play("exit_puzzle")
 				state = "new_text"
 				$text.visible_ratio = 0
 				$"../../player".move_texting = true
@@ -106,8 +124,9 @@ func change_text():
 					$"../../animation_player".play("fade_to_black")
 					await $"../../animation_player".animation_finished
 					get_tree().change_scene_to_file("res://prefabs/credit.tscn")
+				else:
+					$"../../animation_player2".play("exit_puzzle")
 			else:
-				$"../../song".play()
 				current_stage += 1
 				state = "typing"
 				$text.text = dialogues[current_dialogue][current_stage]
@@ -115,3 +134,29 @@ func change_text():
 				max_characters = dialogues[current_dialogue][current_stage].length()
 				$"../../animation_player".play("resetE")
 				$text2.hide()
+				if current_dialogue == "rodkiss_good" or current_dialogue == "rodkiss_bad":
+						if current_stage == 1:
+							$"../../song".play()
+							rodkiss_speed = 1
+						elif current_stage == 2:
+								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_3"]
+								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.99
+						elif current_stage == 3:
+							if current_dialogue == "rodkiss_good":
+								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_good"]
+								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
+							elif current_dialogue == "rodkiss_bad":
+								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_bad"]
+								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
+						elif current_stage == 4:
+								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_4"]
+								rodkiss_speed = 0.99
+								await get_tree().create_timer(2.2).timeout
+								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
+								
+				else:
+					$"../../song".play()
