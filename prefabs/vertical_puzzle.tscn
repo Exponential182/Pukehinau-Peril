@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_tghds"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="3_28ko8"]
 [ext_resource type="Texture2D" uid="uid://wa6okxa0m5tx" path="res://assets/Sprites/blue_background.svg" id="4_tghds"]
+[ext_resource type="AudioStream" uid="uid://b112mhuxuvmn8" path="res://assets/SFX/90741__bigdumbweirdo__orch-hit.wav" id="5_28ko8"]
+[ext_resource type="AudioStream" uid="uid://bdm88osw05fih" path="res://assets/SFX/fend.mp3" id="6_d1beo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vetud"]
 size = Vector2(118, 172)
@@ -47,6 +49,7 @@ height = 120
 
 [node name="vertical_puzzle" type="Node2D" unique_id=1792755049]
 light_mask = 2
+z_index = 500
 script = ExtResource("1_n2pnt")
 
 [node name="background" type="Sprite2D" parent="." unique_id=1906833742]
@@ -199,6 +202,12 @@ offset_bottom = 794.0
 theme_override_fonts/font = ExtResource("3_28ko8")
 theme_override_font_sizes/font_size = 128
 text = "Retry"
+
+[node name="combo" type="AudioStreamPlayer" parent="." unique_id=918790381]
+stream = ExtResource("5_28ko8")
+
+[node name="done" type="AudioStreamPlayer" parent="." unique_id=16361542]
+stream = ExtResource("6_d1beo")
 
 [connection signal="area_entered" from="canvas_layer/main_area" to="." method="_on_main_area_area_entered"]
 [connection signal="area_exited" from="canvas_layer/main_area" to="." method="_on_main_area_area_exited"]

@@ -26,7 +26,7 @@ var can_combo = true
 var combo_multiplier = 1
 var wait = 0
 var last_synced_value := 0.0
-
+var done_switch = false
 signal vertical_puzzle_completed
 
 func _ready() -> void:
@@ -36,7 +36,11 @@ func _ready() -> void:
 	vertical_puzzle_completed.connect(get_parent().vertical_puzzle_completed)
 
 func _physics_process(delta: float) -> void:
-	if progress_bar.value >=99.9:
+	if progress_bar.value >=99.9 and not done_switch:
+		$combo.stop()
+		$done.play()
+		done_switch = true
+		await get_tree().create_timer(2).timeout
 		vertical_puzzle_completed.emit()
 		self.queue_free()
 	elif progress_bar.value > 0.1:
@@ -67,11 +71,15 @@ func _physics_process(delta: float) -> void:
 		if min_win < win_position and win_position < max_win:
 			in_range = true
 		if in_range:
+			$combo.play()
+			$combo.pitch_scale = 0.5 + (combo * 0.1)
 			combo += 1
-			var progress_adition = combo_multiplier * 100 + 5
+			var progress_adition = combo_multiplier * 4 + 5
 			progress_bar.value += progress_adition
 			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
 		else:
+			$combo.play()
+			$combo.pitch_scale = 0.2
 			progress_bar.value -= 10
 			combo = 0
 			combo_multiplier = 1

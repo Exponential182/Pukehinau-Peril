@@ -89,6 +89,7 @@ func spawn_fadeout_particle(pos: Vector2, particle_scale: int):
 	self.add_child(spawned_particle)
 
 func spawn_pop_particle(pos: Vector2):
+	$pop.play()
 	var spawned_particle = pop_particle.instantiate()
 	spawned_particle.position = pos
 	spawned_particle.emitting = true

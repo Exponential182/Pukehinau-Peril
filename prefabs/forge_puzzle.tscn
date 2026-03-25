@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dn3o3iwc116lo" path="res://prefabs/forge_key_grid.tscn" id="3_6rt1s"]
 [ext_resource type="Texture2D" uid="uid://clttadga5eyab" path="res://assets/Sprites/wooden_plank_background.png" id="3_714mt"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="4_714mt"]
+[ext_resource type="AudioStream" uid="uid://bjdrtrtblk2ca" path="res://assets/SFX/mixkit-game-ball-tap-2073.wav" id="5_714mt"]
 
 [node name="forge_puzzle" type="Node2D" unique_id=2044794346]
 light_mask = 2
@@ -84,6 +85,9 @@ theme_override_fonts/font = ExtResource("4_714mt")
 theme_override_font_sizes/font_size = 42
 text = "Hold left click while hovering over squares to cut out the shape outlined in red. You can reset by pressing the buttons in the top right."
 autowrap_mode = 2
+
+[node name="pop" type="AudioStreamPlayer" parent="." unique_id=1388181561]
+stream = ExtResource("5_714mt")
 
 [connection signal="pressed" from="stage_1_button" to="." method="_stage_1_reset"]
 [connection signal="pressed" from="stage_2_button" to="." method="_stage_2_reset"]
