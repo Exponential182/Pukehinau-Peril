@@ -33,20 +33,20 @@ Good luck.",
 	"Oh, I'm finished already? I'm on fire today.",
 	"*You tell him what you did*",
 	"You did WHAT?",
-	"Why didn't I think of that? I don't think the moderators will be happy though.",
+	"Hmm, why didn't I think of that? I don't think the moderators will be happy though.",
 	".                                                          
 	..                                                        
 	...                                                           
-	Well, at least I can go home. See ya tomorow!"],
+	Well, at least I can go home. See you tomorow!"],
 	"rodkiss_bad" : [
 "Oh, I'm finished already? I'm on fire today.",
 "*You tell him what you did*",
 "You did WHAT?",
-"That server’s going to take a whole day to fix, I might get in trouble for that.",
+"... That server’s going to take a whole day to fix, I might get in trouble for that.",
 ".                                     
 ..                                      
 ...                                            
-Well, at least I can go home. See ya tomorrow!"],
+Well, at least I can go home. See you tomorrow!"],
 	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
 }
 var visible_ratio = 0
@@ -141,16 +141,22 @@ func change_text():
 						elif current_stage == 2:
 								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_3"]
 								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.99
 						elif current_stage == 3:
 							if current_dialogue == "rodkiss_good":
 								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_good"]
 								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
 							elif current_dialogue == "rodkiss_bad":
 								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_bad"]
 								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
 						elif current_stage == 4:
 								$"../../rodkiss_audio".stream = rodkiss_dialogues["rodkiss_4"]
-								await get_tree().create_timer(2).timeout
+								rodkiss_speed = 0.99
+								await get_tree().create_timer(2.2).timeout
 								$"../../rodkiss_audio".play()
+								rodkiss_speed = 0.32
+								
 				else:
 					$"../../song".play()
