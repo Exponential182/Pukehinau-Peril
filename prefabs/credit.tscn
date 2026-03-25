@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vbcn8qdf76f7" path="res://scripts/node_3d.gd" id="1_a8hd2"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="2_ou2ry"]
-[ext_resource type="AudioStream" uid="uid://bjasw1f42pqth" path="res://assets/SFX/Star_wars_theme.mp3" id="3_slcei"]
+[ext_resource type="AudioStream" uid="uid://bjasw1f42pqth" path="res://assets/Star_wars_theme.mp3" id="3_slcei"]
 [ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/Themes and fonts/buttons.tres" id="4_slcei"]
 
 [sub_resource type="Environment" id="Environment_a8hd2"]
@@ -132,14 +132,14 @@ libraries/ = SubResource("AnimationLibrary_slcei")
 [node name="audio_stream_player_3d" type="AudioStreamPlayer3D" parent="." unique_id=1485258671]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.4370365)
 stream = ExtResource("3_slcei")
-volume_db = -19.9
+volume_db = -24.0
 max_db = -0.5
 autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=29249742]
 
 [node name="label" type="Label" parent="UI" unique_id=1199819764]
-modulate = Color(1, 1, 1, 0.14509805)
+modulate = Color(1, 1, 1, 0.5019608)
 offset_left = 9.0
 offset_top = 7.0
 offset_right = 268.0
@@ -147,3 +147,12 @@ offset_bottom = 42.0
 theme = ExtResource("4_slcei")
 theme_override_font_sizes/font_size = 32
 text = "Hold SPACE to speed up"
+
+[node name="time" type="Label" parent="UI" unique_id=529432855]
+texture_filter = 1
+offset_left = 1557.0
+offset_top = 20.0
+offset_right = 1886.0
+offset_bottom = 158.0
+theme = ExtResource("4_slcei")
+horizontal_alignment = 1
