@@ -5,7 +5,8 @@
 
 [node name="forge_pop_sound" type="AudioStreamPlayer" unique_id=1764345483]
 stream = ExtResource("1_lcy78")
-volume_db = -10.0
+volume_db = -30.0
+pitch_scale = 3.0
 autoplay = true
 script = ExtResource("2_xdvdi")
 

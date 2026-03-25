@@ -47,6 +47,9 @@ func _ready():
 	camera.enabled = true
 	animation.play("brawn_idle")
 	$"../world/black".show()
+	$"../world/black1".show()
+	$"../world/black2".show()
+	$"../world/black3".show()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and not is_puzzling and not texting:

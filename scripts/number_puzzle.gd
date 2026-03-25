@@ -4,7 +4,6 @@ var random_number = []
 var stage = 1
 var can_input = false
 var number_buttons = []
-@onready var music_player = get_node("/root/main_level/music_player")
 
 signal number_puzzle_completed
 
@@ -91,7 +90,6 @@ func check_input() -> void:
 	if $line_edit.text == correct:
 		if stage == 8:
 			await play_win_melody()
-			music_player.volume_db = 0
 			$"../number_puzzle".modulate = Color.WHITE
 			$ending.show()
 		else:
@@ -100,7 +98,6 @@ func check_input() -> void:
 			stage += 1
 			await get_tree().create_timer(0.5).timeout
 			show_sequence()
-			music_player.volume_db += 1
 	else:
 		can_input = false
 		await flash_color(Color.RED)
@@ -129,12 +126,10 @@ func _on_button_unhover(btn: Button) -> void:
 
 
 func _on_good_pressed() -> void:
-	music_player.volume_db = -5
 	number_puzzle_completed.emit("good")
 	self.queue_free()
 
 
 func _on_bad_pressed() -> void:
-	music_player.volume_db = -5
 	number_puzzle_completed.emit("bad")
 	self.queue_free()
