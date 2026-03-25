@@ -9,7 +9,7 @@ signal number_puzzle_completed
 
 func _ready() -> void:
 	number_puzzle_completed.connect(get_parent().number_puzzle_completed)
-	for i in range(8):
+	for i in range(1):
 		random_number.append(randi_range(0, 9))
 	number_buttons = [$button10,$button,$button2,$button3,$button4,$button5,$button6,$button7,$button8,$button9]
 	var all_buttons = number_buttons + [$delete, $replay]
@@ -88,7 +88,7 @@ func check_input() -> void:
 	for i in range(stage):
 		correct += str(random_number[i])
 	if $line_edit.text == correct:
-		if stage == 8:
+		if stage == 1:
 			await play_win_melody()
 			$"../number_puzzle".modulate = Color.WHITE
 			$ending.show()

@@ -574,6 +574,7 @@ frame = 4
 frame_progress = 1.0
 
 [node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
+limit_enabled = false
 limit_left = 0
 limit_top = 0
 limit_right = 4224
