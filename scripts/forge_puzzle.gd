@@ -54,7 +54,7 @@ func stage_select(stage):
 		target_cells = $grid_handler/stage_4/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_4/grid_layer
 		key_map = $grid_handler/stage_4/base_layer
-		bounds = Vector2i(22, 14)
+		bounds = Vector2i(24, 14)
 		current_stage = 4
 		stage_scale = 4
 	
