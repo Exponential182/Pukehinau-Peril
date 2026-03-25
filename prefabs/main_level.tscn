@@ -29,6 +29,12 @@
 [ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/SFX/main_world.mp3" id="27_swjyn"]
 [ext_resource type="AudioStream" uid="uid://b73rd7ve67ty2" path="res://assets/SFX/Dialogue.mp3" id="28_a8o3y"]
 
+[sub_resource type="Gradient" id="Gradient_a8o3y"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3fpug"]
+gradient = SubResource("Gradient_a8o3y")
+
 [sub_resource type="Gradient" id="Gradient_csty0"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gvws3"]
@@ -1808,7 +1814,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1, 2),
 "transitions": PackedFloat32Array(2, 2, 2, 2, 2, 1, 1),
 "update": 0,
-"values": [0.55, 0.35, 0.55, 0.35, 0.55, 0.55, 0.4]
+"values": [0.55, 0.35, 0.55, 0.35, 0.55, 0.55, 0.3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1909,6 +1915,12 @@ energy = 0.36
 texture = ExtResource("1_v5q0s")
 texture_scale = 0.35
 
+[node name="light_swtich_light4" type="PointLight2D" parent="world/lights" unique_id=1382584579]
+position = Vector2(3170, -426)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
 [node name="light_swtich_light5" type="PointLight2D" parent="world/lights" unique_id=428742657]
 position = Vector2(2655, -424)
 energy = 0.36
@@ -1951,10 +1963,19 @@ energy = 0.36
 texture = ExtResource("1_v5q0s")
 texture_scale = 0.35
 
-[node name="light_swtich_light4" type="PointLight2D" parent="world/lights" unique_id=1382584579]
-position = Vector2(3170, -426)
+[node name="light_swtich_light12" type="PointLight2D" parent="world/lights" unique_id=1328122712]
+visible = false
+position = Vector2(1472, 155.99998)
+scale = Vector2(1.0714291, 480)
 energy = 0.36
-texture = ExtResource("1_v5q0s")
+texture = SubResource("GradientTexture1D_3fpug")
+texture_scale = 0.35
+
+[node name="light_swtich_light13" type="PointLight2D" parent="world/lights" unique_id=1274812570]
+position = Vector2(4015, 155.00002)
+scale = Vector2(3.5491102, 480)
+energy = 0.36
+texture = SubResource("GradientTexture1D_3fpug")
 texture_scale = 0.35
 
 [node name="point_light_2d" type="PointLight2D" parent="world/lights" unique_id=247042311]
@@ -2006,7 +2027,6 @@ tile_set = SubResource("TileSet_coybf")
 metadata/_edit_lock_ = true
 
 [node name="black" type="TileMapLayer" parent="world" unique_id=1565791124]
-visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2068,6 +2088,7 @@ rotation = -3.1415925
 
 [node name="door1" parent="world/doors" unique_id=939289659 instance=ExtResource("4_wy2mc")]
 position = Vector2(1472, 160)
+metadata/_edit_lock_ = true
 
 [node name="door2" parent="world/doors" unique_id=655292924 instance=ExtResource("11_iqjog")]
 position = Vector2(3904, 160)
@@ -2279,6 +2300,7 @@ position = Vector2(960, 540)
 [node name="player" parent="." unique_id=484850195 instance=ExtResource("6_jynbf")]
 z_index = 30
 position = Vector2(499, 383)
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1762167688]
 
