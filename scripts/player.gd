@@ -240,13 +240,9 @@ func box_puzzle_interaction(delta):
 
 func box_puzzle_started(body):
 	if body.name == "player":
-		$player_hitbox.shape.size = Vector2(92, 120)
-		$player_hitbox.position = Vector2(2, 2)
 		is_box_puzzle_active = true
 
 
 func box_puzzle_ended(body):
 	if body.name == "player":
-		$player_hitbox.shape.size = Vector2(92, 148)
-		$player_hitbox.position = Vector2(2, -9)
 		is_box_puzzle_active = false

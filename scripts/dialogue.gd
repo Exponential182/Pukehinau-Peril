@@ -47,7 +47,7 @@ Good luck.",
 ..                                      
 ...                                            
 Well, at least I can go home. See you tomorrow!"],
-	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back!)"]
+	"final_locked" : ["Looks like the door is locked from the inside, you need a key to enter. (Go back, you missed a door!)"]
 }
 var visible_ratio = 0
 var state = "new_text"
