@@ -4,9 +4,11 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		$"../../UI/dialogue".current_dialogue = rodkiss_level
 		$"../../UI/dialogue".change_text()
+		$animated_sprite_2d.play("sad")
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "player":
 		$"../../UI/dialogue".current_dialogue = null
 		$"../../UI/interact".hide()
+		$animated_sprite_2d.play("front")

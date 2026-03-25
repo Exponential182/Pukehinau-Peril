@@ -25,6 +25,9 @@ func number_puzzle_completed(ending):
 	$"../puzzle_areas/number_puzzle/area".disabled = true
 	puzzles["number_puzzle"][1] = true
 	$"../dialogue_areas/rodkiss".rodkiss_level = "rodkiss_" +str(ending)
+	$"../world/lights/p14_computer_lights/light_swtich_light11".color = Color("green")
+	$"../puzzle_areas/number_puzzle/light_swtich_light12".color = Color("green")
+	$"../dialogue_areas/rodkiss/animated_sprite_2d".play("front")
 func vertical_puzzle_completed():
 	$"../puzzle_areas/vertical_puzzle".modulate = Color("green")
 	fix_player()
