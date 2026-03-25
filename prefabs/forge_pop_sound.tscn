@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cxxgm2x27oq2p"]
+
+[ext_resource type="AudioStream" uid="uid://di1bp8gx8q1x" path="res://assets/SFX/tile_pop.ogg" id="1_lcy78"]
+[ext_resource type="Script" uid="uid://6dr41faqkbhb" path="res://scripts/forge_pop_sound.gd" id="2_xdvdi"]
+
+[node name="forge_pop_sound" type="AudioStreamPlayer" unique_id=1764345483]
+stream = ExtResource("1_lcy78")
+autoplay = true
+script = ExtResource("2_xdvdi")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -16,6 +16,7 @@ var current_stage = null
 @onready var fadeout_particle = preload("res://prefabs/forge_tile_fade.tscn")
 @onready var pop_particle = preload("res://prefabs/forge_tile_pop.tscn")
 @onready var forge_grid = preload("res://prefabs/forge_key_grid.tscn")
+@onready var pop_sound = preload("res://prefabs/forge_pop_sound.tscn")
 
 
 func stage_select(stage):
@@ -178,6 +179,7 @@ func _process(_delta):
 			if original_grid_value != live_grid_states[current_stage][base_layer_tile_pos.y][base_layer_tile_pos.x]:
 				spawn_pop_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale)
 				spawn_fadeout_particle(key_map.map_to_local(base_layer_tile_pos)*stage_scale, stage_scale)
+				add_child(pop_sound.instantiate())
 				var changes = dfs_tile_removal(live_grid_states[current_stage])
 				live_grid_states[current_stage] = changes[0]
 				for coordinate in changes[1]:
