@@ -36,7 +36,7 @@ var door_positions = {
 	
 }
 var door_limits = {
-	"door1" : Vector4(510,2430,0,-1220),
+	"door1" : Vector4(510,2430,0,-1408),
 	"door2" :Vector4(1824,3744,0,-1728),
 	"returndoor1" : Vector4(0,4224,1088,0),
 	"returndoor2" : Vector4(0,4224,1088,0),
@@ -46,7 +46,7 @@ func _ready():
 	puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brawn_idle")
-	#$"../world/black".show()
+	$"../world/black".show()
 	$"../world/black1".show()
 	$"../world/black2".show()
 	$"../world/black3".show()
