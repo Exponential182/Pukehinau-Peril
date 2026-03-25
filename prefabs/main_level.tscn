@@ -6,11 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_ofjge"]
 [ext_resource type="Texture2D" uid="uid://c10g6dp3erww0" path="res://assets/Sprites/white_square.png" id="2_v5q0s"]
 [ext_resource type="Texture2D" uid="uid://2t1ti1sb760a" path="res://assets/Sprites/Walls2(1).png" id="3_66lda"]
+[ext_resource type="Texture2D" uid="uid://c1bm2ne156rc1" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Bookshelf 1.png" id="3_jodgh"]
 [ext_resource type="Script" uid="uid://bymiu7nmmn11w" path="res://scripts/puzzles.gd" id="3_nja2s"]
+[ext_resource type="Texture2D" uid="uid://bse2vlhmwryiv" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Poster - Text.png" id="4_1bq8e"]
 [ext_resource type="PackedScene" uid="uid://jiapebxijfue" path="res://prefabs/door.tscn" id="4_wy2mc"]
+[ext_resource type="Texture2D" uid="uid://cbkqdtx83wipv" path="res://assets/School Daze Tileset/School Daze/Stage 2/Objects/Poster - Text.png" id="4_xm61b"]
 [ext_resource type="Texture2D" uid="uid://b7q5ealxi6j4u" path="res://assets/School Daze Tileset/School Daze/Stage 3/Tileset/Floors.png" id="5_66lda"]
 [ext_resource type="Texture2D" uid="uid://cd8casou218e3" path="res://assets/Sprites/Walls2(2).png" id="5_78yew"]
+[ext_resource type="Texture2D" uid="uid://dep8w47813mog" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Notice Board.png" id="5_xm61b"]
+[ext_resource type="Texture2D" uid="uid://cl8qtr0qxbbnv" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Small Table - Sideways.png" id="6_1bq8e"]
 [ext_resource type="PackedScene" uid="uid://uf8ol5pwve7" path="res://prefabs/player.tscn" id="6_jynbf"]
+[ext_resource type="Texture2D" uid="uid://pp58kkxsbgx6" path="res://assets/School Daze Tileset/School Daze/Stage 1/Objects/Chair - Side.png" id="7_xm61b"]
 [ext_resource type="Texture2D" uid="uid://q37wveoawnuo" path="res://assets/Sprites/windows.png" id="8_66ua4"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="8_fy1nc"]
 [ext_resource type="Texture2D" uid="uid://bnh21x8pxmr2e" path="res://assets/Sprites/chairs.png" id="8_swjyn"]
@@ -26,7 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ccljpja5rnax2" path="res://prefabs/box_puzzle.tscn" id="19_gvws3"]
 [ext_resource type="Script" uid="uid://3xusoi5h6dg0" path="res://scripts/rodkiss.gd" id="19_nuly2"]
 [ext_resource type="Texture2D" uid="uid://dyech36r42nt2" path="res://assets/Sprites/Brawns_Base.png" id="22_swjyn"]
-[ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/SFX/main_world.mp3" id="27_swjyn"]
+[ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/main_world.mp3" id="27_swjyn"]
 [ext_resource type="AudioStream" uid="uid://b73rd7ve67ty2" path="res://assets/SFX/Dialogue.mp3" id="28_a8o3y"]
 
 [sub_resource type="Gradient" id="Gradient_csty0"]
@@ -1897,66 +1903,6 @@ energy = 0.36
 texture = ExtResource("1_v5q0s")
 texture_scale = 0.35
 
-[node name="light_swtich_light2" type="PointLight2D" parent="world/lights" unique_id=1369809391]
-position = Vector2(2911, -809)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light3" type="PointLight2D" parent="world/lights" unique_id=854338097]
-position = Vector2(2913, -426)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light5" type="PointLight2D" parent="world/lights" unique_id=428742657]
-position = Vector2(2655, -424)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light6" type="PointLight2D" parent="world/lights" unique_id=314446691]
-position = Vector2(2798, -805)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light7" type="PointLight2D" parent="world/lights" unique_id=1576910578]
-position = Vector2(2798, -873)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light8" type="PointLight2D" parent="world/lights" unique_id=391113987]
-position = Vector2(3038, -1260)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light9" type="PointLight2D" parent="world/lights" unique_id=437436805]
-position = Vector2(3167, -1261)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light10" type="PointLight2D" parent="world/lights" unique_id=1699815293]
-position = Vector2(2912, -1260)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light11" type="PointLight2D" parent="world/lights" unique_id=1251719824]
-position = Vector2(3474, -1128)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light4" type="PointLight2D" parent="world/lights" unique_id=1382584579]
-position = Vector2(3170, -426)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
 [node name="point_light_2d" type="PointLight2D" parent="world/lights" unique_id=247042311]
 position = Vector2(1472.4799, -159.2908)
 rotation = 1.5707964
@@ -1968,6 +1914,190 @@ position = Vector2(3039.7559, -97.154816)
 rotation = 1.5707964
 scale = Vector2(2.9511373, 18.907404)
 texture = SubResource("GradientTexture2D_gvws3")
+
+[node name="p14_computer_lights" type="Node2D" parent="world/lights" unique_id=206043774]
+
+[node name="light_swtich_light2" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1369809391]
+position = Vector2(2911, -809)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light3" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=854338097]
+position = Vector2(2913, -426)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light5" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=428742657]
+position = Vector2(2655, -424)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light6" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=314446691]
+position = Vector2(2798, -805)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light7" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1576910578]
+position = Vector2(2798, -873)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light8" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=391113987]
+position = Vector2(3038, -1260)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light9" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=437436805]
+position = Vector2(3167, -1261)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light10" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1699815293]
+position = Vector2(2912, -1260)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light11" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1251719824]
+position = Vector2(3474, -1128)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="light_swtich_light4" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1382584579]
+position = Vector2(3170, -426)
+energy = 0.36
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="main_room_lights" type="Node2D" parent="world/lights" unique_id=1713812211]
+
+[node name="computer1" type="PointLight2D" parent="world/lights/main_room_lights" unique_id=551577115]
+position = Vector2(209.32895, 797.7368)
+energy = 0.8
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="computer2" type="PointLight2D" parent="world/lights/main_room_lights" unique_id=764081403]
+position = Vector2(750.02936, 668.10425)
+energy = 0.8
+texture = ExtResource("1_v5q0s")
+texture_scale = 0.35
+
+[node name="decorations_main_space" type="Node2D" parent="world" unique_id=451880098]
+z_index = 1
+texture_filter = 1
+scale = Vector2(2, 2)
+
+[node name="bookshelf1" type="Sprite2D" parent="world/decorations_main_space" unique_id=2010931921]
+texture_repeat = 2
+position = Vector2(352, 120.5)
+scale = Vector2(2, 2)
+texture = ExtResource("3_jodgh")
+region_enabled = true
+region_rect = Rect2(0, 0, 52, 25)
+
+[node name="poster1" type="Sprite2D" parent="world/decorations_main_space" unique_id=1414684810]
+position = Vector2(24, 64)
+scale = Vector2(4, 4)
+texture = ExtResource("4_1bq8e")
+
+[node name="poster2" type="Sprite2D" parent="world/decorations_main_space" unique_id=294871614]
+position = Vector2(808, 64)
+scale = Vector2(4, 4)
+texture = ExtResource("4_1bq8e")
+
+[node name="poster3" type="Sprite2D" parent="world/decorations_main_space" unique_id=1772430210]
+position = Vector2(1036, 60)
+rotation = -1.5707964
+scale = Vector2(4, 4)
+texture = ExtResource("4_1bq8e")
+
+[node name="poster4" type="Sprite2D" parent="world/decorations_main_space" unique_id=1457316443]
+position = Vector2(1636, 64)
+rotation = 1.5707964
+scale = Vector2(4, 4)
+texture = ExtResource("4_xm61b")
+
+[node name="noticeboard1" type="Sprite2D" parent="world/decorations_main_space" unique_id=141317507]
+position = Vector2(912, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("5_xm61b")
+
+[node name="noticeboard2" type="Sprite2D" parent="world/decorations_main_space" unique_id=622522748]
+position = Vector2(1176, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("5_xm61b")
+
+[node name="noticeboard3" type="Sprite2D" parent="world/decorations_main_space" unique_id=1467940980]
+position = Vector2(1508, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("5_xm61b")
+flip_h = true
+
+[node name="table1" type="Sprite2D" parent="world/decorations_main_space" unique_id=146093603]
+texture_repeat = 2
+position = Vector2(100, 408)
+scale = Vector2(4, 4)
+texture = ExtResource("6_1bq8e")
+region_enabled = true
+region_rect = Rect2(0, 0, 18, 15)
+
+[node name="table2" type="Sprite2D" parent="world/decorations_main_space" unique_id=614808050]
+texture_repeat = 2
+position = Vector2(331, 482)
+scale = Vector2(4, 4)
+texture = ExtResource("6_1bq8e")
+region_enabled = true
+region_rect = Rect2(0, 0, 18, 15)
+
+[node name="table3" type="Sprite2D" parent="world/decorations_main_space" unique_id=895827983]
+texture_repeat = 2
+position = Vector2(367, 342)
+scale = Vector2(4, 4)
+texture = ExtResource("6_1bq8e")
+region_enabled = true
+region_rect = Rect2(0, 0, 18, 15)
+
+[node name="chair_side1" type="Sprite2D" parent="world/decorations_main_space" unique_id=1295541849]
+position = Vector2(44, 408.00003)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+
+[node name="chair_side2" type="Sprite2D" parent="world/decorations_main_space" unique_id=1955789830]
+position = Vector2(156, 408.00003)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+flip_h = true
+
+[node name="chair_side3" type="Sprite2D" parent="world/decorations_main_space" unique_id=510798852]
+position = Vector2(275, 482)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+
+[node name="chair_side4" type="Sprite2D" parent="world/decorations_main_space" unique_id=135041062]
+position = Vector2(387, 482)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+flip_h = true
+
+[node name="chair_side5" type="Sprite2D" parent="world/decorations_main_space" unique_id=1548521199]
+position = Vector2(311, 342)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+
+[node name="chair_side6" type="Sprite2D" parent="world/decorations_main_space" unique_id=183584516]
+position = Vector2(423, 342)
+scale = Vector2(3, 3)
+texture = ExtResource("7_xm61b")
+flip_h = true
 
 [node name="tilemap" type="TileMapLayer" parent="world" unique_id=1672345720]
 texture_filter = 1
@@ -1987,7 +2117,7 @@ metadata/_edit_lock_ = true
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAArAPL/BAADAAYAAAArAPP/BAADAAYAAAA4AOr/BAADAAYAAAApAOz/BAADAAMAAAA2AO7/BAABAAYAAAA=")
+tile_map_data = PackedByteArray("AAArAPL/BAADAAYAAAArAPP/BAADAAYAAAA4AOr/BAADAAYAAAApAOz/BAADAAMAAAA2AO7/BAABAAYAAAALAAoABAADAAYAAAADAAwABAABAAYAAAA=")
 tile_set = SubResource("TileSet_gklso")
 metadata/_edit_lock_ = true
 
@@ -2006,6 +2136,7 @@ tile_set = SubResource("TileSet_coybf")
 metadata/_edit_lock_ = true
 
 [node name="black" type="TileMapLayer" parent="world" unique_id=1565791124]
+visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2033,6 +2164,7 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="black1" type="TileMapLayer" parent="world" unique_id=1685122871]
+visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2041,6 +2173,7 @@ tile_set = SubResource("TileSet_swjyn")
 metadata/_edit_lock_ = true
 
 [node name="black2" type="TileMapLayer" parent="world" unique_id=1597144420]
+visible = false
 z_index = 50
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2049,6 +2182,7 @@ tile_set = SubResource("TileSet_swjyn")
 metadata/_edit_lock_ = true
 
 [node name="black3" type="TileMapLayer" parent="world" unique_id=854957417]
+visible = false
 z_index = 5
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2275,6 +2409,7 @@ z_index = 30
 position = Vector2(499, 383)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1762167688]
+visible = false
 
 [node name="dialogue_background2" type="Sprite2D" parent="UI" unique_id=1608522195]
 visible = false

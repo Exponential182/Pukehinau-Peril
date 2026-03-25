@@ -83,11 +83,10 @@ position = Vector2(1344, 576)
 position = Vector2(1344, 960)
 
 [node name="reset_button" type="Button" parent="." unique_id=1963945164]
-visible = false
-offset_left = -28.0
-offset_top = 85.0
-offset_right = 220.0
-offset_bottom = 168.0
+offset_left = 924.0
+offset_top = 80.0
+offset_right = 1172.0
+offset_bottom = 163.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
 disabled = true
