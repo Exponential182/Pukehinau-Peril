@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d3iert4qud60u" path="res://assets/Sprites/Brawn_change.png" id="6_rgeog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
-size = Vector2(92, 100)
+size = Vector2(88, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0anbp"]
 atlas = ExtResource("2_u51tk")
@@ -562,7 +562,7 @@ collision_layer = 3
 script = ExtResource("1_r66lb")
 
 [node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1464497376]
-position = Vector2(2, -9)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_su5do")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="." unique_id=1178543682]
@@ -574,7 +574,6 @@ frame = 4
 frame_progress = 1.0
 
 [node name="player_camera" type="Camera2D" parent="." unique_id=1241364279]
-limit_enabled = false
 limit_left = 0
 limit_top = 0
 limit_right = 4224
