@@ -2,9 +2,55 @@
 
 [ext_resource type="Script" uid="uid://cle6oabqydtew" path="res://scripts/menu_script.gd" id="1_1n3ne"]
 [ext_resource type="AudioStream" uid="uid://cu5k8e5jcu4n2" path="res://assets/menu_music.mp3" id="2_eib0j"]
+[ext_resource type="Texture2D" uid="uid://udk2h2jt2r5n" path="res://assets/drawnMrRodkiss.png" id="2_fuj45"]
+[ext_resource type="Theme" uid="uid://be1y2sbetlsc3" path="res://assets/Themes and fonts/buttons.tres" id="4_ndc6x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n3ne"]
 font_size = 50
+
+[sub_resource type="Gradient" id="Gradient_ndc6x"]
+offsets = PackedFloat32Array(0, 0.9892704)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u8y11"]
+gradient = SubResource("Gradient_ndc6x")
+
+[sub_resource type="Animation" id="Animation_ifsy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drawn_mr_rodkiss3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5bm13"]
+resource_name = "new_animation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drawn_mr_rodkiss3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e886g"]
+_data = {
+&"RESET": SubResource("Animation_ifsy8"),
+&"new_animation": SubResource("Animation_5bm13")
+}
 
 [node name="main_menu" type="Control" unique_id=1679809929]
 layout_mode = 3
@@ -18,29 +64,29 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.38039216, 0.84313726, 1, 0.8039216)
 
-[node name="title" type="Label" parent="." unique_id=714351596]
-layout_mode = 0
-offset_left = 710.0
-offset_top = 112.0
-offset_right = 1210.0
-offset_bottom = 262.0
-text = "Pukehinau Peril"
-label_settings = SubResource("LabelSettings_1n3ne")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="drawn_mr_rodkiss2" type="Sprite2D" parent="." unique_id=1467451580]
+position = Vector2(6061.68, 540.7)
+scale = Vector2(3.415, 0.382)
+texture = ExtResource("2_fuj45")
+region_rect = Rect2(-466.545, 0, 0, 0)
+
+[node name="drawn_mr_rodkiss" type="Sprite2D" parent="." unique_id=1413608485]
+position = Vector2(1218, 540)
+scale = Vector2(0.381, 0.381)
+texture = ExtResource("2_fuj45")
 
 [node name="credits" type="Label" parent="." unique_id=427827721]
 layout_mode = 0
-offset_left = 619.0
-offset_top = 506.0
-offset_right = 1282.0
-offset_bottom = 863.0
+offset_left = 8.0
+offset_top = 321.2
+offset_right = 671.0
+offset_bottom = 678.197
+theme = ExtResource("4_ndc6x")
 text = "Mr. Rodkiss voicelines
 Headphones/Audio
 STRONGLY RECOMMENDED
 "
 label_settings = SubResource("LabelSettings_1n3ne")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="start_button" type="Button" parent="." unique_id=1787614412]
@@ -67,6 +113,25 @@ stream = ExtResource("2_eib0j")
 volume_db = 8.0
 autoplay = true
 parameters/looping = true
+
+[node name="label" type="Label" parent="." unique_id=279118115]
+layout_mode = 0
+offset_left = -176.0
+offset_top = 9.0
+offset_right = 1182.0
+offset_bottom = 284.0
+theme = ExtResource("4_ndc6x")
+theme_override_font_sizes/font_size = 180
+text = "Pukehinau Peril"
+horizontal_alignment = 1
+
+[node name="drawn_mr_rodkiss3" type="Sprite2D" parent="." unique_id=743503933]
+position = Vector2(978.99994, 546.49994)
+scale = Vector2(31, 17.703125)
+texture = SubResource("GradientTexture2D_u8y11")
+
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=142448249]
+libraries/ = SubResource("AnimationLibrary_e886g")
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="credit_replay" to="." method="_on_credit_replay_pressed"]

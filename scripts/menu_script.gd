@@ -1,6 +1,7 @@
 extends Control
 
 func _ready() -> void:
+	$animation_player.play("new_animation")
 	if Global.game_complete:
 		$credit_replay.show()
 
