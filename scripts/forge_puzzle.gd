@@ -26,7 +26,7 @@ func stage_select(stage):
 		target_cells = $grid_handler/stage_1/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_1/grid_layer
 		key_map = $grid_handler/stage_1/base_layer
-		bounds = Vector2i(24, 14)
+		bounds = Vector2i(22, 14)
 		current_stage = 1
 		stage_scale = 4
 		$tutorial.show()
@@ -36,7 +36,7 @@ func stage_select(stage):
 		target_cells = $grid_handler/stage_2/comparison_layer.get_used_cells()
 		grid_map = $grid_handler/stage_2/grid_layer
 		key_map = $grid_handler/stage_2/base_layer
-		bounds = Vector2i(22, 14)
+		bounds = Vector2i(24, 14)
 		current_stage = 2
 		stage_scale = 4
 	

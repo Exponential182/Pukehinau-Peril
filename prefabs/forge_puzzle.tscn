@@ -75,7 +75,7 @@ theme_override_font_sizes/font_size = 100
 text = "YOU WIN!"
 
 [node name="tutorial" type="Label" parent="." unique_id=1992936829]
-z_index = 110
+z_index = 200
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 713.0
