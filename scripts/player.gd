@@ -43,6 +43,7 @@ var door_limits = {
 }
 signal summon_puzzle
 func _ready():
+	Global.game_active = true
 	puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brawn_idle")

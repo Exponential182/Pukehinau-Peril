@@ -3,6 +3,11 @@ extends Node3D
 var transitioning := false
 var speed = 2
 var can_speed = true
+
+func _ready():
+	Global.game_active = false
+	$UI/time.text = Global.time_string()
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("smack") and can_speed:
 		speed = 2
