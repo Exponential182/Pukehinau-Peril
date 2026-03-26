@@ -36,10 +36,10 @@
 [ext_resource type="PackedScene" uid="uid://ccljpja5rnax2" path="res://prefabs/box_puzzle.tscn" id="19_gvws3"]
 [ext_resource type="Texture2D" uid="uid://dcan3uommq3ko" path="res://assets/Sprites/Inside_C2.png" id="19_ki521"]
 [ext_resource type="Script" uid="uid://3xusoi5h6dg0" path="res://scripts/rodkiss.gd" id="19_nuly2"]
-[ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/main_world.mp3" id="27_swjyn"]
 [ext_resource type="AudioStream" uid="uid://b73rd7ve67ty2" path="res://assets/SFX/Dialogue.mp3" id="28_a8o3y"]
 [ext_resource type="Texture2D" uid="uid://bh0m0eeo0ffj7" path="res://assets/MrRodkiss_spriteset.png" id="30_ki521"]
 [ext_resource type="AudioStream" uid="uid://cpoo8s6skavbb" path="res://assets/SFX/pukehinau_peril_audio/whosentyou-[AudioTrimmer.com].mp3" id="37_ki521"]
+[ext_resource type="AudioStream" uid="uid://bla6a1o6oy85y" path="res://assets/SFX/main_world.mp3" id="38_ccsyf"]
 
 [sub_resource type="Gradient" id="Gradient_csty0"]
 
@@ -3252,23 +3252,11 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("UI/dialogue_background2:visible")
+tracks/4/path = NodePath("UI/dialogue_background3:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("UI/dialogue_background2:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(-0.033333335),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
@@ -3309,26 +3297,14 @@ resource_name = "fade_to_black"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UI/dialogue_background2:modulate")
+tracks/0/path = NodePath("UI/dialogue_background3:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UI/dialogue_background2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_v5q0s"]
@@ -3403,6 +3379,21 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ccsyf"]
+resource_name = "un_fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/dialogue_background3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66lda"]
 _data = {
 &"RESET": SubResource("Animation_2237u"),
@@ -3411,7 +3402,8 @@ _data = {
 &"fade_to_black": SubResource("Animation_swjyn"),
 &"lights": SubResource("Animation_v5q0s"),
 &"pressE": SubResource("Animation_iqjog"),
-&"resetE": SubResource("Animation_csty0")
+&"resetE": SubResource("Animation_csty0"),
+&"un_fade_to_black": SubResource("Animation_ccsyf")
 }
 
 [node name="main_level" type="Node2D" unique_id=1141564264]
@@ -4002,7 +3994,13 @@ position = Vector2(367, 381)
 [node name="UI" type="CanvasLayer" parent="." unique_id=1762167688]
 
 [node name="dialogue_background2" type="Sprite2D" parent="UI" unique_id=1608522195]
-visible = false
+modulate = Color(0, 0, 0, 0)
+position = Vector2(960, 578.635)
+scale = Vector2(6.341, 1347.304)
+texture = SubResource("GradientTexture1D_atu1i")
+metadata/_edit_lock_ = true
+
+[node name="dialogue_background3" type="Sprite2D" parent="UI" unique_id=236520858]
 position = Vector2(960, 578.635)
 scale = Vector2(6.341, 1347.304)
 texture = SubResource("GradientTexture1D_atu1i")
@@ -4062,8 +4060,11 @@ libraries/ = SubResource("AnimationLibrary_66lda")
 [node name="animation_player2" type="AnimationPlayer" parent="." unique_id=740039442]
 libraries/ = SubResource("AnimationLibrary_66lda")
 
+[node name="animation_player3" type="AnimationPlayer" parent="." unique_id=769182212]
+libraries/ = SubResource("AnimationLibrary_66lda")
+
 [node name="music_player" type="AudioStreamPlayer" parent="." unique_id=1940725622]
-stream = ExtResource("27_swjyn")
+stream = ExtResource("38_ccsyf")
 volume_db = -10.0
 autoplay = true
 parameters/looping = true

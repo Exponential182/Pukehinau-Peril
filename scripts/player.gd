@@ -47,6 +47,7 @@ func _ready():
 	puzzle_camera.enabled = false
 	camera.enabled = true
 	animation.play("brawn_idle")
+	$"../animation_player3".play("un_fade_to_black")
 	$"../world/black".show()
 	$"../world/black1".show()
 	$"../world/black2".show()

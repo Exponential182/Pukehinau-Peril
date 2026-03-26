@@ -168,9 +168,11 @@ offset_left = 864.0
 offset_top = 654.0
 offset_right = 1829.0
 offset_bottom = 975.0
+theme_override_constants/line_spacing = -12
 theme_override_fonts/font = ExtResource("3_28ko8")
-theme_override_font_sizes/font_size = 64
-text = "Press space at the right time to charge the lights, higher combos increase score and speed, but waiting too long quickly decreases the score."
+theme_override_font_sizes/font_size = 62
+text = "After clicking START, Press SPACE when the icon is inside the green area to charge the lights. Correctly timed presses increase score and speed, but waiting too long or wrong presses quickly decreases the score."
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="sprite_2d" type="Sprite2D" parent="." unique_id=1258209718]
