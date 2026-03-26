@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	if state == "playing":
 		if progress_bar.value > 0.1:
 			progress_bar.value -= wait * 0.03 * (1+0.1*wait)
-			$lightbulb/point_light_2d.energy = progress_bar.value/100
+			$lightbulb/point_light_2d.energy = 0.5 + progress_bar.value/100
 			$lightbulb/point_light_2d.scale = Vector2(1 + progress_bar.value/100,1 + progress_bar.value/100)
 			pass
 		else:
@@ -101,7 +101,7 @@ func shake(strength: float, duration: float):
 		original_offset = Vector2(1470,530) + offset
 
 func color_flash(color:Color):
-	$lightbulb/point_light_2d.energy = progress_bar.value/100
+	$lightbulb/point_light_2d.energy = 0.5 + progress_bar.value/100
 	$lightbulb/point_light_2d.color = color
 	await get_tree().create_timer(0.5).timeout
 	$lightbulb/point_light_2d.color = "white"

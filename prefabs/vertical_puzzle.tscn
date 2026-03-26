@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bbnt6fg25w0fw"]
 
 [ext_resource type="Script" uid="uid://c21glppvsl2il" path="res://scripts/vertical_puzzle.gd" id="1_n2pnt"]
-[ext_resource type="Texture2D" uid="uid://bu1rm3vweuivn" path="res://assets/lightswitchui_unlighted.png" id="2_d1beo"]
 [ext_resource type="Texture2D" uid="uid://s77k0b2l8vlc" path="res://icon.svg" id="2_tghds"]
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="3_28ko8"]
+[ext_resource type="Texture2D" uid="uid://b5a12unllc0hu" path="res://assets/Sprites/lightswitchui_unlighted.png" id="4_1aoew"]
 [ext_resource type="AudioStream" uid="uid://brjhg6hm8530v" path="res://assets/SFX/vertical_puzze(1).mp3" id="5_d1beo"]
 [ext_resource type="AudioStream" uid="uid://bdm88osw05fih" path="res://assets/SFX/fend.mp3" id="6_d1beo"]
 [ext_resource type="Texture2D" uid="uid://btrf318od7huf" path="res://assets/Sprites/circle light.webp" id="7_1aoew"]
+[ext_resource type="Texture2D" uid="uid://c77sfbegvncyv" path="res://assets/Sprites/lightswitchui_lighted(2).png" id="7_6qprv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vetud"]
 size = Vector2(118, 172)
@@ -54,6 +55,7 @@ z_index = 500
 script = ExtResource("1_n2pnt")
 
 [node name="main_light" type="DirectionalLight2D" parent="." unique_id=575195253]
+visible = false
 position = Vector2(-513, -580)
 energy = 0.55
 blend_mode = 1
@@ -185,9 +187,9 @@ scale = Vector2(34.695, 34.695)
 text = "Good"
 
 [node name="lightswitchui_unlighted" type="Sprite2D" parent="." unique_id=440627082]
+texture_filter = 1
 position = Vector2(960, 540.075)
-scale = Vector2(4, 3.9994447)
-texture = ExtResource("2_d1beo")
+texture = ExtResource("4_1aoew")
 
 [node name="Tutorial" type="Label" parent="." unique_id=1443259148]
 z_index = 120
@@ -217,16 +219,17 @@ stream = ExtResource("5_d1beo")
 stream = ExtResource("6_d1beo")
 
 [node name="lightbulb" type="Node2D" parent="." unique_id=824255658]
-position = Vector2(1044, 272)
+position = Vector2(1043, 375.555)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="lightbulb" unique_id=1829736672]
-scale = Vector2(1.7593124, 1.5177504)
-texture = ExtResource("2_tghds")
+modulate = Color(0.5176471, 0.5176471, 0.5176471, 1)
+scale = Vector2(4, 3.452)
+texture = ExtResource("7_6qprv")
+offset = Vector2(-19.91, 49.665)
 
 [node name="point_light_2d" type="PointLight2D" parent="lightbulb" unique_id=217800484]
-scale = Vector2(2, 2)
-energy = 0.1
+position = Vector2(7.155, -71.455)
 texture = ExtResource("7_1aoew")
 
 [connection signal="pressed" from="canvas_layer/fail/button" to="." method="_on_button_pressed"]
