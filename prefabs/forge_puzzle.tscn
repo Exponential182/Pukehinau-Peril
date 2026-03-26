@@ -81,8 +81,8 @@ offset_top = 10.0
 offset_right = 713.0
 offset_bottom = 299.0
 theme_override_fonts/font = ExtResource("4_714mt")
-theme_override_font_sizes/font_size = 42
-text = "Hold left click while hovering over squares to cut out the shape outlined in red. You can reset by pressing the buttons in the top right."
+theme_override_font_sizes/font_size = 41
+text = "Hold left click while hovering over dark squares to cut out the shape outlined in red. You can reset by pressing the buttons in the top right."
 autowrap_mode = 2
 
 [connection signal="pressed" from="stage_1_button" to="." method="_stage_1_reset"]
