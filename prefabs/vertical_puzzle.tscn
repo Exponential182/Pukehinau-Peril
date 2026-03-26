@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cp2y2i6geeae8" path="res://assets/Themes and fonts/Jersey10-Regular.ttf" id="3_28ko8"]
 [ext_resource type="AudioStream" uid="uid://brjhg6hm8530v" path="res://assets/SFX/vertical_puzze(1).mp3" id="5_d1beo"]
 [ext_resource type="AudioStream" uid="uid://bdm88osw05fih" path="res://assets/SFX/fend.mp3" id="6_d1beo"]
+[ext_resource type="Texture2D" uid="uid://btrf318od7huf" path="res://assets/Sprites/circle light.webp" id="7_1aoew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vetud"]
 size = Vector2(118, 172)
@@ -52,12 +53,38 @@ light_mask = 2
 z_index = 500
 script = ExtResource("1_n2pnt")
 
-[node name="lightswitchui_unlighted" type="Sprite2D" parent="." unique_id=440627082]
-position = Vector2(960, 540.075)
-scale = Vector2(4, 3.9994447)
-texture = ExtResource("2_d1beo")
+[node name="main_light" type="DirectionalLight2D" parent="." unique_id=575195253]
+position = Vector2(-513, -580)
+energy = 0.55
+blend_mode = 1
+shadow_enabled = true
 
 [node name="canvas_layer" type="CanvasLayer" parent="." unique_id=184093748]
+
+[node name="fail" type="Node2D" parent="canvas_layer" unique_id=1918243977]
+
+[node name="Tutorial" type="Label" parent="canvas_layer/fail" unique_id=2059556525]
+visible = false
+z_index = 120
+offset_left = 518.0
+offset_top = 436.0
+offset_right = 1548.0
+offset_bottom = 725.0
+theme_override_fonts/font = ExtResource("3_28ko8")
+theme_override_font_sizes/font_size = 64
+text = "You failed :("
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="button" type="Button" parent="canvas_layer/fail" unique_id=364393041]
+z_index = 186
+offset_left = 1343.0
+offset_top = 351.0
+offset_right = 1805.0
+offset_bottom = 560.0
+theme_override_fonts/font = ExtResource("3_28ko8")
+theme_override_font_sizes/font_size = 128
+text = "Start"
 
 [node name="main_area" type="Area2D" parent="canvas_layer" unique_id=818856713]
 position = Vector2(60, 536)
@@ -68,12 +95,6 @@ visible = false
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_vetud")
 
-[node name="Sprite2D" type="Sprite2D" parent="canvas_layer" unique_id=1829736672]
-visible = false
-position = Vector2(11, 540)
-scale = Vector2(1.003, 1.348)
-texture = ExtResource("2_tghds")
-
 [node name="win_area" type="Area2D" parent="canvas_layer" unique_id=242481353]
 position = Vector2(184, 392.88)
 metadata/_edit_group_ = true
@@ -83,7 +104,8 @@ visible = false
 shape = SubResource("RectangleShape2D_uvhsu")
 
 [node name="Sprite2D" type="Sprite2D" parent="canvas_layer/win_area" unique_id=1997258581]
-scale = Vector2(1, 0.140625)
+position = Vector2(52.499996, 0)
+scale = Vector2(1.8671875, 0.140625)
 texture = ExtResource("2_tghds")
 
 [node name="score" type="Node2D" parent="canvas_layer" unique_id=1017932353]
@@ -162,6 +184,11 @@ offset_bottom = 443.0
 scale = Vector2(34.695, 34.695)
 text = "Good"
 
+[node name="lightswitchui_unlighted" type="Sprite2D" parent="." unique_id=440627082]
+position = Vector2(960, 540.075)
+scale = Vector2(4, 3.9994447)
+texture = ExtResource("2_d1beo")
+
 [node name="Tutorial" type="Label" parent="." unique_id=1443259148]
 z_index = 120
 offset_left = 864.0
@@ -183,39 +210,27 @@ rotation = 1.5707964
 scale = Vector2(0.7869468, 1.9704674)
 texture = SubResource("GradientTexture2D_d1beo")
 
-[node name="fail" type="Node2D" parent="." unique_id=1918243977]
-
-[node name="Tutorial" type="Label" parent="fail" unique_id=2059556525]
-visible = false
-z_index = 120
-offset_left = 518.0
-offset_top = 436.0
-offset_right = 1548.0
-offset_bottom = 725.0
-theme_override_fonts/font = ExtResource("3_28ko8")
-theme_override_font_sizes/font_size = 64
-text = "You failed :("
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="button" type="Button" parent="fail" unique_id=364393041]
-z_index = 186
-offset_left = 1343.0
-offset_top = 351.0
-offset_right = 1805.0
-offset_bottom = 560.0
-theme_override_fonts/font = ExtResource("3_28ko8")
-theme_override_font_sizes/font_size = 128
-text = "Start"
-
 [node name="combo" type="AudioStreamPlayer" parent="." unique_id=918790381]
 stream = ExtResource("5_d1beo")
 
 [node name="done" type="AudioStreamPlayer" parent="." unique_id=16361542]
 stream = ExtResource("6_d1beo")
 
+[node name="lightbulb" type="Node2D" parent="." unique_id=824255658]
+position = Vector2(1044, 272)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="lightbulb" unique_id=1829736672]
+scale = Vector2(1.7593124, 1.5177504)
+texture = ExtResource("2_tghds")
+
+[node name="point_light_2d" type="PointLight2D" parent="lightbulb" unique_id=217800484]
+scale = Vector2(2, 2)
+energy = 0.1
+texture = ExtResource("7_1aoew")
+
+[connection signal="pressed" from="canvas_layer/fail/button" to="." method="_on_button_pressed"]
 [connection signal="area_entered" from="canvas_layer/main_area" to="." method="_on_main_area_area_entered"]
 [connection signal="area_exited" from="canvas_layer/main_area" to="." method="_on_main_area_area_exited"]
 [connection signal="timeout" from="canvas_layer/combo_timer" to="." method="_on_combo_timer_timeout"]
 [connection signal="timeout" from="canvas_layer/speed_timer" to="." method="_on_speed_timer_timeout"]
-[connection signal="pressed" from="fail/button" to="." method="_on_button_pressed"]

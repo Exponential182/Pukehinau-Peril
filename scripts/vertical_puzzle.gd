@@ -1,7 +1,7 @@
 extends Node2D
 @onready var win_area = $canvas_layer/win_area
 @onready var progress_bar = $canvas_layer/bar/ProgressBar
-@onready var bar = $canvas_layer/bar
+@onready var bar = $lightbulb
 @onready var offset = $canvas_layer/bar/ProgressBar.position
 @onready var combo_counter = $canvas_layer/combo_counter
 @onready var combo_text = $canvas_layer/combo_counter/combo_count
@@ -38,16 +38,18 @@ func _physics_process(delta: float) -> void:
 	if state == "playing":
 		if progress_bar.value > 0.1:
 			progress_bar.value -= wait * 0.03 * (1+0.1*wait)
+			$lightbulb/point_light_2d.energy = progress_bar.value/100
+			$lightbulb/point_light_2d.scale = Vector2(1 + progress_bar.value/100,1 + progress_bar.value/100)
 			pass
 		else:
-			$fail.show()
+			$canvas_layer/fail.show()
 			$canvas_layer/combo_counter.hide()
 			state = "paused"
 			can_combo = false
 		if shake_timer > 0:
 			shake_timer -= delta
-			#bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
-			#bar.rotation_degrees = 0 + randf_range(-1, 1) * (1.0/combo_multiplier) * shake_strength * (shake_timer / shake_duration)
+			bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
+			bar.rotation_degrees = 0 + randf_range(-1, 1) * (1.0/combo_multiplier) * shake_strength * (shake_timer / shake_duration)
 		else:
 			offset = Vector2.ZERO
 		win_area.position.y += speed * direction
@@ -66,6 +68,7 @@ func _physics_process(delta: float) -> void:
 			if min_win < win_position and win_position < max_win:
 				in_range = true
 			if in_range:
+				color_flash(Color("green"))
 				$combo.play()
 				$combo.pitch_scale = 0.5 + (combo * 0.1)
 				combo += 1
@@ -80,6 +83,7 @@ func _physics_process(delta: float) -> void:
 					vertical_puzzle_completed.emit()
 					self.queue_free()
 			else:
+				color_flash(Color("red"))
 				$combo.play()
 				$combo.pitch_scale = 0.35
 				progress_bar.value -= 10
@@ -96,6 +100,12 @@ func shake(strength: float, duration: float):
 		shake_timer = duration
 		original_offset = Vector2(1470,530) + offset
 
+func color_flash(color:Color):
+	$lightbulb/point_light_2d.energy = progress_bar.value/100
+	$lightbulb/point_light_2d.color = color
+	await get_tree().create_timer(0.5).timeout
+	$lightbulb/point_light_2d.color = "white"
+	
 func _on_combo_timer_timeout() -> void:
 	can_combo = true
 
@@ -105,9 +115,10 @@ func _on_speed_timer_timeout() -> void:
 
 func _on_button_pressed() -> void:
 	state = "playing"
-	$fail.hide()
+	$canvas_layer/fail.hide()
 	$canvas_layer/combo_counter.show()
-	$fail/Tutorial.show()
+	$canvas_layer/fail/Tutorial.show()
+	$canvas_layer/fail/button.text = "Retry"
 	progress_bar.value = 20
 	wait = 0
 	combo = 0
