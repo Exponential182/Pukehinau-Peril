@@ -39,7 +39,6 @@ func vertical_puzzle_completed():
 	$"../animation_player2".play("exit_puzzle")
 func forge_puzzle_completed():
 	$"../world/doors/door2".is_enterable = true
-	$"../world/doors/door2/sprite_2d".hide()
 	$"../puzzle_areas/forge_puzzle".modulate = Color("green")
 	fix_player()
 	puzzles["forge_puzzle"][1] = true

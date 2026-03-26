@@ -3114,6 +3114,9 @@ texture = ExtResource("10_g84q7")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_a8o3y")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccsyf"]
+size = Vector2(334, 326)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5do"]
 size = Vector2(101, 326)
 
@@ -3261,6 +3264,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("world/doors/door2/sprite_2d:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_a8o3y"]
 resource_name = "enter_puzzle"
@@ -3347,6 +3362,21 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_ov4dy"]
+resource_name = "lock_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("world/doors/door2/sprite_2d:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_iqjog"]
 resource_name = "pressE"
 length = 2.0
@@ -3401,6 +3431,7 @@ _data = {
 &"exit_puzzle": SubResource("Animation_3fpug"),
 &"fade_to_black": SubResource("Animation_swjyn"),
 &"lights": SubResource("Animation_v5q0s"),
+&"lock_fade": SubResource("Animation_ov4dy"),
 &"pressE": SubResource("Animation_iqjog"),
 &"resetE": SubResource("Animation_csty0"),
 &"un_fade_to_black": SubResource("Animation_ccsyf")
@@ -3783,6 +3814,12 @@ position = Vector2(60, 8)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("15_a8o3y")
 
+[node name="key_unlock_area" type="Area2D" parent="world/doors/door2" unique_id=618794126]
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="world/doors/door2/key_unlock_area" unique_id=595467721]
+position = Vector2(105, 58)
+shape = SubResource("RectangleShape2D_ccsyf")
+
 [node name="puzzle_areas" type="Node2D" parent="." unique_id=1004798896]
 
 [node name="forge_puzzle" type="Area2D" parent="puzzle_areas" unique_id=539822609]
@@ -4068,6 +4105,7 @@ stream = ExtResource("28_a8o3y")
 [node name="rodkiss_audio" type="AudioStreamPlayer" parent="." unique_id=185620888]
 stream = ExtResource("37_ki521")
 
+[connection signal="body_entered" from="world/doors/door2/key_unlock_area" to="world/doors/door2" method="_on_key_area_entered"]
 [connection signal="body_entered" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_entered"]
 [connection signal="body_exited" from="puzzle_areas/forge_puzzle" to="puzzle_areas/forge_puzzle" method="_on_body_exited"]
 [connection signal="body_entered" from="puzzle_areas/number_puzzle" to="puzzle_areas/number_puzzle" method="_on_body_entered"]
