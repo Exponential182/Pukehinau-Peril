@@ -11,8 +11,8 @@ extends Node2D
 var in_range = false
 var speed = 15
 var direction = 1
-var min_height = 122
-var max_height = 974
+var min_height = 140
+var max_height = 950
 var min_win = 450
 var max_win = 630
 var base_speed = 10
