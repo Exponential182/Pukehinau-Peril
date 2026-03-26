@@ -122,11 +122,6 @@ func _physics_process(delta: float) -> void:
 				animation.play(str(state) + "_" + str(direction_vertical))
 			if velocity.length() < 0.1:
 				animation.play(str(state)+ "_idle")
-	
-	if last_box:
-		$"../UI/interact".show()
-	else:
-		$"../UI/interact".hide()
 	if is_box_puzzle_active:
 		box_puzzle_interaction(delta)
 		$"../puzzles/box_puzzle/reset_button".show()
@@ -208,6 +203,11 @@ func _box_exited():
 		last_box = null
 
 func box_puzzle_interaction(delta):
+	if last_box:
+		$"../UI/interact".show()
+	else:
+		$"../UI/interact".hide()
+	
 	if Input.is_action_just_pressed("interact") and last_box:
 		is_pushing_box = not is_pushing_box
 		if is_pushing_box:

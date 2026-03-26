@@ -11,8 +11,8 @@ extends Node2D
 var in_range = false
 var speed = 15
 var direction = 1
-var min_height = 0
-var max_height = 1080
+var min_height = 122
+var max_height = 974
 var min_win = 450
 var max_win = 630
 var base_speed = 10
@@ -27,67 +27,67 @@ var combo_multiplier = 1
 var wait = 0
 var last_synced_value := 0.0
 var done_switch = false
+var state = "paused"
 signal vertical_puzzle_completed
 
 func _ready() -> void:
-	var score_scale = progress_bar.value/100
-	$score/score.text = str(round(progress_bar.value*10)/10)
-	$score.scale = Vector2(score_scale, score_scale)
+	
 	vertical_puzzle_completed.connect(get_parent().vertical_puzzle_completed)
 
 func _physics_process(delta: float) -> void:
-	if progress_bar.value > 0.1:
-		progress_bar.value -= wait * 0.03 * (1+0.1*wait)
-		pass
-	else:
-		$fail.show()
-		can_combo = false
-	if shake_timer > 0:
-		shake_timer -= delta
-		bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
-		bar.rotation_degrees = 0 + randf_range(-1, 1) * (1.0/combo_multiplier) * shake_strength * (shake_timer / shake_duration)
-	else:
-		offset = Vector2.ZERO
-	win_area.position.y += speed * direction
-	var area_position = win_area.position.y
-	if min_height > area_position or max_height < area_position:
-		direction *= -1
-		wait += 1
-	if Input.is_action_just_pressed("smack") and can_combo or Input.is_action_just_pressed("interact") and can_combo:
-		wait = 0
-		combo_multiplier = 1 + (0.1*combo)
-		can_combo = false
-		combo_timer.start(0.7)
-		speed = 0
-		var win_position = win_area.position.y
-		in_range = false
-		if min_win < win_position and win_position < max_win:
-			in_range = true
-		if in_range:
-			$combo.play()
-			$combo.pitch_scale = 0.5 + (combo * 0.1)
-			combo += 1
-			var progress_adition = combo_multiplier * 4 + 5
-			progress_bar.value += progress_adition
-			shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
-			if progress_bar.value >=99.9 and not done_switch:
-				$combo.stop()
-				$done.play()
-				done_switch = true
-				await get_tree().create_timer(2).timeout
-				vertical_puzzle_completed.emit()
-				self.queue_free()
+	if state == "playing":
+		if progress_bar.value > 0.1:
+			progress_bar.value -= wait * 0.03 * (1+0.1*wait)
+			pass
 		else:
-			$combo.play()
-			$combo.pitch_scale = 0.35
-			progress_bar.value -= 10
-			combo = 0
-			combo_multiplier = 1
-		combo_text.text = "COMBO\nX" + str(combo)
-		speed_timer.start(0.5)
-	var score_scale = progress_bar.value/100
-	$score/score.text = str(round(progress_bar.value*10)/10)
-	$score.scale = Vector2(score_scale, score_scale)
+			$fail.show()
+			$canvas_layer/combo_counter.hide()
+			state = "paused"
+			can_combo = false
+		if shake_timer > 0:
+			shake_timer -= delta
+			#bar.scale = Vector2(1,1) + Vector2(rand_scale,rand_scale) * combo_multiplier * 0.6 * (shake_timer / shake_duration)
+			#bar.rotation_degrees = 0 + randf_range(-1, 1) * (1.0/combo_multiplier) * shake_strength * (shake_timer / shake_duration)
+		else:
+			offset = Vector2.ZERO
+		win_area.position.y += speed * direction
+		var area_position = win_area.position.y
+		if min_height > area_position or max_height < area_position:
+			direction *= -1
+			wait += 1
+		if Input.is_action_just_pressed("smack") and can_combo or Input.is_action_just_pressed("interact") and can_combo:
+			wait = 0
+			combo_multiplier = 1 + (0.1*combo)
+			can_combo = false
+			combo_timer.start(0.7)
+			speed = 0
+			var win_position = win_area.position.y
+			in_range = false
+			if min_win < win_position and win_position < max_win:
+				in_range = true
+			if in_range:
+				$combo.play()
+				$combo.pitch_scale = 0.5 + (combo * 0.1)
+				combo += 1
+				var progress_adition = combo_multiplier * 4 + 5
+				progress_bar.value += progress_adition
+				shake(progress_bar.value * combo_multiplier * 0.2, 1.0)
+				if progress_bar.value >=99.9 and not done_switch:
+					$combo.stop()
+					$done.play()
+					done_switch = true
+					await get_tree().create_timer(2).timeout
+					vertical_puzzle_completed.emit()
+					self.queue_free()
+			else:
+				$combo.play()
+				$combo.pitch_scale = 0.35
+				progress_bar.value -= 10
+				combo = 0
+				combo_multiplier = 1
+			combo_text.text = "COMBO\nX" + str(combo)
+			speed_timer.start(0.5)
+		$canvas_layer/score/score.text = str(round(progress_bar.value*10)/10)
 func shake(strength: float, duration: float):
 	if combo > 2:
 		rand_scale = (0.005*(progress_bar.value))
@@ -104,7 +104,10 @@ func _on_speed_timer_timeout() -> void:
 
 
 func _on_button_pressed() -> void:
+	state = "playing"
 	$fail.hide()
+	$canvas_layer/combo_counter.show()
+	$fail/Tutorial.show()
 	progress_bar.value = 20
 	wait = 0
 	combo = 0
