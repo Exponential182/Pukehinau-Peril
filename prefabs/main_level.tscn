@@ -4048,6 +4048,18 @@ theme_override_font_sizes/font_size = 50
 text = "Press \"E\" to interact"
 autowrap_mode = 2
 
+[node name="box_wrong_archetype" type="Label" parent="UI" unique_id=132175682]
+visible = false
+z_index = 120
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 325.0
+offset_bottom = 132.0
+theme_override_fonts/font = ExtResource("8_fy1nc")
+theme_override_font_sizes/font_size = 50
+text = "You're too weak to push this box."
+autowrap_mode = 2
+
 [node name="dialogue" type="Node2D" parent="UI" unique_id=2089645933]
 visible = false
 position = Vector2(960, 889)

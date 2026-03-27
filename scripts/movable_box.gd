@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 signal box_entered(box: Node)
-signal box_exited()
+signal box_exited(box: Node)
 
 
 func _ready():
@@ -21,4 +21,4 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	if body.name == "player":
-		box_exited.emit()
+		box_exited.emit(self)
