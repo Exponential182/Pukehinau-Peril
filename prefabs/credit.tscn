@@ -150,9 +150,9 @@ text = "Hold SPACE to speed up"
 
 [node name="time" type="Label" parent="UI" unique_id=529432855]
 texture_filter = 1
-offset_left = 1557.0
-offset_top = 20.0
-offset_right = 1886.0
-offset_bottom = 158.0
+offset_left = 1447.0
+offset_top = 21.0
+offset_right = 1893.0
+offset_bottom = 159.0
 theme = ExtResource("4_slcei")
-horizontal_alignment = 1
+horizontal_alignment = 2
