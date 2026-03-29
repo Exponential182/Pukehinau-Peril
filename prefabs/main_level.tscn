@@ -3135,9 +3135,6 @@ size = Vector2(174, 158)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqjog"]
 size = Vector2(252, 199)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8o3y"]
-size = Vector2(116, 158)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66ua4"]
 size = Vector2(128, 200)
 
@@ -3470,62 +3467,8 @@ texture = SubResource("GradientTexture2D_gvws3")
 
 [node name="p14_computer_lights" type="Node2D" parent="world/lights" unique_id=206043774]
 
-[node name="light_swtich_light2" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1369809391]
-position = Vector2(2911, -809)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light3" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=854338097]
-position = Vector2(2913, -426)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light5" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=428742657]
-position = Vector2(2655, -424)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light6" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=314446691]
-position = Vector2(2798, -805)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light7" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1576910578]
-position = Vector2(2798, -873)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light8" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=391113987]
-position = Vector2(3038, -1260)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light9" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=437436805]
-position = Vector2(3167, -1261)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light10" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1699815293]
-position = Vector2(2912, -1260)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
 [node name="light_swtich_light11" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1251719824]
-position = Vector2(3474, -1128)
-energy = 0.36
-texture = ExtResource("1_v5q0s")
-texture_scale = 0.35
-
-[node name="light_swtich_light4" type="PointLight2D" parent="world/lights/p14_computer_lights" unique_id=1382584579]
-position = Vector2(3170, -426)
+position = Vector2(3474, -1129)
 energy = 0.36
 texture = ExtResource("1_v5q0s")
 texture_scale = 0.35
@@ -3724,7 +3667,7 @@ metadata/_edit_lock_ = true
 z_index = 24
 texture_filter = 1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAArAPL/BAADAAYAAAArAPP/BAADAAYAAAA4AOr/BAADAAYAAAApAOz/BAADAAMAAAA2AO7/BAABAAYAAAALAAoABAADAAYAAAADAAwABAABAAYAAAASAPD/BAACAAAAAAASAPH/BAACAAEAAAAbAPD/BAACAAAAAAAbAPH/BAACAAEAAAASAPT/BAACAAAAAAASAPX/BAACAAEAAAAbAPT/BAACAAAAAAAbAPX/BAACAAEAAAASAPn/BAACAAEAAAASAPj/BAACAAAAAAAbAPn/BAACAAEAAAAbAPj/BAACAAAAAAAVAPD/BAACAAAAAAAVAPH/BAACAAEAAAAYAPD/BAACAAAAAAAYAPH/BAACAAEAAAAYAPT/BAACAAAAAAAYAPX/BAACAAEAAAAVAPX/BAACAAAAAAAVAPb/BAACAAEAAAAtAPn/BAAFAAMAAAApAPn/BAAFAAMAAAAxAPn/BAAFAAMAAAAtAPP/BAAFAAMAAAAtAOz/BAAFAAMAAAAvAOz/BAAFAAMAAAAxAOz/BAAFAAMAAAA=")
+tile_map_data = PackedByteArray("AAArAPL/BAADAAYAAAArAPP/BAADAAYAAAA4AOr/BAADAAYAAAApAOz/BAADAAMAAAA2AO7/BAABAAYAAAALAAoABAADAAYAAAADAAwABAABAAYAAAASAPD/BAACAAAAAAASAPH/BAACAAEAAAAbAPD/BAACAAAAAAAbAPH/BAACAAEAAAASAPT/BAACAAAAAAASAPX/BAACAAEAAAAbAPT/BAACAAAAAAAbAPX/BAACAAEAAAASAPn/BAACAAEAAAASAPj/BAACAAAAAAAbAPn/BAACAAEAAAAbAPj/BAACAAAAAAAVAPD/BAACAAAAAAAVAPH/BAACAAEAAAAYAPD/BAACAAAAAAAYAPH/BAACAAEAAAAYAPT/BAACAAAAAAAYAPX/BAACAAEAAAAVAPX/BAACAAAAAAAVAPb/BAACAAEAAAAtAPn/BAABAAMAAAApAPn/BAABAAMAAAAxAPn/BAABAAMAAAAtAPP/BAABAAMAAAAtAOz/BAABAAMAAAAvAOz/BAABAAMAAAAxAOz/BAABAAMAAAA=")
 tile_set = SubResource("TileSet_gklso")
 metadata/_edit_lock_ = true
 
@@ -3807,6 +3750,7 @@ metadata/_edit_lock_ = true
 
 [node name="door2" parent="world/doors" unique_id=655292924 instance=ExtResource("11_iqjog")]
 position = Vector2(3904, 160)
+is_unlocked = false
 
 [node name="sprite_2d" type="Sprite2D" parent="world/doors/door2" unique_id=1519778709]
 texture_filter = 1
@@ -3935,10 +3879,6 @@ shape = SubResource("RectangleShape2D_iqjog")
 [node name="collision_shape_2d4" type="CollisionShape2D" parent="dialogue_areas/locked_door" unique_id=1152263497]
 position = Vector2(3381, -8)
 shape = SubResource("RectangleShape2D_iqjog")
-
-[node name="collision_shape_2d2" type="CollisionShape2D" parent="dialogue_areas/locked_door" unique_id=566537888]
-position = Vector2(2305, -11)
-shape = SubResource("RectangleShape2D_a8o3y")
 
 [node name="push_or_pull" type="Area2D" parent="dialogue_areas" unique_id=1137752788]
 position = Vector2(220, 164)
