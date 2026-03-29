@@ -218,7 +218,7 @@ offset_bottom = 975.0
 theme_override_constants/line_spacing = -12
 theme_override_fonts/font = ExtResource("3_28ko8")
 theme_override_font_sizes/font_size = 62
-text = "After clicking START, Press SPACE when the icon is inside the green area to charge the lights. Correctly timed presses increase score and speed, but waiting too long or wrong presses quickly decreases the score."
+text = "After clicking START, Press SPACE when the bar is inside the green area to charge the lights. Correctly timed presses increase score and speed, but waiting too long or wrong presses quickly decreases the score."
 vertical_alignment = 1
 autowrap_mode = 2
 

@@ -222,6 +222,7 @@ func box_puzzle_interaction(delta):
 		elif pushed_box:
 			pushed_box.modulate = Color("#ffff62")
 			last_box.erase(pushed_box)
+			last_box.push_front(pushed_box)
 			pushed_box = null
 			speed = base_speed
 	
