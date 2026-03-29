@@ -26,7 +26,7 @@ var current_door_position = Vector2(0,0)
 @export var is_box_puzzle_active = false
 var is_pushing_box = false
 var pushed_box = null
-var last_box = null
+var last_box = []
 var box_puzzle_position = Vector2(1700.0, 0)
 
 var door_positions = {
@@ -196,27 +196,32 @@ func _on_swap_timer_timeout() -> void:
 
 
 func _box_entered(box):
-	last_box = box
+	last_box.append(box)
 
 
-func _box_exited():
-	if !pushed_box:
-		last_box = null
+func _box_exited(box):
+	last_box.erase(box)
 
 func box_puzzle_interaction(delta):
-	if last_box:
+	if last_box and state == "brawn":
 		$"../UI/interact".show()
+		$"../UI/box_wrong_archetype".hide()
+	elif last_box and state == "brain":
+		$"../UI/interact".hide()
+		$"../UI/box_wrong_archetype".show()
 	else:
 		$"../UI/interact".hide()
+		$"../UI/box_wrong_archetype".hide()
 	
 	if Input.is_action_just_pressed("interact") and last_box:
 		is_pushing_box = not is_pushing_box
-		if is_pushing_box:
-			pushed_box = last_box
+		if is_pushing_box and state == "brawn":
+			pushed_box = last_box[-1]
 			speed = pushing_speed
 			pushed_box.modulate = Color("green")
 		elif pushed_box:
 			pushed_box.modulate = Color("#ffff62")
+			last_box.erase(pushed_box)
 			pushed_box = null
 			speed = base_speed
 	
@@ -225,6 +230,7 @@ func box_puzzle_interaction(delta):
 		if player_to_box.length() >= 145.0:
 			speed = base_speed
 			pushed_box.modulate = Color("white")
+			last_box.erase(pushed_box)
 			pushed_box = null
 			is_pushing_box = false
 		else:

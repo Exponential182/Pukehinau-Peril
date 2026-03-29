@@ -3,7 +3,8 @@ extends Node2D
 @onready var player = get_node("/root/main_level/player")
 signal entered_door
 var is_enterable = false
-@export var is_unlocked = false
+var is_unlocked = false
+
 func _ready() -> void:
 	entered_door.connect(get_node("/root/main_level/player").entered_door)
 func _on_door_area_body_entered(body: Node2D) -> void:
