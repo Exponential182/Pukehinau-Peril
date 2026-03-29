@@ -76,13 +76,14 @@ text = "YOU WIN!"
 
 [node name="tutorial" type="Label" parent="." unique_id=1992936829]
 z_index = 200
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 713.0
-offset_bottom = 299.0
+offset_left = 1493.0
+offset_top = 563.0
+offset_right = 1918.0
+offset_bottom = 1077.0
 theme_override_fonts/font = ExtResource("4_714mt")
-theme_override_font_sizes/font_size = 41
-text = "Hold left click while hovering over dark squares to cut out the shape outlined in red. You can reset by pressing the buttons in the top right."
+theme_override_font_sizes/font_size = 37
+text = "Hold left click while hovering over darker squares to cut out the shape outlined in red. You don't need to cut every square, just around the red outline. You can reset by pressing the buttons in the top right."
+horizontal_alignment = 2
 autowrap_mode = 2
 
 [connection signal="pressed" from="stage_1_button" to="." method="_stage_1_reset"]
